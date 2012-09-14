@@ -1,0 +1,14 @@
+<div class="gr-side-item gr-mb20">
+    <h4>Следят:</h4>
+    <p class="dimmed">
+        {% with person_entities=info.participants.follower.entities %}
+            {% include "participants/list.html" %}
+        {% endwith %}
+    </p>
+
+    {% comment %}
+        {% if info.participants.follower.count > LIST_COUNT.follower %}
+            <a href="{{ participants_url }}?type=follower">Показать всеx...</a>
+        {% endif %}
+    {% endcomment %}
+</div>

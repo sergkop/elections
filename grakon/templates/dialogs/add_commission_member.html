@@ -1,0 +1,37 @@
+{% load crispy_forms_tags %}
+
+<div id="add_commission_member_dialog" style="display: none;">
+    <p style="margin:0.3em;">Перед добавлением члена комиссии
+    <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a> убедитесь,
+    что он еще не добавлен в список.</p>
+    <form id="add_commission_member_form" class="dialog_form" method="post" action="{% url add_commission_member %}">
+        {% csrf_token %}
+        {% crispy add_commission_member_form %}
+
+        <input type="hidden" name="location" value="" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function add_commission_member_dialog_init(){
+        $('#add_commission_member_form input[name="location"]').val({{ current_location.id }});
+        $("#add_commission_member_dialog").dialog("open");
+    }
+
+    $(function(){
+        $("#add_commission_member_dialog").dialog({autoOpen: false, width: 650, height: 400, modal: true, title: "Добавить члена комиссии",
+            buttons: {
+                "Добавить": function(){
+                    $.post("{% url add_commission_member %}", $("#add_commission_member_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#add_commission_member_dialog").dialog("close");
+                            window.location.href = "{{ current_location.get_absolute_url }}";
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#add_commission_member_dialog").dialog("close");}
+            }
+        }).dialog("close");
+    });
+</script>

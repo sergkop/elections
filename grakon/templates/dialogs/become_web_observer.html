@@ -1,0 +1,52 @@
+{% load crispy_forms_tags %}
+
+<div id="become_web_observer_dialog">
+    <p style="margin:0.3em;">Выложить ссылку на видео с веб-камер.</p>
+    <form id="become_web_observer_form" class="dialog_form" method="post" action="{% url become_web_observer %}">
+        {% csrf_token %}
+        {% crispy become_web_observer_form %}
+
+        <input type="hidden" name="location" value="" />
+    </form>
+
+    <!--div style="margin-top:4em;">
+        Вы можете принять участие про просмотре собранных видео и поиску заснятых фальсификаций
+        на сайте <a href="http://ss.setere.com/" target="_blank">Считайте Сами</a>. 
+        О том, как и зачем стать веб-наблюдателем читайте в <a href="{% url web_observers_help %}" target="_blank">инструкции веб-наблюдателя</a>.
+    </div-->
+</div>
+
+<script type="text/javascript">
+    function become_web_observer_dialog_init(){
+        $('#become_web_observer_form input[name="location"]').val({{ current_location.id }});
+        $("#become_web_observer_dialog").dialog("open");
+    }
+
+    $(function(){
+        $("#become_web_observer_dialog").dialog({width: 650, height: 400, modal: true, title: "Выложить ссылку на видео с веб-камер",
+            buttons: {
+                "Добавить": function(){
+                    $.post("{% url become_web_observer %}", $("#become_web_observer_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#become_web_observer_dialog").dialog("close");
+                            window.location.href = "{% url web_observers current_location.id %}";
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#become_web_observer_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        // Press button on pressing Enter
+        $("#become_web_observer_form input").keypress(function(e){
+            if(e.which == 13){
+                e.preventDefault();
+                $("#become_web_observer_dialog").dialog("option", "buttons")["Добавить"]();
+                return false;
+            }
+        });
+    });
+
+    
+</script>

@@ -1,0 +1,100 @@
+from django import template
+from django.template.loader import render_to_string
+from django.utils._os import safe_join
+
+from pystache import Renderer
+
+register = template.Library()
+
+@register.tag(name='tabs')
+def tabs_tag(parser, token):
+    args = token.split_contents()
+    if len(args) != 3:
+        raise template.TemplateSyntaxError("tabs tag takes exactly 2 arguments")
+    return TabsNode(*args[1:])
+
+class TabsNode(template.Node):
+    def __init__(self, *args):
+        """
+        args is a sequence of tabs, active_tab.
+        tabs is a list of tuples (name, title, url, css_class).
+        """
+        self.args = [template.Variable(arg) for arg in args]
+
+    def render(self, context):
+        tabs, active = self.args = [arg.resolve(context) for arg in self.args]
+
+        active_tabs = filter(lambda tab: tab[0]==active, tabs)
+        assert len(active_tabs)==1, "Active tab must be uniquely identified"
+
+        context.update({
+            'tabs': tabs,
+            'active': active
+        })
+        return render_to_string('elements/tabs.html', context)
+
+def get_mustache_template(path):
+    # This code is partially copied from django.template.loaders.app_directories
+    from django.template.loaders.app_directories import app_template_dirs
+    for template_dir in app_template_dirs:
+        try:
+            full_path = safe_join(template_dir, path)
+        except ValueError:
+            pass
+        else:
+            try:
+                file = open(full_path)
+                try:
+                    return file.read().decode('utf8')
+                finally:
+                    file.close()
+            except IOError:
+                pass
+
+def mustache_renderer(partials_paths):
+    """ partials_paths = {name: path} """
+    partials = {}
+    for name, path in partials_paths.iteritems():
+        partials[name] = get_mustache_template(path)
+    return Renderer(partials=partials)
+
+comments_templates = {
+    'comment_item': 'comments/item.mustache',
+    'comments_list': 'comments/list.mustache',
+    'comment_field': 'comments/field.mustache',
+}
+
+@register.simple_tag(takes_context=True)
+def show_comments(context, info):
+    template = get_mustache_template('comments/list.mustache')
+
+    # TODO: check that corresponding entity model has comments feature
+
+    # TODO: move getting renderer out of here
+    comments_renderer = mustache_renderer(comments_templates)
+
+    # Hack to make it work for locations and entities
+    entity_id = info['instance']['id'] if type(info['instance']) is dict else getattr(info['instance'], 'id')
+
+    ctx = {
+        'ct': info['ct'],
+        'e_id': entity_id,
+        'comments': info['comments']['data'],
+        'PROFILE': context['request'].PROFILE,
+    }
+    return comments_renderer.render(template, ctx)
+
+
+from django.core.urlresolvers import reverse
+
+# TODO: depricate it
+# TODO: add optional hint (title) and class to tell tipsy to show a tip
+@register.inclusion_tag('elements/button.html')
+def button(title, id=None, link='', center='center', tip=''):
+    """ link is either a url, starting with http:// or https://, or the name of a view """
+    if link!='' and not link.startswith('http://') and not link.startswith('https://') and not link.startswith('mailto:'):
+        link = reverse(link)
+
+    external = link.startswith('http') if link else False
+
+    return {'title': title, 'id': id, 'link': link, 'external': external, 'center': center!='', 'tip': tip}

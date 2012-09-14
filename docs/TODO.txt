@@ -1,0 +1,405 @@
+* a short list of team members we are looking for in the top of the page
+
+Social registration
+    * social activate
+    * merge accounts from social and email (see SOCIAL_AUTH_ASSOCIATE_BY_MAIL)
+    * consider case when user refuses to give rights to application
+    * configure django-social-auth
+
+    * create page for LOGIN_ERROR_URL
+    * create google oauth2 app from grakon account (?)
+    * file with all passwords, social applications (where to get them)
+
+* Make browsers remember passwords (check that it works)
+
+* additional list of old team members
+
+1) после добавления длинного комментария на несколько строк поле для добавления нового комментария не уменьшается обратно до 1 строчки (это происходит только после перезагрузки страницы)
+2) когда жмешь "ответить", то едет верстка: нет отступа между разделительной чертой и полем для ввода ответа
+3) сделайте, пожалуйста, по нажатию "enter" добавление комментария, а не перенос строки. Это более естественно и не приводит к обманчивому предположению, что можно добавить несколько абзацев.
+4) notifications about comments
+
+* redesing of registration form
+* use required input attribute in fields
+
+* recalculate ratings on save (e.g. in profiles)
+
+* links in breadcrumbs should depend on type of page or tab on location
+
+* don't show user name in user's lists of tasks and projects
+
+* Invite old users and simplify account creation for them (autofill name, insert hash to confirm email), registration form must be able to take get parameters
+
+* Notification about resource provided for project comes twice
+
+* separate analytics of elections site
+* analytics of registration (events in GA - http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html) - success, errors, just visits
+* use ga events to monitor pressing buttons, registration and other activities
+
+Yulia:
+    * send message dialog
+    * feedback form formatting
+    * popup for linking idea to project
+    * when user closes slidedown list of followers or projects, boldness of link doesn't go away
+    * form fields are not highlighted anymore (with uniform script)
+    * consider all the cases for showing lists under task/idea (press one button first, then another, also close)
+    * bug when pressing edit resource button
+
+UI:
+    * поменять кнопки на главной
+    * счетчики под плюсиками 0 - непонятно, что они кликабельны
+
+* use tinymce parameters from settings.py in js
+* rewrite tinymce widget
+* getContent() should be taken for specific tinymce instances, not active
+
+* split nginx logs in 10mb files
+
+* unsubscribe from letters + subscription configuration
+
+* display data for logged in user at main page (no redirect) - data from followed entities
+
+* minification of static files (http://developer.yahoo.com/yui/compressor/)
+
+* update ratings on any changes (adding, deleting, following, etc)
+* override save() method of EntityProperty models to reset cache
+---------------------------------------------------------------------
+* automate analytics collection for emails (percent of read + GA campaign)
+
+* notifications about adding to contacts
+* weekly letters with a list of new projects/tasks
+
+* show counters of provided resources for project in the right panel
+* show provided resources in profile and profile list item + count in ratings
+
+* analytics of read time for emails
+* analytics of email domains
+
+* sorting entities lists by rating, date (choose sorting type)
+
+* sort resources in idea and profile (by title?)
+* sort resources in project right panel by creation time
+
+Account activation:
+    * fix sending profile activation email via admin
+    * what happens when account activation link expires? is it possible to register again?
+
+* ability to delete ideas, tasks (without resources), projects, comments
+* ability to request entity deletion (like with profiles)
+
+* new widget for location editor; add location in location list editor
+
+* include other factors in users sorting (number of contacts, etc.)
+
+* get comment id from ajax request
+* autolinking in comments
+
+* don't load social networks scripts (vkontakte - include loading scripts in elements/share.html)
+
+Search
+    * min-width in locations/select.html
+    * #search in styles and body, {% block body %}
+    * qfilter in Location.get_entities
+    * reimplement SearchForm and view
+    * full-text search of entities
+    * autocompletion
+
+* show notifications on the website
+* configure celery to perform notification tasks periodically
+
+Emails:
+    * redirect url to track pressing on external links in emails
+    * 3 lists of old emails - active, unknown, inactive; unsent emails
+    * use Amazon SNS to receive bounce and complaints notifications
+    * suggest users to add our emails to contacts lists
+    * script to retrieve and analyze bounce messages, spam complaints (celery tasks checking gmail messages)
+    * send emails about считайте сами
+    * model with emails which should be blacklisted
+
+* tags for projects, tasks (like ЖКХ, здравоохранение, etc.)
+
+* in html fields remove last empty line on cleaning
+
+* how to edit task/project location?
+
+* database backups
+
+* no breadcrumbs on create form pages
+* in registration form check that russian letters are used in first and last name
+
+* open share dialogs in popups (vk, fb, twitter)
+* add tabs names to title for entities, image url and description should be specified as context variable
+* in url crop GA campaign get parameters
+
+* suggest tasks, projects to follow (based on geography)
+
+* Invite friends button under contacts in profile
+
+* restructure main menu
+
+* when user is removed his projects, tasks, ideas are left and cause errors
+
+* предлагать друзей на площадке пользуясь списком друзей в соц сетях
+-------------------------------------------------------------------------
+* Emails: DomainKeys, Sender ID (dns configuration + document it)
+
+* test for users similar to http://www.bg.ru/good/
+
+* allow user to start working without confirmation of his email, but limit his functionality (?)
+
+Testing:
+    * perform code testing after commit (github hooks)
+    * testing in browsers, selenium, http://www.browserstack.com
+    * tests and test coverage
+
+* use celery to send messages
+
+UI:
+    * pressing enter in comments doesn't add new line in final text - use it for submit?
+    * на страницах "своих" локейшнов есть кнопки "отписаться" в правом столбце. Они довольно не понятны:
+      от чего отписаться? например, на вкладке комментов - отписаться от комментов? Давайте вообще выкинем
+      эти кнопки. Пусть пользователи отписываются от локэйшнов через страницу профайла.
+
+* template filter to produce html code for emails
+    * http://www.campaignmonitor.com/css/
+    * http://htmlemailboilerplate.com/
+    * http://www.sitepoint.com/code-html-email-newsletters/
+    * http://www.1stwebdesigner.com/tutorials/ultimate-guide-html-emails/
+
+* move html blocks for entities items in special templates and add template path to entity models
+* make ideas, tasks editable in lists
+
+* descriptions of html fields in forms are not shown (show inside field as grey text)
+
+Code improvements:
+    * write docs (entities, features, info, ajax ports, code_data)
+
+    * update init_database
+    * add more content to init_database
+
+    * special location placeholder for empty tasks and projects lists should be moved to templates in locations
+
+    * use entity_base_view in location
+
+    * on task list page get_related_info is called twice
+
+    * in ajax ports make sure that entity content type has allowed value
+
+    * depricate account activated page and registration failed page
+
+* some email were not sent (see status)
+
+* hide follow/unfollow button for admin
+* can admin unfollow an entity?
+
+* add task and add project forms should open with initialized location
+
+* typography http://jevix.ru/
+
+* settings page (change password, request account deletion)
+
+* use jinja instead of django templates (?) Check rendering time
+-------------------------------------------------------------------------------
+* update comment counters when comment is added
+
+* in forms near location selector allow to chose current location using geolocation
+
+* when mouse is over the date - show exact time in hover
+
+* conventions file for front-end developer (docs about tabs and buttons, page layout)
+
+* project-ideas connection (editing ideas of the project)
+* linking idea to project on idea page
+
+* set of permissions (verified users)
+
+* solve issues with several locations and is_main, allow to restrict a single related location for entity model
+
+* when text field text is longer than 140 - text is cut
+
+* user's avatar, use it in comments, emails
+
+* in datetime widget set russian names for months and days of week - http://trentrichardson.com/examples/timepicker/ (move to main.js)
+
+* sitemaps
+
+*  RuntimeWarning: DateTimeField received a naive datetime while time zone support is active when sending message
+
+Deployment:
+    * split requirements to deploy and develop, use inclusion
+    * switch to uwsgi
+    * configure firewall (ufw)
+    * introduce separate server for db, static and media files, memcached
+    * describe deployment process in docs
+    * start using https://github.com/ronnix/fabtools and https://github.com/sebastien/cuisine
+    * monitoring https://github.com/sebastien/watchdog
+
+Performance:
+    * multi-key indices in db (http://www.postgresql.org/docs/9.1/interactive/indexes-multicolumn.html)
+    * move scripts loading at the bottom of html (or use defer), use firebug profiler and Net tab
+
+* ability to edit html in message (special filtering of html for emails)
+
+* separate getting counters and pagination entities/ids
+
+* 'Новости' tab for all entities
+
+* popup with user info when mouse is over the link
+
+* Activating compessing in tinymce breaks popups (on development server only)
+
+* README
+
+Emails:
+    * page with form for writing messages (put link on it in emails)
+    * send email notifying that user has been added to contacts (+ ability to unsubscribe)
+
+* complaints
+
+* ability to add admins
+
+* ability to read messages on website
+
+Analytics:
+    * analyze when user visited site/logged in last time
+    * configure logging, sentry
+    * analyze access logs, use google analytics api; regularly build and analyze statistics of visits,
+      which pages are visited
+    * use page visits analytics to determine optimal caching times
+    * analyze average time spent on site, how often user returns, what he does
+    * use Graphite for server monitoring - http://blog.mozilla.com/webdev/2012/04/05/tracking-deployments-in-graphite/
+    * get statistics on db usage
+---------------------------------------------------------------------------------
+* denormalization of counters
+
+* ability to specify yandex money account when asking for money
+
+* Class to standartize forms features
+
+* Introduce FINAL_URL_PREFIX and use
+
+* show locations in tables (?)
+
+SEO:
+    * Webmaster Tools, https://www.google.com/webmasters/
+    * set proper page titles
+    * ability to set individual titles for tabs of static pages
+    * Disallow paths in robots.txt (see django-social-auth example) - generate it and put in static on deployment
+    * how to deal with large sitemaps?
+
+* invitations to projects?
+
+* Ability to sign up for higher levels
+
+* popups with user's info and points in right panel
+
+* Give rating for comments, negative for complaints
+
+* pages for tools and users (with search) + bring them back in main menu
+
+* дополнительные поля в профайле (телефон, скайп, сайт, возраст?->дата рождения)
+
+Misc:
+    * share and share_horizontal overlap a lot
+    * replace grakon_share_logo.jpg with logos/share.jpg (google oauth2 app), smaller version (60x60),
+        move logo url to settings
+    * add tips to buttons and ? signs to get help on features of the system
+    * in forms limit lengths of strings that go into model's CharField
+
+* http://analytics.blogspot.co.uk/2012/05/new-google-analytics-easy-dashboard.html
+
+* Check that urls are specified properly in templates (look for "/ and http://grakon.org)
+
+* privacy settings
+
+* ability to choose timezone/determine it from location
+--------------------------------------
+* calendar page with projects
+
+* add wikipedia links to locations, info about population, map boundaries
+
+* show projects on map and allow to specify exact location on the map
+
+* can we speed up get_for by not taking all entities, just those within requested limit?
+
+* Fill in registration form with location or login
+
+* display entities assigned to higher levels of hierarchy on lower levels?
+
+* use gravatar
+
+* Show list my locations in top panel (if there are more than 1)
+
+* move password change views to users (from auth)
+* reasons to register on registration page (merge with landing page)
+
+* captchas
+
+* display html fields in admin listings nicely (extract text only)
+--------------------------------------
+* use https://github.com/Kicksend/mailcheck to suggest correct email
+
+* give superuser the rights of all admins (?)
+
+Emails:
+    * list-unsubscribe header
+    * messages, subscription @grakon.org (send messages of different types from different emails)
+    * analyze email postfixes, detect sending problems, configure properly
+
+Front-end
+    * take only necessary parts of jquery-ui, compress
+    * use sprites to extract images from one file (especially icons) (https://github.com/jorgebastida/glue)
+
+    * http://sass-lang.com/, http://www.bigjason.com/blog/using-sass-django/,
+      http://compass-style.org/blog/2011/05/09/compass-django/
+    * https://github.com/dziegler/django-css
+    * http://www.modernizr.com/
+
+    * automate search for unused and missing images, style classes
+
+Performance:
+    * make lazy reformal loading
+    * start using subqueries - http://charlesleifer.com/blog/working-around-django-s-orm-to-do-interesting-things-with-gfks/
+    * use debug toolbar, page speed to optimize page load
+
+    * add all mime types to gzip list of nginx configuration
+    * cache ajax (json) queries, gzip it, don't make authentication db queries for public ajax queries
+    * move static content to sub-domain (?), keep it cookie-free (how?)
+    * use pngcrush (pngcrush -rem alla -reduce -brute image.png result.png) to compress pngs; gif->png?
+    * use jpegtran (jpegtran -copy none -optimize -perfect image.jpg > res.jpg) to compress jpegs
+    * postgres configuration
+    * compress favicon
+
+Cache:
+    * use template caching
+
+AB testing:
+    * https://github.com/johnboxall/django-ab
+    * https://bitbucket.org/akoha/django-lean/wiki/Home
+    * http://visualwebsiteoptimizer.com/feature-list.php
+
+Celery:
+    * recalculate entities points (once a day)
+
+* update select widget in breadcrumbs with chosen (?)
+
+Deployment:
+    * far expires date in nginx
+    * configure nginx (see config settings)
+
+    * describe complete deployment process - file access rights, running services, directories and users to create, creating database, etc.
+    * separate server for media files? (512 mb)
+
+* project news page - store in db, rss + ability to post to social networks automatically
+
+* don't use cache for anonymous users on the dev server (for convinience)
+
+* use twisted inside scrapy to download pages with several parallel processes
+
+* написать текст на страницах 404 и 500
+
+* put all our media (video, presentations, logos, infographics, etc.) online in social networks
+
+* use pylint, pyflakes for code checking (pylint --generate-rcfile > config_path; pylint --rcfile=config_path services/ > report.txt)
+
+* move reformal options to settings

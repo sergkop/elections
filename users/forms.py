@@ -1,0 +1,97 @@
+# -*- coding:utf-8 -*-
+from smtplib import SMTPException
+
+from django import forms
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
+from django.forms.widgets import HiddenInput, Textarea, CheckboxInput
+from django.template.loader import render_to_string
+
+from crispy_forms.layout import Fieldset, Layout
+
+from elements.utils import form_helper
+from users.models import CommissionMember, Message, Profile, WebObserver
+
+class MessageForm(forms.Form):
+    to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
+    title = forms.CharField(required=False, label=u'Тема')
+    body = forms.CharField(widget=Textarea(attrs={'cols':60, 'rows':4}), label=u'Сообщение')
+    show_email = forms.BooleanField(label=u'Раскрыть получателю мой адрес электронной почты', initial=False, required=False)
+
+    class Meta:
+        model = Profile
+        exclude = ('user', 'referendum')
+
+    helper = form_helper('send_message', u'Отправить')
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        self.from_user = self.request.user
+        super(MessageForm, self).__init__(*args, **kwargs)
+
+    def send(self):
+        title = self.cleaned_data['title']
+        title = u' '.join(title.split('\n'))
+        body = self.cleaned_data['body']
+        show_email = self.cleaned_data['show_email']
+        to_user = self.cleaned_data['to_user']
+        ctx = { 
+            'title': title,
+            'body': body,
+            'show_email': show_email,
+            'link': u'%s%s' % (settings.URL_PREFIX, reverse('profile', kwargs={'username': self.from_user.username})),
+        }
+        if show_email:
+            ctx['from_user'] = self.from_user
+        message = render_to_string('mail/notification.txt', ctx)
+        mail_title = u'Пользователь %s написал вам сообщение' % self.from_user.username 
+
+        try:
+            send_mail(mail_title, message, settings.DEFAULT_FROM_EMAIL, [to_user.email], fail_silently=False)
+        except SMTPException:
+            return u'Невозможно отправить сообщение'
+        else:
+            Message.objects.create(from_user=self.request.profile, to_user=to_user.get_profile(), title=title, body=body, show_email=show_email)
+
+class FeedbackForm(forms.Form):
+    name = forms.CharField(label=u'Ваше имя')
+    email = forms.CharField(label=u'Электронная почта')
+    body = forms.CharField(widget=Textarea(attrs={'style': 'width:100%;'}), label=u'Сообщение')
+
+    helper = form_helper('feedback', u'Отправить')
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(FeedbackForm, self).__init__(*args, **kwargs)
+        if self.request.user.is_authenticated():
+            del self.fields['name']
+            del self.fields['email']
+
+    def send(self):
+        ctx = {
+            'message': self.cleaned_data['body'],
+            'user': self.request.user,
+        }
+        ctx['name'] = self.cleaned_data.get('name', '')
+        ctx['email'] = self.cleaned_data.get('email', '')
+        if self.request.user.is_authenticated():
+            ctx['link']  = u'%s%s' % (settings.URL_PREFIX, reverse(
+                    'profile', kwargs={'username': self.request.user.username}))
+        from_mail = settings.DEFAULT_FROM_EMAIL
+        message = render_to_string('feedback/mail.txt', ctx)
+        send_mail(u'[ОБРАТНАЯ СВЯЗЬ]', message, from_mail, [from_mail], fail_silently=False)
+
+class CommissionMemberForm(forms.ModelForm):
+    class Meta:
+        model = CommissionMember
+        exclude = ('location', 'user', 'time')
+
+class WebObserverForm(forms.ModelForm):
+    start_time = forms.IntegerField(u'Начало наблюдения', widget=forms.Select(choices=[(i, str(i)+'.00') for i in range(7, 24)]))
+    end_time = forms.IntegerField(u'Окончание наблюдения', widget=forms.Select(choices=[(i, str(i)+'.00') for i in range(8, 24)]+[(24, '0.00')]))
+
+    class Meta:
+        model = WebObserver
+        exclude = ('location', 'user', 'time', 'capture_video')

@@ -1,0 +1,33 @@
+<div id="login_dialog" class="hidden">
+    <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
+        {% csrf_token %}
+        <!--input type="hidden" value="" name="csrfmiddlewaretoken"/-->
+        <table class="markup" width="370">
+            <tr>
+                <td width="25%"><label for="id_username">Email:</label></td>
+                <td><input id="id_username" type="text" name="username" style="width: 90%"/></td>
+            </tr>
+            <tr>
+                <td><label for="id_password">Пароль:</label></td>
+                <td><input id="id_password" type="password" name="password" style="width: 90%"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" valign="middle" align="center">
+                    <input id="login_form_submit" type="submit" value="Войти" class="ym-button" onclick="_gaq.push(['_trackEvent', 'login', 'login']); return true;" />&nbsp;
+                    <!--<a id="login_form_submit" class="ym-button" href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
+                    <button type="button" id="login_dialog_register" class="ym-button" onclick="window.location='{% if is_referendum_page %}{% url referendum_register %}{% else %}{% url register %}{% endif %}?utm_campaign=register&utm_medium=link&utm_source=login_dialog'">Регистрация</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="{% url password_reset %}">Забыли пароль?</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script type="text/javascript">
+    create_dialog("login_dialog", 400, 270, "Войдите в систему", "", {});
+    $("#menu_login_btn").click(login_dialog_init);
+</script>

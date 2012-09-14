@@ -1,0 +1,15 @@
+{% extends "auth/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Регистрация нового пользователя{% endblock %}
+
+{% block top %}
+    <h1>Регистрация нового пользователя</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="gr-descr">
+        {% crispy form form.helper %}
+    </div>
+{% endblock %}

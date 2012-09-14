@@ -1,0 +1,23 @@
+{% load elements %}
+
+<div class="side_block_header side_block_observer">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=observer">Наблюдатели ({{ counters.observer }})</a>
+    {% else %}
+        Наблюдатели ({{ counters.observer }})
+    {% endif %}
+</div>
+
+<div class="content_block">
+    {% button "Я &mdash; наблюдатель" "become_observer" "" "center" "Для тех, кто записался в избиратели на выборах 4 марта" %}
+</div>
+
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_observer.html" %}
+    {% endif %}
+{% endif %}
+
+{% with btn_id="become_observer" role="observer" status_plural="наблюдатели" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

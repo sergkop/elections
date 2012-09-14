@@ -1,0 +1,47 @@
+django>=1.4.1
+south>=0.7.6
+
+# Front-end
+django-tinymce
+django-crispy-forms
+pystache
+
+# HTML
+bleach
+beautifulsoup
+
+# Social
+django-social-auth
+google-api-python-client
+
+# Drivers
+psycopg2
+pylibmc
+
+# Sending emails
+dnspython
+-e git+https://github.com/ghewgill/pydkim.git#egg=pydkim
+boto
+
+# Background tasks
+supervisor
+django-celery
+
+# Misc
+django-debug-toolbar
+ipython
+scrapy
+
+# Deployment
+flup
+
+# Documentation
+sphinx
+
+# Dashboard
+django-admin-tools
+python-dateutil==1.5
+pytz
+django-qsstats-magic
+
+#django-simple-captcha

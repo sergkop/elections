@@ -1,0 +1,23 @@
+{% load elements %}
+
+<div class="side_block_header side_block_journalist">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=journalist">Представители СМИ ({{ counters.journalist }})</a>
+    {% else %}
+        Представители СМИ ({{ counters.journalist }})
+    {% endif %}
+</div>
+
+<div class="content_block">
+    {% button "Я &mdash; представитель СМИ" "become_journalist" %}  
+</div>
+
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_journalist.html" %}
+    {% endif %}
+{% endif %}
+
+{% with btn_id="become_journalist" role="journalist" status_plural="представители СМИ" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

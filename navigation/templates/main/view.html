@@ -1,0 +1,221 @@
+{% load elements %}
+<script type="text/javascript">
+    $(function() {
+        $('#traffic').lightBox({
+		imageLoading: '/static/libs/lightbox/lightbox-ico-loading.gif',
+		imageBtnClose: '/static/libs/lightbox/lightbox-btn-close.gif',
+		imageBtnPrev: '/static/libs/lightbox/lightbox-btn-prev.gif',
+		imageBtnNext: '/static/libs/lightbox/lightbox-btn-next.gif'			
+		});
+    });
+    </script>
+<div class="blue-title">Презентация нового Гракона</div>
+<p>Чтобы просмотреть ее в полноэкранном режиме, нажмите на иконку  <img src="{{ STATIC_URL }}images/fullscreen.gif" style="padding: 3px; border: 1px solid #ccc; border-radius: 3px;" align="absmiddle"/> в правом нижнем углу.<br />Запуск через несколько недель. Будем рады партнерам, спонсорам и конструктивному фидбэку! </p>
+<div id="__ss_12251744" style="text-align:center"><iframe src="http://www.slideshare.net/slideshow/embed_code/12251744" width="420" height="354" frameborder="0" style="margin: 0 auto; border: 1px solid #ccc" scrolling="no"></iframe></div>
+<br/>
+
+<!--div style="font-style:italic; border-bottom: 1px dotted #a5a5a5; margin-bottom: 2em">
+
+<p>Выборы президента России прошли. Как и&nbsp;в&nbsp;ходе парламентских выборов в&nbsp;декабре прошлого года, на&nbsp;этот раз многими наблюдателями отмечены нарушения выборного процесса. В&nbsp;интернете появляются записи с&nbsp;установленных на&nbsp;участках веб-камер, фиксирующие &laquo;карусели&raquo;, вбросы и&nbsp;другие фальсификации. Началось сравнение копий протоколов, полученных наблюдателями, и&nbsp;официальных данных ЦИК. В&nbsp;ряде случаев уже обнаружены существенные расхождения. </p>
+<p>У&nbsp;многих возникают вопросы: каковы масштабы подобных нарушений? Оказали&nbsp;ли они существенное влияние на&nbsp;результаты выборов? Почему беспрецедентное число россиян голосовало по&nbsp;открепительным талона? Что происходило на&nbsp;множестве &laquo;однодневных&raquo; УИКов, в&nbsp;которых распределение голосов сильно расходится с&nbsp;соседними участками? Мог&nbsp;ли быть второй тур? Что нам делать дальше? </p>
+<p>В&nbsp;этих вопросах сложно разобраться поодиночке. Но&nbsp;всем вместе, нам вполне по&nbsp;силам собрать по&nbsp;кусочкам и&nbsp;восстановить общую картину событий. После этого каждый сможет сам решить для себя, насколько он&nbsp;доверяет официальным результатам, и&nbsp;выбрать дальнейшие действия. </p>
+<p><a href="{% url functionality %}">Площадка Гракон разрабатывается специально для того, чтобы дать обществу для этого удобные инструменты.</a></p>
+</div-->
+{% include "dialogs/find_uik.html" %}
+
+<!--{% if request.user.is_authenticated %}
+    <p>Чтобы принять участие в работе площадки, рассказать другим пользователям
+    о себе и помочь проведению честных выборов, сделайте следующее.</p>
+
+    {% if not request.profile.has_name %}
+        <div class="blue-title">Введите свои имя и фамилию</div>
+        <div class="check-list-step">
+             <form action="{% url update_profile %}?fields=first_name,last_name" method="post">
+                {% csrf_token %}
+                <div style="display:inline; float: right;">
+                    {% button "Сохранить" "save_name" "" "" %}
+                </div>
+                <div style="margin:0.3em;">Имя: {{ form.first_name }}</div>
+                <div style="margin:0.3em;">Фамилия: {{ form.last_name }}</div>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if not request.profile.show_name %}
+        <div class="blue-title">Покажите свое имя пользователям</div>
+        <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}">
+            {% if not request.profile.has_name %}<div class="i">&nbsp;</div>{% endif %}
+            <p>Это увеличит доверие к вам на площадке.</p>
+            <form action="{% url update_profile %}?fields=show_name" method="post">
+                {% csrf_token %}
+                {{ form.show_name }}
+                <div style="display:inline;">
+                    {% button "Сохранить" "save_show_name" "" "" %}
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if not request.roles.voter %}
+        <div class="blue-title">Выберите свой район</div>
+        <div class="check-list-step">
+
+            <p>Выберите район, где вы проживаете и/или будете голосовать.</p>
+
+            <form id="become_voter_form" method="post" action="{% url become_voter %}">
+                {% csrf_token %}
+                <div id="choose_regions">
+                    {% include "elements/region_choice.html" %}
+                </div>
+            </form>
+            <div style="display: inline;">
+                {% button "Сохранить" "choose_region" "" "" %}
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            set_select_location("choose_regions", []);
+            init_find_uik();
+
+            $("#choose_region").click(function(){
+                signup_for_role("voter", "{% url main %}");
+            });
+        </script>
+    {% endif %}
+
+    <div class="blue-title">Присоединяйтесь к нам в соцсетях</div>
+    <div class="check-list-step">
+        <p>Присоединяйтесь к нам в соцсетях и расскажите о нас своим друзьям</p>
+        {% include "elements/share_horizontal.html" %}
+        <p>или подпишитесь на нас:</p>
+        <div>
+            {% include "elements/read_us.html" %}
+        </div>
+    </div-->
+
+    <!--div class="blue-title">Станьте активным участником на выборах</div>
+    <div class="check-list-step">
+        {% if roles %}
+            <ul>
+                {% include "elements/roles.html" %}
+            </ul>
+        {% endif %}
+
+        <ul class="nobullet">
+            <li><span class="pseudolink blue" id="become_observer1">Наблюдатель</span></li>
+            <li><span class="pseudolink blue" id="become_member1">Член комиссии</span></li>
+            <li><span class="pseudolink blue" id="become_journalist1">Представитель СМИ</span></li>
+            <li><span class="pseudolink blue" id="become_lawyer1">Юрист</span></li>
+            <li><span class="pseudolink blue" id="become_prosecutor1">Представитель прокуратуры</span></li>
+            <li><span class="pseudolink blue" id="become_authority1">Представитель власти</span></li>
+        </ul>
+
+    </div>
+
+    {% with btn_id="become_observer1" role="observer" status_plural="наблюдатели" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_member1" role="member" status_plural="члены комиссии" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_journalist1" role="journalist" status_plural="представители СМИ" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_lawyer1" role="lawyer" status_plural="юристы" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_prosecutor1" role="prosecutor" status_plural="представители прокуратуры" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_authority1" role="authority" status_plural="представители власти" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% if not request.profile.about %}
+        <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+        <div class="blue-title">Добавьте информацию о себе</div>
+        <div class="check-list-step">
+            <p>Вы можете оставить свои координаты,
+            написать про участие в выборах и как готовность помочь другим участникам.</p>
+            <form action="{% url update_profile %}?fields=about" method="post">
+                {% csrf_token %}
+                <div style=" overflow: hidden;">
+                    {{ form.about }}
+                </div>
+                <div class="mt15">
+                    {% button "Добавить" "save_about" "" "" %}
+                </div>
+            </form>
+        </div>
+    {% endif %}-->
+<!--{% else %}
+
+{% endif %}-->
+    <!--p>Гракон&nbsp;&mdash; мини-соцсеть для координации работы любых организаций и&nbsp;граждан,
+объединенных одной целью&nbsp;&mdash; <b>проведением честных выборов</b> президента 4&nbsp;марта.</p>
+
+	<p>Удобная структура площадки позволяет участникам эффективно находить поблизости
+    именно тех людей и&nbsp;группы, которые могут им&nbsp;помочь. В&nbsp;результате активные участники
+    могут скоординировать свои действия в&nbsp;день выборов и&nbsp;минимизировать шансы
+    возникновения нарушений на&nbsp;участках.</p-->
+
+    <!--{% button "Короткая презентация" "view_presentation" "" %}-->
+
+    <!--div class="center">
+        <iframe width="450" height="259" src="http://www.youtube.com/embed/9YQTq4d3WJ0" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <br/>
+    {% include "dialogs/presentation.html" %}-->
+
+    <div class="blue-title">Тем временем</div>
+
+    <div class="step"><i>1</i><p>Мы продолжаем сбор копий протоколов и нарушений:</p>
+        <div class="center">
+            {% button "Сообщить о нарушении" "" "report_violation" "" %}{% button "Выложить протокол" "" "upload_protocol" "" %}
+        </div>
+        <p>Все <a href="{% url dump %}">собранные данные</a> выкладываются в удобном скачивания формате.</p>
+    </div>
+
+    <div class="step"><i>2</i><p>Вы можете выложить ссылку на зафиксированное веб-камерами видео
+        на страницу соответствующего УИКа</p>
+        {% button "Выложить ссылку на видео" "become_web_observer2" "" %}
+        <!--Также рекомендуем Вам воспользоваться удобной функцией
+        ускорения видео и последующего детального анализа, представленной на сайте "Считайте Сами".-->
+    </div>
+
+    <div class="step"><i>3</i><p>Вы можете легко <b>составить жалобу</b>, воспользовавшись
+        сайтом <a href="http://kuda-komu.net/voting/" target="_blank">Куда?Кому?</a>.</p>
+        <br/>
+    </div>
+
+    <div class="step"><i>4</i>Вы можете посмотреть результаты выборов на своем избирательном участке:</p>
+        <div id="choose_regions">
+            {% include "elements/region_choice.html" %}
+            <div style="display: inline;">
+                {% button "Перейти" "goto_location" "" "" %}
+            </div>
+            &nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;
+            <div style="display: inline;">
+                {% button "Найти на карте" "map_location" "" "" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="step"><i>5</i>
+        <p>Следите за <b>новостями проекта</b></p>
+        {% include "elements/read_us.html" %}
+    </div>
+
+    <script type="text/javascript">
+        set_select_location("choose_regions", []);
+        $("#login_content1, #login_content2, #login_content3").click(function(){
+            login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах:");
+        });
+        $("#view_presentation").click(function(){presentation_dialog_init();});
+    </script>

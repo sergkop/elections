@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content_header %}
+    <h2 class="location_header">Вход в систему</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="static-content">
+        {% crispy form %}
+
+        <div class="center">
+
+            <br/>
+            <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
+            <a href="{% url register %}">Регистрация</a>
+        </div>
+    </div>
+{% endblock %}

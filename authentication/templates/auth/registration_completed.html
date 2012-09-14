@@ -1,0 +1,22 @@
+{% extends "auth/base.html" %}
+
+{% block title %}Регистрация успешно завершена{% endblock %}
+
+{% block top %}
+    <h1>Регистрация успешно завершена</h1>
+{% endblock %}
+
+{% block right_column %}
+    {% include "elements/share.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="gr-descr">
+        <p><b>На вашу электронную почту отправлено письмо со ссылкой для активации аккаунта.</b></p>
+
+        <p>Если вы не получите письмо в течение нескольких минут проверьте папку Спам.</p>
+
+        <p>Если письмо так и не пришло, пожалуйста, напишите на <a href="mailto:{{ ADMIN_EMAIL}}">{{ ADMIN_EMAIL }}</a>
+        и укажите введенное имя пользователя.</p>
+    </div>
+{% endblock %}

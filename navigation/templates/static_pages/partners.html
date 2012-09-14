@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Партнеры - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Наши партнеры</h2>
+{% endblock %}
+
+{% block content %}
+<div class="static-content">
+    <style type="text/css">
+        .ym-col1 {width: 0px;}
+        .ym-col2 {width: 0px;}
+        .ym-col3 {margin-left: 0; width: 100%; padding: 15px 0;}
+		h2.location_header {margin-left: 15px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li a{line-height: 1em; text-align: center; height: 49px; padding-top: 5px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 55px;}
+    </style>
+   <p>Мы&nbsp;призываем к&nbsp;взаимному сотрудничеству все организации и&nbsp;группы, чья деятельность связана с&nbsp;контролем
+или освещением выборов. Вместо дублирования функциональности, мы&nbsp;будем рады разместить банеры
+и&nbsp;ссылки на&nbsp;Ваши сайты, и&nbsp;перенаправлять заинтересованных пользователей. Примеры сотрудничества:</p>
+
+    <ul>
+    <li>перенаправление избирателей, желающих стать наблюдателями, на&nbsp;сайт <a href="http://nabludatel.org" target="_blank">&laquo;Гражданина Наблюдателя&raquo;</a>
+    для записи на&nbsp;тренинги</li>
+    <li>перенаправление пользователей, желающих сообщить о&nbsp;нарушении, на&nbsp;сайт <a href="http://www.kartanarusheniy.ru/" target="_blank">&laquo;Карты Нарушений&raquo;</a></li>
+    <li>перенаправление пользователей, желающих оформить жалобу или нарушение, на&nbsp;сайт
+    <a href="http://kuda-komu.net/" target="_blank">&laquo;Куда? Кому?&raquo;</a> для полу-автоматического оформления бумаг</li>
+    </ul>
+
+    <p>Если Вы хотите стать нашим партнером, пишите нам на <a href="mailto:admin@grakon.org">admin@grakon.org</a>.</p>
+    
+    <div class="partners">
+        <div class="partner_block">
+            <a href="http://nabludatel.org" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/gn.jpg" width="150px" class="side_block_image" style="margin-top:15px" />
+            </a>
+        </div>
+        
+        <div class="partner_block">
+            <a href="http://webnabludatel.org/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/web_observer.png" width="150px" class="side_block_image" style="margin-top: -15px" />
+            </a>
+        </div>
+        
+        <div class="partner_block">
+            <a href="http://www.ligaizbirateley.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/liga.jpg" width="120" class="side_block_image" />
+            </a>
+        </div>
+       
+        <div class="partner_block">
+            <a href="http://rosvybory.org/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/rosvybory.png" class="side_block_image" style="margin-top:10px" />
+            </a>
+        </div>
+        
+        <div class="partner_block">
+            <a href="http://www.golos.org/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/golos_logo.png" height="80" class="side_block_image" />
+            </a>
+        </div>       
+        
+        
+        <div class="partner_block">
+            <a href="http://kuda-komu.net/voting/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/komukuda.gif" width="150px" class="side_block_image" style="margin-top:15px"  />
+            </a>
+        </div>
+        
+
+        <div class="partner_block">
+            <a href="http://www.yabloko.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/yabloko.jpg" class="side_block_image" style="margin-top:17px"  />
+            </a>
+        </div>    
+        
+        <div class="partner_block">
+            <a href="http://mdp2012.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/prohorov.jpg" width="150px" class="side_block_image" />
+            </a>
+        </div>
+    
+        <div class="partner_block">
+            <a href="http://sidorinlab.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/sidorinlab.png" width="150px" class="side_block_image" style="margin-top:28px"  />
+            </a>
+        </div>
+
+        <div class="partner_block">
+            <a href="http://www.kartanarusheniy.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/kartanarusheniy.gif" width="150px" class="side_block_image" />
+            </a>
+        </div>
+        <div class="cl">&nbsp;</div>
+    </div>
+ </div>
+{% endblock %}

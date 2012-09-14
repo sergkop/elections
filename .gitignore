@@ -1,0 +1,13 @@
+*.swp
+*~
+*.project*
+*.pydevproject*
+*.pyc
+*.bak
+*.kate-swp
+grakon/site_settings.py
+database.sqlite
+Makefile
+*.directory
+celerybeat-schedule
+celeryev.pid

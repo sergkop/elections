@@ -1,0 +1,13 @@
+{% extends "auth/base.html" %}
+
+{% block title %}Ваша учетная запись активирована{% endblock %}
+
+{% block top %}
+    <h1>Ваша учетная запись активирована</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="gr-descr">
+        <p>Спасибо за регистрацию! Теперь вы можете <a href="{% url login %}">войти</a> в систему.</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="js-comments" ct="{{ct}}" e_id="{{e_id}}">
+    <div class="js-comments">
+        {{#PROFILE.id}}
+            {{>comment_field}}
+            <!--div class="gr-bb-grey-lt"></div-->
+        {{/PROFILE.id}}
+
+        {{#comments}}
+            {{>comment_item}}
+        {{/comments}}
+    </div>
+</div>
+
+

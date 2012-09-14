@@ -1,0 +1,7 @@
+{% extends "letters/base.html" %}
+
+{% block content %}
+    {% for notification in notifications %}
+        {{ notification }}
+    {% endfor %}
+{% endblock %}

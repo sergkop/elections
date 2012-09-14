@@ -1,0 +1,23 @@
+{% load elements %}
+
+<div class="side_block_header side_block_member">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=member">Члены избирательной комиссии ({{ counters.member }})</a>
+    {% else %}
+        Члены избирательной комиссии ({{ counters.member }})
+    {% endif %}
+</div>
+
+<div class="content_block">
+    {% button "Я &mdash; член комиссии" "become_member" "" "center" "Для членов избирательных комиссий" %}
+</div>
+
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_member.html" %}
+    {% endif %}
+{% endif %}
+
+{% with btn_id="become_member" role="member" status_plural="члены комиссии" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

@@ -1,0 +1,21 @@
+{% load elements %}
+
+<div class="side_block_header side_block_lawyer">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=lawyer">Юристы ({{ counters.lawyer }})</a>
+    {% else %}
+        Юристы ({{ counters.lawyer }})
+    {% endif %}
+</div>
+
+<div class="content_block">
+    {% button "Я &mdash; юрист" "become_lawyer" %}  
+</div>
+
+{% if user.is_authenticated %}
+    {% include "dialogs/become_lawyer.html" %}
+{% endif %}
+
+{% with btn_id="become_lawyer" role="lawyer" status_plural="юристы" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

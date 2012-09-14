@@ -1,0 +1,4 @@
+To merge:
+    * authentication templates
+    * static pages views and urls
+    

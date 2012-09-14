@@ -1,0 +1,37 @@
+#!/bin/bash
+PIDFILE=/var/run/grakon.pid
+SOCKET=%(path)sgrakon.sock
+
+METHOD="prefork"
+
+action=${1:-restart}
+
+start() {
+    cd %(code_path)s
+    source %(env_path)sbin/activate
+    python manage.py runfcgi method=${METHOD} socket=${SOCKET} pidfile=${PIDFILE} && echo "fcgi started."
+    chown www-data:www-data ${SOCKET}
+}
+
+stop() {
+    if [ -e ${PIDFILE} ]
+    then
+        kill `cat ${PIDFILE}` && rm -f ${PIDFILE} &&  echo "fcgi stoped."
+    fi
+}
+
+restart() {
+    stop
+    start
+}
+
+usage() {
+    echo "Arguments should be: start, stop, restart or None."
+}
+
+case ${action} in
+    start   ) start   ;;
+    stop    ) stop    ;;
+    restart ) restart ;;
+    *       ) usage   ;;
+esac
