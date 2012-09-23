@@ -1,21 +1,98 @@
 # -*- coding:utf-8 -*-
+from django.core.cache import cache
 from django.db import models
+
+from services.cache import cache_function
 
 # Url templates for pages on izbirkom.ru with information about comissions
 RESULTS_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show&global=1&vrn=100100031793505&region=%(region_code)d&prver=0&pronetvd=null'
-#RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show&global=true&root=%(root)d&tvd=%(tvd)d&vrn=100100031793505&prver=0&pronetvd=null&region=%(region_code)d&sub_region=%(region_code)d&type=0&vibid=%(tvd)d'
 RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/region/%(region_name)s?action=show&root=%(root)d&tvd=%(tvd)d&vrn=100100031793505&region=%(region_code)d&global=true&sub_region=%(region_code)d&prver=0&pronetvd=null&vibid=%(tvd)d&type=226'
 
-#INFO_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=0&vrnkomis=0'
 INFO_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=%(vrnorg)d&vrnkomis=%(vrnkomis)d'
 
-FOREIGN_TERRITORIES = u'Зарубежные территории' # Do not change this name without proper changes in production db
-FOREIGN_NAME = 'foreign-countries'
-FOREIGN_CODE = 99
+class LocationManager(models.Manager):
+    @cache_function('location/country', 1000)
+    def country(self):
+        return self.get(country=None)
 
+    def info_for(self, ids, related=True):
+        """
+        Return {id: {'location': location, entities_keys: entities_data}}.
+        If related is True, return list of entities data, otherwise - only ids.
+        """
+        cache_prefix = self.model.cache_prefix
+        cached_locations = cache.get_many([cache_prefix+str(id) for id in ids])
+
+        cached_ids = []
+        res = {}
+        for key, entity in cached_locations.iteritems():
+            id = int(key[len(cache_prefix):])
+            cached_ids.append(id)
+            res[id] = entity
+
+        other_ids = set(ids) - set(cached_ids)
+        if len(other_ids) > 0:
+            other_res = dict((id, {}) for id in other_ids)
+
+            comments_data = FEATURES_MODELS['comments'].objects.get_for(Location, other_ids)
+
+            ct_id = ContentType.objects.get_for_model(self.model).id
+            locations = self.filter(id__in=other_ids).select_related()
+            participants_ids = []
+            for loc in locations:
+                # TODO: instance is a dict in all entities
+                other_res[loc.id] = {'instance': loc, 'ct': ct_id}
+
+                # TODO: do we need tools data here?
+                for name, model in ENTITIES_MODELS.iteritems():
+                    if name == 'participants':
+                        continue
+
+                    other_res[loc.id][name] = loc.get_entities(name)(
+                            limit=settings.LIST_COUNT['tools'])
+
+                # Get participants
+                participants_data = loc.get_entities('participants')(limit=settings.LIST_COUNT['participants'])
+                participants_ids += participants_data['ids']
+                other_res[loc.id]['participants'] = {
+                    'count': participants_data['count'],
+                    'entities': [{'id': id} for id in participants_data['ids']],
+                }
+
+                # Comments
+                other_res[loc.id]['comments'] = comments_data[loc.id]
+
+            profiles_by_id = ENTITIES_MODELS['participants'].objects.only('id', 'first_name', 'last_name', 'intro', 'rating') \
+                    .in_bulk(set(participants_ids))
+
+            for loc in locations:
+                for entity in other_res[loc.id]['participants']['entities']:
+                    entity.update(profiles_by_id[entity['id']].display_info())
+
+            res.update(other_res)
+
+            cache_res = dict((cache_prefix+str(id), other_res[id]) for id in other_res)
+            cache.set_many(cache_res, 60) # TODO: specify time outside of this method
+
+        if related:
+            for name, model in ENTITIES_MODELS.iteritems():
+                if name == 'participants':
+                        continue
+
+                e_ids = set(e_id for id in ids for e_id in res[id][name]['ids'])
+                e_info = model.objects.info_for(e_ids, related=False)
+
+                for id in ids:
+                    res[id][name]['entities'] = [e_info[e_id] for e_id in res[id][name]['ids']
+                            if e_id in e_info]
+
+        return res
+
+# TODO: add foreign uiks (in other countries)
 class Location(models.Model):
     """ The number of non-null values of parent specifies the level of location """
     # keys to the parents of the corresponding level (if present)
+    country = models.ForeignKey('self', null=True, blank=True, related_name='country_related')
     region = models.ForeignKey('self', null=True, blank=True, related_name='in_region')
     tik = models.ForeignKey('self', null=True, blank=True, related_name='in_tik')
 
@@ -40,6 +117,16 @@ class Location(models.Model):
 
     data = models.TextField() # keeps counters for cik data and users
 
+    #participants = generic.GenericRelation('participants.EntityParticipant', object_id_field='entity_id')
+
+    objects = LocationManager()
+
+    cache_prefix = 'location_info'
+
+    # A hack to implement participants
+    features = ['participants', 'comments']
+    roles = ['follower']
+
     def level(self):
         if self.region_id is None:
             return 2
@@ -48,17 +135,17 @@ class Location(models.Model):
         else:
             return 4
 
+    def is_country(self):
+        return self.country_id is None
+
     def is_region(self):
-        return self.region_id is None and self.tik_id is None
+        return self.country_id is not None and self.region_id is None
 
     def is_tik(self):
         return self.region_id is not None and self.tik_id is None
 
     def is_uik(self):
-        return self.region_id is not None and self.tik_id is not None
-
-    def is_foreign(self):
-        return self.region_name==FOREIGN_NAME
+        return self.tik_id is not None
 
     def results_url(self):
         """ Link to the page with elections results on izbirkom.ru """
@@ -106,13 +193,15 @@ class Location(models.Model):
                 name = str(self.region) + u'->' + name
         return name
 
+    def info(self, related=True):
+        return Location.objects.info_for([self.id], related)[self.id]
+
+    def cache_key(self):
+        return self.cache_prefix + str(self.id)
+
+    def clear_cache(self):
+        cache.delete(self.cache_key())
+
     @models.permalink
     def get_absolute_url(self):
-        return ('location_wall', (), {'loc_id': str(self.id)})
-
-class Boundary(models.Model):
-    data = models.TextField()
-    x_min = models.FloatField(db_index=True)
-    x_max = models.FloatField(db_index=True)
-    y_min = models.FloatField(db_index=True)
-    y_max = models.FloatField(db_index=True)
+        return ('location', (), {'loc_id': str(self.id)})

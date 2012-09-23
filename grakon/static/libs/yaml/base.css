@@ -68,8 +68,6 @@
 		display:block;
 	}
 	
-	header, footer, nav, .ym-column {text-align:center;}
-	
 	nav {padding-bottom: .8em; padding-top: 2.5em}
 	
 	footer {height: 3.3em; position: relative; padding: .8em 0 1em; font-size: .9em; border-top: 2px solid #ddd;}
@@ -216,10 +214,10 @@
 	.ym-column { display:table; width:100%;}
 
 	.ym-col1 { width: 70%; float:left; padding: 3em 2em 0 0;} /* center column */
-        #main .ym-col1, .gr-wide .ym-col1  {width: auto; padding: 0; float: none;}
-        #search .ym-col1, .gr-wide .ym-col1  {width: auto; padding: 0; float: none;}
+        #main .ym-col1, .gr-wide .ym-col1  {padding: 0; float: none;}
+        #search .ym-col1, .gr-wide .ym-col1  {padding: 0; float: none;}
 	.ym-col2 { width: 30%; float:left;  margin-left: -100%; padding: 1em 1em 0 0;} /* left column */
-	.ym-col3 {  float:right; width: 30%; margin-left: -5px; margin-right: 0%; padding: 3em 0 0 2em;} /* right column */
+	.ym-col3 {  float:right; width: 70%; margin-left: -5px; margin-right: 0%; padding: 3em 0 0 2em;} /* right column */
 	
 	.ym-cbox { padding: 0 10px }
 	.ym-cbox-left { padding: 0 10px 0 0 }

@@ -139,3 +139,10 @@ def check_permissions(func):
             return HttpResponse(u'У вас нет прав на выполнение этой операции')
         return func(request, entity)
     return new_func
+
+def entity_tabs_view(view):
+    return {
+        'tab': view.tab,
+        'tabs': view.tabs,
+        'template_path': filter(lambda t: t[0]==view.tab, view.tabs)[0][3],
+    }

@@ -19,16 +19,13 @@ def media_files(request):
             'libs/jquery-ui/jquery-ui.css',
             'libs/crispy-forms/uni-form.css',
             'libs/crispy-forms/default.uni-form.css',
-            'libs/chosen/chosen.css',
             'libs/tipsy/tipsy.css',
-            'libs/jTour/jquery-jtour-2.0.2.css',
 
             'css/hlist.css',
-            'css/tabs.css',
-            'css/gray-theme.css',
+            'css/layout.css',
             'css/typography.css',
-            'css/deco.css',
             'css/style.css',
+            'css/julia_style.css',
         ),
     })
 
@@ -40,22 +37,22 @@ def media_files(request):
         )
     else:
         js = (
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js',
             'http://userapi.com/js/api/openapi.js?49', # VKontakte
         )
 
     js += (
         'libs/underscore.js',
+        'libs/tipsy/jquery.tipsy.js',
         'libs/json2.js',
         'libs/backbone.js',
-        'libs/chosen/chosen.jquery.min.js',
         'libs/jquery.placeholder.min.js',
         'libs/jquery.autosize.js',
         reverse('code_data') if settings.DEBUG else 'js/code_data.js',
-        'js/main.js',
-        'js/comments.js',
-        'js/locations.js',
+        #'js/main.js',
+        #'js/comments.js',
+        #'js/locations.js',
     )
     media.add_js(js)
 

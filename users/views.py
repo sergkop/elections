@@ -11,7 +11,7 @@ from elements.participants.models import participant_in
 from elements.utils import table_data
 from elements.views import entity_base_view, entity_tabs_view
 from services.email import send_email
-from users.forms import MessageForm, ProfileForm
+from users.forms import MessageForm
 from users.models import Message, Profile
 
 class BaseProfileView(object):

@@ -3,43 +3,11 @@ from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
 
-from locations.models import FOREIGN_TERRITORIES, Location
+from locations.models import Location
 from services.cache import cache_function
 from users.models import CommissionMember, Profile, WebObserver
 
-def cache_location_function(key_prefix, timeout, timeout_region=None, timeout_tik=None, timeout_uik=None):
-    """ Takes function of one argument (location with default value None) """
-    def decorator(func):
-        def new_func(location=None):
-            if location:
-                key = key_prefix + '_' + str(location.id)
-            else:
-                key = key_prefix + '_all'
-
-            res = cache.get(key)
-            if res:
-                return res
-
-            res = func(location)
-
-            # Determine timeout
-            if location is None:
-                timeout1 = timeout
-            elif location.is_region():
-                timeout1 = timeout_region or timeout
-            elif location.is_tik():
-                timeout1 = timeout_tik or timeout
-            elif location.is_uik():
-                timeout1 = timeout_uik or timeout
-
-            cache.set(key, res, timeout1)
-            return res
-
-        return new_func
-
-    return decorator
-
-@cache_location_function('regions_list', 1000)
+# TODO: include it in info and cache (?)
 def regions_list(location=None):
     """ location = None for Russia """
     if location is None:
@@ -49,8 +17,6 @@ def regions_list(location=None):
                 regions[1] = (loc_id, name)
             elif name == u'Санкт-Петербург':
                 regions[2] = (loc_id, name)
-            elif name == FOREIGN_TERRITORIES:
-                regions[3] = (loc_id, name)
             else:
                 regions.append((loc_id, name))
         return regions
@@ -69,13 +35,13 @@ def get_roles_query(location=None):
     query = Q(location=location)
     if location.is_region():
         query |= Q(location__region=location)
-    elif location.is_tik():
-        query |= Q(location__tik=location)
+    #elif location.is_tik():
+    #    query |= Q(location__tik=location)
 
     return query
 
+# TODO: include it in info and cache
 # TODO: count members differently?
-@cache_location_function('roles_counter', 300)
 def get_roles_counters(location=None):
     counters = {}
     query = get_roles_query(location)

@@ -10,6 +10,7 @@ from django.views.generic.base import TemplateView
 from elements.locations.utils import breadcrumbs_context
 from locations.models import Location
 from locations.utils import get_roles_counters, regions_list
+from navigation.forms import FeedbackForm
 from services.cache import cache_function
 from users.models import CommissionMember
 
@@ -80,3 +81,19 @@ def sitemap(request):
         'organizations': Organization.objects.filter(verified=True),
     }
     return render_to_response('sitemap.html', context_instance=RequestContext(request, context))
+
+def feedback(request, **kwargs):
+    if request.method == 'POST':
+        form = FeedbackForm(request, request.POST)
+        if form.is_valid():
+            form.send()
+            return redirect('feedback_thanks')
+    else:
+        form = FeedbackForm(request)
+
+    ctx = {
+        'form': form,
+        'template': 'feedback/feedback.html',
+    }
+    ctx.update(kwargs)
+    return static_page(request, **ctx)

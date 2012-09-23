@@ -2,7 +2,7 @@
     <center>
         Чтобы записаться юристом укажите какую организацию вы представляете.
         <br/><br/>
-        <form id="become_lawyer_form" method="post" action="{% url become_lawyer %}">
+        <form id="become_lawyer_form" method="post" action="{# url become_lawyer #}">
             {% csrf_token %}
             <select name="organization">
                 {% for organization in organizations %}
@@ -16,7 +16,7 @@
                 <br/>
                 <input type="text" name="data" value="" size="50" maxlength="50" />
             </div>
-            <input type="hidden" name="tik" value="{{ current_location.id }}" />
+            <input type="hidden" name="tik" value="{{ location.id }}" />
         </form>
     </center>
 </div>

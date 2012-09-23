@@ -13,8 +13,6 @@
 {% endblock %}
 
 {% block left_column %}
-    {% include "dialogs/report.html" %}
-
     {% include "dialogs/send_message.html" %}
 
     {% include "dialogs/add_to_contacts.html" %}
@@ -135,11 +133,6 @@
                     $("#add_to_contacts").show()
                     $('#have_in_contacts_ul li a[href="{{ user.get_absolute_url }}"]').parent().remove();
                 }
-            });
-
-            $("#report_user_dialog").on("report_dialog_event", function(event, username){
-                $('#contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
-                $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
             });
         </script>
     {% endif %}

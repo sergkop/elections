@@ -2,28 +2,28 @@
     <div class="breadcrumbs">
         <ul>
             <li class="first">
-               {% if current_location %}
+               {% if location %}
                     <a href="{% url main %}">Россия<i></i><b></b></a>
                {% else %}
                     <strong>Россия<i></i><b></b></strong>
                {% endif %}
             </li>
 
-            {% if current_location.region %}
+            {% if location.region %}
                 <li>
-                    <a href="{% url location_wall current_location.region.id %}">{{ current_location.region }}<i></i><b></b></a> 
+                    <a href="{% url location_wall location.region.id %}">{{ location.region }}<i></i><b></b></a> 
                 </li>
             {% endif %}
 
-            {% if current_location.tik %}
+            {% if location.tik %}
                 <li>
-                    <a href="{% url location_wall current_location.tik.id %}">{{ current_location.tik }}<i></i><b></b></a>
+                    <a href="{% url location_wall location.tik.id %}">{{ location.tik }}<i></i><b></b></a>
                 </li>
             {% endif %}
 
-            {% if current_location %}
+            {% if location %}
                 <li>
-                    <strong>{{ current_location }}<i></i><b></b></strong>
+                    <strong>{{ location }}<i></i><b></b></strong>
                 </li>
             {% endif %}
 
@@ -31,14 +31,14 @@
                 <li>
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
-                            {% if current_location.is_region %}
+                            {% if location.is_region %}
                                 <option value="" selected="selected">Выбрать район (ТИК)</option>
                             {% endif %}
-                            {% if current_location.is_tik %}
+                            {% if location.is_tik %}
                                 <option value="" selected="selected">Выбрать участок</option>
                             {% endif %}
                             {% for id, name in sub_regions %}
-                                <option value="{{ id }}">{% if current_location.is_tik %}УИК № {% endif %}{{ name }}</option>
+                                <option value="{{ id }}">{% if location.is_tik %}УИК № {% endif %}{{ name }}</option>
                             {% endfor %}
                         </select>
                     </form>

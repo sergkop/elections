@@ -1,8 +1,8 @@
 {% load elements %}
 
 <div class="side_block_header side_block_journalist">
-    {% if current_location %}
-        <a href="{% url participants current_location.id %}?type=journalist">Представители СМИ ({{ counters.journalist }})</a>
+    {% if location %}
+        <a href="{% url participants location.id %}?type=journalist">Представители СМИ ({{ counters.journalist }})</a>
     {% else %}
         Представители СМИ ({{ counters.journalist }})
     {% endif %}
@@ -13,7 +13,7 @@
 </div>
 
 {% if user.is_authenticated %}
-    {% if current_location.is_tik or current_location.is_uik %}
+    {% if location.is_tik or location.is_uik %}
         {% include "dialogs/become_journalist.html" %}
     {% endif %}
 {% endif %}

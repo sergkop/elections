@@ -1,6 +1,6 @@
 {% load elements %}
 
-{% if not current_location or current_location.is_region %}
+{% if not location or location.is_region %}
     {% if request.user.is_authenticated %}
         {% include "dialogs/change_location.html" %}
     {% endif %}
@@ -19,5 +19,3 @@
 {% if user.is_authenticated %}
     {% include "dialogs/add_to_contacts.html" %}
 {% endif %}
-
-{% include "dialogs/report.html" %}

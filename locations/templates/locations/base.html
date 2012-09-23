@@ -3,10 +3,10 @@
 {% load elements %}
 
 {% block title %}
-Результаты президентских выборов -
-{% if current_location.region %}{{ current_location.region }} - {% endif %}
-{% if current_location.tik %}{{ current_location.tik }} - {% endif %}
-{{ current_location }} - Гракон
+Результаты выборов -
+{% if location.region %}{{ location.region }} - {% endif %}
+{% if location.tik %}{{ location.tik }} - {% endif %}
+{{ location }} - Гракон
 {% endblock %}
 
 {% block head %}
@@ -17,8 +17,6 @@
 
 {% block breadcrumbs %}
     {% include "elements/breadcrumbs.html" %}
-
-    {% include "elements/results_table.html" %}
 {% endblock %}
 
 {% block left_column %}
@@ -30,52 +28,11 @@
 {% endblock %}
 
 {% block right_column %}
-    {% include "blocks/web_observers.html" %}
-
-    {% include "blocks/commission_members.html" %}
-
     {% include "elements/right_panel.html" %}
-
-    {% include "dialogs/add_link.html" %}
-    {% include "dialogs/add_commission_member.html" %}
-
-    {% if user.is_authenticated %}
-        <script type="text/javascript">
-            // Add link
-            $("#add_link_dialog").on("add_link_event", function(){
-                $("#links_ul").append($("<li/>").append(
-                    $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
-                        .text($("#link_name_input").val())
-                ));
-            });
-
-            /*$("#report_link").click(function(){
-                // TODO: depricate it
-                $("#links_ul li").each(function(index){
-                    var url = $(this).children("a").attr("href");
-                    var text = $(this).text();
-                    var a_copy = $("<a/>").attr("href", url).text(text);
-                    var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
-                    $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
-                });
-            });*/
-        </script>
-    {% endif %}
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">{{ current_location }}</h2>
+    <h2 class="location_header">{{ location }}</h2>
 
-    {% tabs "tabs" view "loc_id" loc_id "Сообщения&nbsp;" "location_wall" "services/disqus.html" "" "Карта" "location_map" "locations/map.html" "" "Информация" "location_info" "locations/info.html" "" "Участники" "participants" "locations/participants.html" "" %}
-
-    {% include "services/disqus-counter.html" %}
-
-    <script type="text/javascript">
-        $("#add_commission_member, #add_commission_member1, #add_commission_member2").click(add_commission_member_dialog_init);
-        {% if dialog %}
-            $(document).ready(function(){
-                become_{{ dialog }}_dialog_init();
-            });
-        {% endif %}
-    </script>
+    {% include template_path %}
 {% endblock %}

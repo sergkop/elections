@@ -11,9 +11,6 @@ from qsstats import QuerySetStats
 
 from elements.widgets import DateTimeWidget
 from services.models import Email
-from tools.ideas.models import Idea
-from tools.projects.models import Project
-from tools.tasks.models import Task
 from users.models import Message
 
 dt_format = '%d/%m/%Y %H:%M'
@@ -61,9 +58,6 @@ class ContentStats(BaseSiteStats):
 
         self.get_models_data({
             'users': (User.objects.filter(is_active=True), 'date_joined'),
-            'ideas': (Idea.objects.all(), 'add_time'),
-            'projects': (Project.objects.all(), 'add_time'),
-            'tasks': (Task.objects.all(), 'add_time'),
             'messages': (Message.objects.all(), 'time'),
         })
 
@@ -88,9 +82,6 @@ class EmailStats(BaseSiteStats):
         emails = Email.objects.all()
         if self.mailtype != 'all':
             emails = emails.filter(type=self.mailtype)
-
-        first_time = emails.order_by('time')[0].time
-        last_time = emails.order_by('-time')[0].time
 
         self.enddate = datetime.now().replace(tzinfo=utc)
         self.startdate = self.enddate - timedelta(days=30)

@@ -13,8 +13,9 @@
     <meta property="og:image" content="{{ URL_PREFIX }}{{ STATIC_URL }}images/grakon_share_logo.jpg" />
     <meta property="og:description" content="Гракон - мини-соцсеть для координации работы любых организаций и граждан, объединенных одной целью - проведением честных выборов президента 4 марта." />
 
-    {{ grakon_media }}
-    {{ crispy_form_media }}
+    {{ media_files }}
+
+    {{ form.media }}
 
     <!--[if IE]>
     <link href="{{ STATIC_URL }}libs/yaml/iehacks.css" rel="stylesheet" type="text/css"/>
@@ -49,7 +50,7 @@
             <div class="ym-hlist">
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url functionality %}">О проекте</a></li>
+                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
                 </ul>
 
                 <div class="login_logout">
@@ -59,9 +60,9 @@
                                 <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
                             {% endif %}
                             {% if my_profile.first_name or my_profile.last_name %}
-                                <a href="{% url my_profile %}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
+                                <a href="{{ request.profile.get_absolute_url }}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
                             {% else %}
-                                <a href="{% url my_profile %}">Профайл</a> |
+                                <a href="{{ request.profile.get_absolute_url }}">Профайл</a> |
                             {% endif %}
                             <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                         </div>

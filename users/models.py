@@ -30,6 +30,7 @@ class ProfileManager(BaseEntityManager):
 
         # TODO: use ratings to sort entities
 
+        """
         for entity_name in ('ideas', 'tasks', 'projects', 'questions'):
             model = ENTITIES_MODELS[entity_name]
 
@@ -43,8 +44,10 @@ class ProfileManager(BaseEntityManager):
             for id in ids:
                 for role in model.roles:
                     data[id][entity_name][role]['count'] = len(data[id][entity_name][role]['ids'])
+        """
 
     def get_related_info(self, data, ids):
+        """
         for entity_name in ('ideas', 'tasks', 'projects', 'questions'):
             model = ENTITIES_MODELS[entity_name]
 
@@ -56,6 +59,8 @@ class ProfileManager(BaseEntityManager):
                 for role in model.roles:
                     data[id][entity_name][role]['entities'] = [entities_info[e_id] \
                             for e_id in data[id][entity_name][role]['ids']]
+        """
+        pass
 
 @entity_class(['locations', 'participants'])
 class Profile(BaseEntityModel):

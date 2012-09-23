@@ -1,28 +1,28 @@
 {% load elements %}
 
 <p>
-    <b>Адрес</b>: {{ current_location.postcode|default:"" }} {{ current_location.address|default:"Адрес недоступен" }}
+    <b>Адрес</b>: {{ location.postcode|default:"" }} {{ location.address|default:"Адрес недоступен" }}
 </p>
 
 <p>
-    <b>Телефон</b>: {{ current_location.telephone|default:"Телефон недоступен" }}
+    <b>Телефон</b>: {{ location.telephone|default:"Телефон недоступен" }}
 </p>
 
-{% if current_location.email %}
+{% if location.email %}
 <p>
-    <b>Email</b>: <a href="mailto:{{ current_location.email }}">{{ current_location.email }}</a>
+    <b>Email</b>: <a href="mailto:{{ location.email }}">{{ location.email }}</a>
 </p>
 {% endif %}
 
-{% if not current_location.is_foreign or not current_location.is_tik %}
+{% if not location.is_foreign or not location.is_tik %}
     <p>
         <b>Информация на сайте Центризбиркома:</b>
         <br/>
-        {% if current_location.info_url %}
-            <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
+        {% if location.info_url %}
+            <a href="{{ location.info_url }}" target="_blank">Информация о комиссии</a>
             <br/>
         {% endif %}
-        <a href="{{ current_location.results_url }}" target="_blank">Официальные результаты выборов</a>
+        <a href="{{ location.results_url }}" target="_blank">Официальные результаты выборов</a>
     </p>
 {% endif %}
 

@@ -16,7 +16,7 @@
     получили копию протокола?</p>
     <form id="become_supporter_form" method="post" action="{% url become_supporter %}">
         {% csrf_token %}
-        <input type="hidden" name="uik" value="{{ current_location.id }}" />
+        <input type="hidden" name="uik" value="{{ location.id }}" />
     </form>
 </div>
 
@@ -29,7 +29,7 @@
         title: "Поддержать наблюдателей",
         buttons: {
             "Поддержать": function(){
-                signup_for_role("supporter", "{% url supporters current_location.id %}");
+                signup_for_role("supporter", "{% url supporters location.id %}");
             },
             "Отмена": function(){$("#become_supporter_dialog").dialog("close");}
         }

@@ -5,7 +5,7 @@
             в список контактов?
         </center>
 
-        <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+        <form id="add_to_contacts_form" method="post" action="{# url add_to_contacts #}">
             {% csrf_token %}
             <input type="hidden" name="username" value="" />
         </form>
@@ -17,7 +17,7 @@
     {% if user.is_authenticated %}
         $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
             "Добавить": function(){
-                $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
+                $.post("{# url add_to_contacts #}", $("#add_to_contacts_form").serialize(), function(data){
                     $("#add_to_contacts_dialog").dialog("close");
                     if (data=="ok"){
                         var username = $('#add_to_contacts_form input[name="username"]').val();

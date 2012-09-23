@@ -1,8 +1,8 @@
 {% load elements %}
 
 <div class="side_block_header side_block_member">
-    {% if current_location %}
-        <a href="{% url participants current_location.id %}?type=member">Члены избирательной комиссии ({{ counters.member }})</a>
+    {% if location %}
+        <a href="{% url participants location.id %}?type=member">Члены избирательной комиссии ({{ counters.member }})</a>
     {% else %}
         Члены избирательной комиссии ({{ counters.member }})
     {% endif %}
@@ -13,7 +13,7 @@
 </div>
 
 {% if user.is_authenticated %}
-    {% if current_location.is_tik or current_location.is_uik %}
+    {% if location.is_tik or location.is_uik %}
         {% include "dialogs/become_member.html" %}
     {% endif %}
 {% endif %}

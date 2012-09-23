@@ -12,7 +12,7 @@ urlpatterns = patterns('locations.views',
     # Redirect, not used anymore
     url(r'^(?P<loc_id>\d+)/supporters', 'location_supporters', name='supporters'),
 
-    url(r'^get_sub_regions$', 'get_sub_regions', name='get_sub_regions'),
+    url(r'^get_subregions$', 'get_subregions', name='get_subregions'),
     url(r'^goto_location$', 'goto_location', name='goto_location'),
 
     url(r'^locations_data$', 'locations_data', name='locations_data'),

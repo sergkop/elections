@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^', include('authentication.urls')),
     url(r'^', include('elements.urls')),
     url(r'^', include('navigation.urls')),
-    #url(r'^', include('users.urls')),
+    url(r'^', include('users.urls')),
 
     url(r'', include('social_auth.urls')),
     url(r'^tinymce/', include('tinymce.urls')),

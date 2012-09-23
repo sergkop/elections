@@ -1,8 +1,8 @@
 {% load elements %}
 
 <div class="side_block_header side_block_lawyer">
-    {% if current_location %}
-        <a href="{% url participants current_location.id %}?type=lawyer">Юристы ({{ counters.lawyer }})</a>
+    {% if location %}
+        <a href="{% url participants location.id %}?type=lawyer">Юристы ({{ counters.lawyer }})</a>
     {% else %}
         Юристы ({{ counters.lawyer }})
     {% endif %}

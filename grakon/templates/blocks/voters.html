@@ -7,8 +7,8 @@
     .ym-col1 .content_block .pseudolink {font-style: italic; font-size: 0.9em;}
 </style>
 <div class="side_block_header side_block_voter">
-    {% if current_location %}
-        <a href="{% url participants current_location.id %}?type=voter">Избиратели ({{ counters.voter }})</a>
+    {% if location %}
+        <a href="{% url participants location.id %}?type=voter">Избиратели ({{ counters.voter }})</a>
     {% else %}
         Избиратели ({{ counters.voter }})
     {% endif %}
@@ -19,7 +19,7 @@
 </div>
 
 {% if user.is_authenticated %}
-    {% if current_location.is_tik or current_location.is_uik %}
+    {% if location.is_tik or location.is_uik %}
         {% include "dialogs/become_voter.html" %}
     {% endif %}
 {% endif %}
