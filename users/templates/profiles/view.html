@@ -25,8 +25,7 @@
     <div class="user_actions">
         {% button "Отправить сообщение" "send_message" "" "" %}&nbsp; 
         {% button "Добавить в контакты" "add_to_contacts" "" "" %}&nbsp; 
-        {% button "Удалить из контактов" "remove_from_contacts" "" "" %}
-        {% button "Пожаловаться" "report_user" "" "" %}
+        {# button "Удалить из контактов" "remove_from_contacts" "" "" #}
     </div>
 
     <script type="text/javascript">
@@ -35,40 +34,8 @@
             report_dialog_init("user", {username: "{{ profile_user.username }}"});
         });
 
-        if (!in_contacts("{{ profile_user.username }}")){
-            $("#in_contacts").hide();
-            $("#remove_from_contacts").hide();
-        } else
-            $("#add_to_contacts").hide();
 
-        // Send message
-        $("#send_message").click(function(){
-            send_message_dialog_init("{{ profile_user.username }}", "{{ profile_user.pk }}");
-        });
-
-        // Add to contacts
-        $("#add_to_contacts").click(function(){
-            add_to_contacts_dialog_init("{{ profile_user.username }}");
-        });
-
-        // Remove from contacts
-        $("#remove_from_contacts").click(function(){
-            remove_from_contacts_init("{{ profile_user.username }}");
-        });
     </script>
-
-    {% if user.is_authenticated %}
-        <script type="text/javascript">
-            $("#report_dialog").on("report_dialog_event", function(event, username){
-                // TODO: check that this is profile user
-                $("#is_reported").show();
-                $("#report_user").hide();
-            });
-
-            if ($.inArray("{{ profile_user.username }}", REPORTS["user"])!=-1)
-                $("#report_user").hide();
-        </script>
-    {% endif %}
 {% endif %}
 
 {% if profile_user == user %}
@@ -80,22 +47,12 @@
         {% button "Стать участником" "become_participant" "" "" %}
     </div>
 
-    {% include "dialogs/become_observer.html" %}
-
-    {% include "dialogs/become_voter.html" %}
-
     {% include "dialogs/change_location.html" %}
 
     <script type="text/javascript">
         $("#become_participant").click(function(){
             change_location_dialog_init("Стать участником", "Выберите ваш избирательный округ", "");
         });
-
-        /*$("#become_voter_dialog").on("become_voter", function(event, location_id){
-            var new_title =  (form_location_id("become_voter_form")!="") ? "Сменить избирательный округ" : "Записаться в избиратели";
-            $("#become_voter .ui-button-text").text(new_title);
-            $("#become_voter .ui-icon").toggleClass("ui-icon-circle-check").toggleClass("ui-icon-arrowreturnthick-1-e");
-        });*/
     </script>
 {% endif %}
 <br />

@@ -7,26 +7,6 @@ from locations.models import Location
 from services.cache import cache_function
 from users.models import CommissionMember, Profile, WebObserver
 
-# TODO: include it in info and cache (?)
-def regions_list(location=None):
-    """ location = None for Russia """
-    if location is None:
-        regions = [('', u'Выбрать субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
-        for loc_id, name in Location.objects.filter(region=None).order_by('name').values_list('id', 'name'):
-            if name == u'Москва':
-                regions[1] = (loc_id, name)
-            elif name == u'Санкт-Петербург':
-                regions[2] = (loc_id, name)
-            else:
-                regions.append((loc_id, name))
-        return regions
-    elif location.is_region():
-        return list(Location.objects.filter(region=location, tik=None).order_by('name').values_list('id', 'name'))
-    elif location.is_tik():
-        return list(Location.objects.filter(tik=location).order_by('name').values_list('id', 'name'))
-    else:
-        return []
-
 # TODO: introduce query generators for other types of counting
 def get_roles_query(location=None):
     if location is None:

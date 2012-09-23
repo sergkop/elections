@@ -1,7 +1,11 @@
 # -*- coding:utf-8 -*-
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import models
+from django.db.models import Q
 
+from elements.models import ENTITIES_MODELS, FEATURES_MODELS
 from services.cache import cache_function
 
 # Url templates for pages on izbirkom.ru with information about comissions
@@ -123,7 +127,7 @@ class Location(models.Model):
 
     cache_prefix = 'location_info'
 
-    # A hack to implement participants
+    # A hack to implement participants and comments
     features = ['participants', 'comments']
     roles = ['follower']
 
@@ -202,6 +206,47 @@ class Location(models.Model):
     def clear_cache(self):
         cache.delete(self.cache_key())
 
+    # TODO: cache count separately?
+    # TODO: take is_main into account
+    # TODO: cache it (at least for data for side panels) - in Location
+    def get_entities(self, entity_type, qfilter=None):
+        """ Return {'ids': sorted_entities_ids, 'count': total_count} """
+        from elements.locations.models import EntityLocation
+        model = ENTITIES_MODELS[entity_type]
+
+        def method(start=0, limit=None, sort_by=('-rating',)):
+            entity_query = Q()
+
+            # Filter out unactivated accounts
+            # TODO: make queryset a parameter of entity model (?)
+            if model.entity_name == 'participants':
+                entity_query = Q(user__is_active=True)
+
+            if not self.is_country(): # used to speed up processing
+                loc_query = Q(location__id=self.id)
+
+                field = self.children_query_field()
+                if field:
+                    loc_query |= Q(**{'location__'+field: self.id})
+
+                entity_ids = set(EntityLocation.objects.filter(
+                        content_type=ContentType.objects.get_for_model(model)) \
+                        .filter(loc_query).values_list('entity_id', flat=True))
+
+                # TODO: what happens when the list of ids is too long (for the next query)? - use subqueries
+                entity_query &= Q(id__in=entity_ids)
+
+            if qfilter:
+                entity_query &= qfilter
+
+            ids = model.objects.filter(entity_query).order_by(*sort_by).values_list('id', flat=True)
+            return {
+                'count': ids.count(),
+                'ids': ids[slice(start, start+limit if limit else None)],
+            }
+
+        return method
+
     @models.permalink
     def get_absolute_url(self):
-        return ('location', (), {'loc_id': str(self.id)})
+        return ('location_info', (), {'loc_id': str(self.id)})

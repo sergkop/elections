@@ -12,12 +12,6 @@
     {% button "Я &mdash; член комиссии" "become_member" "" "center" "Для членов избирательных комиссий" %}
 </div>
 
-{% if user.is_authenticated %}
-    {% if location.is_tik or location.is_uik %}
-        {% include "dialogs/become_member.html" %}
-    {% endif %}
-{% endif %}
-
 {% with btn_id="become_member" role="member" status_plural="члены комиссии" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

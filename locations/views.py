@@ -8,9 +8,10 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
+from elements.locations.utils import breadcrumbs_context
 from elements.utils import entity_tabs_view
 from locations.models import Location
-from locations.utils import get_locations_data, get_roles_counters, get_roles_query, regions_list
+from locations.utils import get_locations_data, get_roles_counters, get_roles_query
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, WebObserver
 
@@ -42,21 +43,22 @@ class BaseLocationView(TemplateView):
 
         self.tabs = [
             #('map', u'Карта', reverse('location_map', args=[location.id]), '', 'locations/map.html'),
-            #('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('location_wall', args=[location.id]), 'locations/wall.html'),
+            ('wall', u'Комментарии: ', reverse('location_wall', args=[location.id]), 'locations/wall.html'),
             #('participants', u'Участники: %i' % self.info['participants']['count'], reverse('location_participants', args=[location.id]), 'locations/participants.html'),
             ('info', u'Информация', reverse('location_info', args=[location.id]), 'locations/info.html'),
         ]
 
+        self.info = location.info(related=True)
+
         ctx.update(entity_tabs_view(self))
+        ctx.update(breadcrumbs_context(location))
 
         ctx.update({
             'loc_id': kwargs['loc_id'],
-            'view': kwargs['view'],
-
-            'locations': regions_list(),
-            'sub_regions': regions_list(location),
 
             'signed_up_in_uik': signed_up_in_uik,
+
+            'info': self.info,
 
             #'counters': get_roles_counters(location),
 
@@ -67,13 +69,17 @@ class BaseLocationView(TemplateView):
         ctx.update(self.update_context())
         return ctx
 
-location_view = BaseLocationView.as_view()
-
 class InfoView(BaseLocationView):
     tab = 'info'
 
     def update_context(self):
         return {'commission_members': CommissionMember.objects.filter(location=self.location)}
+
+class WallView(BaseLocationView):
+    tab = 'wall'
+
+    def update_context(self):
+        return {}
 
 class ParticipantsView(BaseLocationView):
     def update_context(self):
@@ -124,7 +130,7 @@ class WebObserversView(BaseLocationView):
         }
 
 def location_supporters(request, loc_id):
-    return HttpResponsePermanentRedirect(reverse('location_wall', kwargs={'loc_id': loc_id}))
+    return HttpResponsePermanentRedirect(reverse('location_info', kwargs={'loc_id': loc_id}))
 
 def get_subregions(request):
     if not request.is_ajax():
@@ -144,7 +150,7 @@ def get_subregions(request):
 
 # TODO: restructure it and take only one parameter
 def goto_location(request):
-    tab = request.GET.get('tab', 'wall')
+    tab = request.GET.get('tab', '')
     for name in ('uik', 'tik', 'region'):
         try:
             location_id = int(request.GET.get(name, ''))

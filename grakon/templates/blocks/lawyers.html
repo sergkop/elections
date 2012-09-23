@@ -12,10 +12,6 @@
     {% button "Я &mdash; юрист" "become_lawyer" %}  
 </div>
 
-{% if user.is_authenticated %}
-    {% include "dialogs/become_lawyer.html" %}
-{% endif %}
-
 {% with btn_id="become_lawyer" role="lawyer" status_plural="юристы" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

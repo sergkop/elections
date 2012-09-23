@@ -50,9 +50,9 @@ def media_files(request):
         'libs/jquery.placeholder.min.js',
         'libs/jquery.autosize.js',
         reverse('code_data') if settings.DEBUG else 'js/code_data.js',
-        #'js/main.js',
-        #'js/comments.js',
-        #'js/locations.js',
+        'js/main.js',
+        'js/comments.js',
+        'js/locations.js',
     )
     media.add_js(js)
 
@@ -61,8 +61,8 @@ def media_files(request):
         'libs/tipsy/jquery.tipsy.js',
         'libs/mustache.js',
         'libs/crispy-forms/uni-form.jquery.js', # TODO: currently doesn't work
-        'libs/jTour/jquery-jtour-2.0.2.min.js',
-        'js/tour.js',
+        #'libs/jTour/jquery-jtour-2.0.2.min.js',
+        #'js/tour.js',
     ))
 
     return {'media_files': media, 'bottom_media_files': bottom_media}

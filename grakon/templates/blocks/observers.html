@@ -12,12 +12,6 @@
     {% button "Я &mdash; наблюдатель" "become_observer" "" "center" "Для тех, кто записался в избиратели на выборах 4 марта" %}
 </div>
 
-{% if user.is_authenticated %}
-    {% if location.is_tik or location.is_uik %}
-        {% include "dialogs/become_observer.html" %}
-    {% endif %}
-{% endif %}
-
 {% with btn_id="become_observer" role="observer" status_plural="наблюдатели" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

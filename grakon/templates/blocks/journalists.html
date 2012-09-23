@@ -12,12 +12,6 @@
     {% button "Я &mdash; представитель СМИ" "become_journalist" %}  
 </div>
 
-{% if user.is_authenticated %}
-    {% if location.is_tik or location.is_uik %}
-        {% include "dialogs/become_journalist.html" %}
-    {% endif %}
-{% endif %}
-
 {% with btn_id="become_journalist" role="journalist" status_plural="представители СМИ" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

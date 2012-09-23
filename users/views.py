@@ -30,9 +30,6 @@ class BaseProfileView(object):
 
         self.tabs = [
             ('view', u'Инфо', reverse('profile', args=[user_id]), 'profiles/view.html'),
-            ('tasks', u'Задачи: %i' % self.info['tasks']['admin']['count'], reverse('profile_tasks', args=[user_id]), 'tasks/list.html'),
-            ('projects', u'Проекты: %i' % self.info['projects']['admin']['count'], reverse('profile_projects', args=[user_id]), 'projects/list.html'),
-            ('ideas', u'Идеи: %i' % self.info['ideas']['admin']['count'], reverse('profile_ideas', args=[user_id]), 'ideas/list.html'),
         ]
 
         ctx.update(entity_tabs_view(self))

@@ -1,4 +1,4 @@
-# coding=utf8
+# -*- coding:utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -7,9 +7,9 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import loader, RequestContext
 from django.views.generic.base import TemplateView
 
-from elements.locations.utils import breadcrumbs_context
+from elements.locations.utils import breadcrumbs_context, subregion_list
 from locations.models import Location
-from locations.utils import get_roles_counters, regions_list
+from locations.utils import get_roles_counters
 from navigation.forms import FeedbackForm
 from services.cache import cache_function
 from users.models import CommissionMember
@@ -18,10 +18,9 @@ from users.models import CommissionMember
 def main_page_context():
     total_counter = User.objects.filter(is_active=True).count()
 
-    sub_regions = regions_list()
+    sub_regions = subregion_list()
     return {
         'counters': get_roles_counters(None),
-        'locations': sub_regions,
         'sub_regions': sub_regions,
         'total_counter': total_counter,
     }

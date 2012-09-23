@@ -15,14 +15,8 @@
 </div>
 
 <div class="content_block">
-    {% button "Я &mdash; избиратель" "become_voter" "" "center" "Для тех, кто будет голосовать на выборах 4 марта" %}
+    {% button "Я &mdash; избиратель" "become_voter" "" "center" "Для тех, кто будет голосовать на выборах" %}
 </div>
-
-{% if user.is_authenticated %}
-    {% if location.is_tik or location.is_uik %}
-        {% include "dialogs/become_voter.html" %}
-    {% endif %}
-{% endif %}
 
 {% with btn_id="become_voter" role="voter" status_plural="избиратели" %}
     {% include "elements/dialog_open_button.html" %}
