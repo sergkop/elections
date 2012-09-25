@@ -9,9 +9,6 @@ urlpatterns = patterns('locations.views',
     url(r'^(?P<loc_id>\d+)/web_observers', WebObserversView.as_view(), name='web_observers', kwargs={'view': 'web_observers'}),
     url(r'^(?P<loc_id>\d+)/participants', ParticipantsView.as_view(), name='participants', kwargs={'view': 'participants'}),
 
-    # Redirect, not used anymore
-    url(r'^(?P<loc_id>\d+)/supporters', 'location_supporters', name='supporters'),
-
     url(r'^get_subregions$', 'get_subregions', name='get_subregions'),
     url(r'^goto_location$', 'goto_location', name='goto_location'),
 

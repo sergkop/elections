@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
-from elements.locations.utils import breadcrumbs_context
+from elements.locations.utils import breadcrumbs_context, subregion_list
 from elements.utils import entity_tabs_view
 from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, get_roles_query
@@ -41,14 +41,14 @@ class BaseLocationView(TemplateView):
         #    if voter_roles:
         #        signed_up_in_uik = voter_roles[0].location.is_uik()
 
+        self.info = location.info(related=True)
+
         self.tabs = [
             #('map', u'Карта', reverse('location_map', args=[location.id]), '', 'locations/map.html'),
-            ('wall', u'Комментарии: ', reverse('location_wall', args=[location.id]), 'locations/wall.html'),
+            ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('location_wall', args=[location.id]), 'locations/wall.html'),
             #('participants', u'Участники: %i' % self.info['participants']['count'], reverse('location_participants', args=[location.id]), 'locations/participants.html'),
             ('info', u'Информация', reverse('location_info', args=[location.id]), 'locations/info.html'),
         ]
-
-        self.info = location.info(related=True)
 
         ctx.update(entity_tabs_view(self))
         ctx.update(breadcrumbs_context(location))
@@ -128,9 +128,6 @@ class WebObserversView(BaseLocationView):
             'view': 'locations/web_observers.html',
             'times': times,
         }
-
-def location_supporters(request, loc_id):
-    return HttpResponsePermanentRedirect(reverse('location_info', kwargs={'loc_id': loc_id}))
 
 def get_subregions(request):
     if not request.is_ajax():

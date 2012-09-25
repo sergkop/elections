@@ -15,7 +15,7 @@ class ProfileManager(BaseEntityManager):
         # Get contacts
         contacts = EntityParticipant.objects.participant_in('follower', ids, Profile)
         contacts_ids = set(c_id for id in ids for c_id in contacts[id]['ids'])
-        contacts_by_id = Profile.objects.only('id', 'first_name', 'last_name', 'intro', 'rating') \
+        contacts_by_id = Profile.objects.only('id', 'first_name', 'last_name', 'rating') \
                 .in_bulk(contacts_ids)
 
         for id in ids:
@@ -31,7 +31,7 @@ class ProfileManager(BaseEntityManager):
         # TODO: use ratings to sort entities
 
         """
-        for entity_name in ('ideas', 'tasks', 'projects', 'questions'):
+        for entity_name in ('ideas', 'projects', 'questions'):
             model = ENTITIES_MODELS[entity_name]
 
             for id in ids:
@@ -69,20 +69,14 @@ class Profile(BaseEntityModel):
     first_name = models.CharField(u'Имя', max_length=40, help_text=u'на русском языке')
     last_name = models.CharField(u'Фамилия', max_length=40, help_text=u'на русском языке')
 
-    intro = models.CharField(u'Кратко о себе', max_length=100, blank=True,
-            help_text=u'например: "юрист", "создатель проекта Гракон", "любитель рисовать карикатуры"')
     about = HTMLField(u'О себе', default='', blank=True)
-
-    referendum = models.CharField(max_length=10, default='',
-            choices=(('', ''), ('voter', 'voter'), ('expert', 'expert'))
-    )
 
     objects = ProfileManager()
 
     entity_name = 'participants'
     entity_title = u'Участники'
     cache_prefix = 'user_info/'
-    editable_fields = ['first_name', 'last_name', 'intro', 'about']
+    editable_fields = ['first_name', 'last_name', 'about']
 
     roles = ['follower']
 
@@ -101,24 +95,17 @@ class Profile(BaseEntityModel):
         data['full_name'] = unicode(self)
         return data
 
-    def display_info(self, intro=False):
+    def display_info(self):
         res = {
             'id': self.id,
             'url': self.get_absolute_url(),
             'full_name': unicode(self),
         }
-        res['intro'] = self.intro
-        #if intro: # TODO: do we need it?
-        #    res['intro'] = self.intro
         return res
 
     def calc_rating(self):
         info = self.info()
-        rating = info['tasks']['admin']['count'] + info['ideas']['admin']['count'] + \
-                3*info['projects']['admin']['count']
-
-        if self.intro:
-            rating += 0.1
+        rating = 0
 
         if self.about:
             rating += 0.1

@@ -137,10 +137,8 @@ def activate(request, activation_key):
             auth.login(request, activation_profile.user)
 
             profile = activation_profile.user.get_profile()
-            if profile.referendum != '':
-                return redirect('referendum')
 
-            return redirect('profile')
+            return redirect('my_profile')
     else:
         form = SetPasswordForm(activation_profile.user)
 

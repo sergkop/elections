@@ -9,7 +9,7 @@ from elements.models import BaseEntityProperty, BaseEntityPropertyManager, ENTIT
 # TODO: user should not follow himself
 class EntityParticipantManager(BaseEntityPropertyManager):
     def get_for(self, model, ids):
-        """ {role: {'count': count, 'entities': [{'id': id, 'url': url, 'full_name': full_name, 'intro': intro}]}} """
+        """ {role: {'count': count, 'entities': [{'id': id, 'url': url, 'full_name': full_name}]}} """
         assert 'participants' in model.features
 
         # Get roles and participants for given entities
@@ -22,7 +22,7 @@ class EntityParticipantManager(BaseEntityPropertyManager):
 
         # Get all related profiles
         from users.models import Profile
-        profiles_by_id = Profile.objects.only('id', 'first_name', 'last_name', 'intro', 'rating') \
+        profiles_by_id = Profile.objects.only('id', 'first_name', 'last_name', 'rating') \
                 .in_bulk(set([r[1] for r in roles_data]))
 
         res = {}
@@ -34,7 +34,7 @@ class EntityParticipantManager(BaseEntityPropertyManager):
                 res[id][role] = {'count': len(profiles), 'entities': []}
 
                 for profile in sorted(profiles, key=lambda p: -p.rating):
-                    res[id][role]['entities'].append(profile.display_info(role=='admin'))
+                    res[id][role]['entities'].append(profile.display_info())
         return res
 
     # TODO: ability to get results for a list of entity types (?)

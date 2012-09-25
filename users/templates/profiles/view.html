@@ -18,24 +18,12 @@
     {% include "elements/roles.html" %}
 </ul>
 
-{% if profile_user != user %}
-    <div id="in_contacts"><i>Добавлен в контакты</i></div>
-    <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
+{% if not is_admin %}
+    {% include "dialogs/send_message.html" %}
 
-    <div class="user_actions">
-        {% button "Отправить сообщение" "send_message" "" "" %}&nbsp; 
-        {% button "Добавить в контакты" "add_to_contacts" "" "" %}&nbsp; 
-        {# button "Удалить из контактов" "remove_from_contacts" "" "" #}
-    </div>
-
-    <script type="text/javascript">
-        // Create buttons
-        $("#report_user").click(function(){
-            report_dialog_init("user", {username: "{{ profile_user.username }}"});
-        });
-
-
-    </script>
+    {% with is_participant=is_follower button=profile.follow_button btn_class="gr-follow-button gr-mb10" pressed_button="gr-grey-button" %}
+        {% include "participants/participate_button.html" %}
+    {% endwith %}
 {% endif %}
 
 {% if profile_user == user %}
@@ -46,14 +34,6 @@
     <div class="user_actions">
         {% button "Стать участником" "become_participant" "" "" %}
     </div>
-
-    {% include "dialogs/change_location.html" %}
-
-    <script type="text/javascript">
-        $("#become_participant").click(function(){
-            change_location_dialog_init("Стать участником", "Выберите ваш избирательный округ", "");
-        });
-    </script>
 {% endif %}
 <br />
 </div>

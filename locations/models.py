@@ -66,7 +66,7 @@ class LocationManager(models.Manager):
                 # Comments
                 other_res[loc.id]['comments'] = comments_data[loc.id]
 
-            profiles_by_id = ENTITIES_MODELS['participants'].objects.only('id', 'first_name', 'last_name', 'intro', 'rating') \
+            profiles_by_id = ENTITIES_MODELS['participants'].objects.only('id', 'first_name', 'last_name', 'rating') \
                     .in_bulk(set(participants_ids))
 
             for loc in locations:
@@ -196,6 +196,11 @@ class Location(models.Model):
             if self.region:
                 name = str(self.region) + u'->' + name
         return name
+
+    def children_query_field(self):
+        """ Return name of of Location field to construct db query filtering children """
+        i = self.level() - 1
+        return ['country', 'region', 'tik'][i] if i<3 else None
 
     def info(self, related=True):
         return Location.objects.info_for([self.id], related)[self.id]

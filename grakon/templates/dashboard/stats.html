@@ -35,39 +35,6 @@
             </p>
         </div>
 
-        <h3 align="center">Ideas</h3>
-        {% bar_chart module.ideas_values module.day_captions '580x150' %}
-
-        <div align="left">
-            <p style="font-size:0.9em;">
-                За сегодня: <strong>{{ module.ideas_qss.this_day }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За неделю: <strong>{{ module.ideas_qss.last_week }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За месяц: <strong>{{ module.ideas_qss.last_month }}</strong>
-            </p>
-        </div>
-
-        <h3 align="center">Projects</h3>
-        {% bar_chart module.projects_values module.day_captions '580x150' %}
-
-        <div align="left">
-            <p style="font-size:0.9em;">
-                За сегодня: <strong>{{ module.projects_qss.this_day }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За неделю: <strong>{{ module.projects_qss.last_week }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За месяц: <strong>{{ module.projects_qss.last_month }}</strong>
-            </p>
-        </div>
-
-        <h3 align="center">Tasks</h3>
-        {% bar_chart module.tasks_values module.day_captions '580x150' %}
-
-        <div align="left">
-            <p style="font-size:0.9em;">
-                За сегодня: <strong>{{ module.tasks_qss.this_day }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За неделю: <strong>{{ module.tasks_qss.last_week }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                За месяц: <strong>{{ module.tasks_qss.last_month }}</strong>
-            </p>
-        </div>
-
         <h3 align="center">Messages</h3>
         {% bar_chart module.messages_values module.day_captions '580x150' %}
 

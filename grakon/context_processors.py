@@ -19,6 +19,7 @@ def media_files(request):
             'libs/jquery-ui/jquery-ui.css',
             'libs/crispy-forms/uni-form.css',
             'libs/crispy-forms/default.uni-form.css',
+            'libs/chosen/chosen.css',
             'libs/tipsy/tipsy.css',
 
             'css/hlist.css',
@@ -47,6 +48,7 @@ def media_files(request):
         'libs/tipsy/jquery.tipsy.js',
         'libs/json2.js',
         'libs/backbone.js',
+        'libs/chosen/chosen.jquery.min.js',
         'libs/jquery.placeholder.min.js',
         'libs/jquery.autosize.js',
         reverse('code_data') if settings.DEBUG else 'js/code_data.js',

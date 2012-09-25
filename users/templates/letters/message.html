@@ -1,0 +1,42 @@
+{% extends "letters/base.html" %}
+
+{% block content %}
+    <font face="Tahoma, Geneva, sans-serif">Пользователь <a href="{{ URL_PREFIX }}{{ sender.get_absolute_url }}" target="_blank"><strong>{{ sender }}</strong></a>
+    отправил(а) вам сообщение</font><br /><br />
+    <table cellpadding="20" cellspacing="0" width="100%" bgcolor="e9eff2">
+        <tr>
+            <td width="330">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td valign="top" align="left">
+                            <font size="3" face="Tahoma, Geneva, sans-serif"><strong>{{ title }}</strong></font></a>&nbsp;
+                            <br />
+                            <font size="2" face="Tahoma, Geneva, sans-serif">{{ body }}</font>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    {% if show_email %}
+        <p>Вы можете ответить на это сообщение, нажав кнопку "Ответить" в своем почтовом клиенте (адрес отправителя - 
+        <a href="mailto:{{ sender.user.email }}">{{ sender.user.email }}</a>).</p>
+        <p>Вы также можете отправить сообщение с нашего сайта:</p>
+    {% else %}
+        <p><b>Не отвечайте на это письмо в вашем почтовом клиенте!</b></p>
+        <p>Вы можете ответить на это сообщение на нашем сайте:</p>
+    {% endif %}
+
+    <a href="{{ URL_PREFIX }}{{ sender.get_absolute_url }}" style="text-decoration: none;" target="_blank">
+        <table bgcolor="#4baad8" width="180">
+            <tr>
+                <td align="center">
+                    <font color="#FFFFFF" size="2" face="Tahoma, Geneva, sans-serif"><strong>Отправить сообщение</strong></font>
+                </td>
+            </tr>
+        </table>
+    </a>
+
+    <div style="border-bottom: 1px #a5a5a5 dotted">&nbsp;</div>
+{% endblock %}

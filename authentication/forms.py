@@ -29,14 +29,14 @@ class BaseRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('last_name', 'first_name', 'intro')
+        fields = ('last_name', 'first_name')
 
 @location_init(True, u'Место жительства')
 class RegistrationForm(BaseRegistrationForm):
     helper = form_helper('register', u'Зарегистрироваться')
     helper.form_id = 'registration_form'
     helper.layout = Layout(
-        Fieldset('', 'last_name', 'first_name', 'intro', 'email', 'location_select'),
+        Fieldset('', 'last_name', 'first_name', 'email', 'location_select'),
     )
 
     def clean_email(self):
@@ -92,7 +92,7 @@ class SocialRegistrationForm(BaseRegistrationForm):
 
         BaseRegistrationForm.__init__(self, *args, **kwargs)
 
-        fields = ['last_name', 'first_name', 'intro', 'email', 'location_select']
+        fields = ['last_name', 'first_name', 'email', 'location_select']
 
         if self.email_verified:
             del self.fields['email']

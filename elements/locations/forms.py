@@ -89,7 +89,7 @@ def location_clean(form):
                 else:
                     form.location = Location.objects.country()
 
-    if form.required and not form.location.is_lowest_level():
+    if form.required and not form.location.is_tik():
         form_location_path(form)
         raise forms.ValidationError(msg)
 
