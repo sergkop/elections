@@ -1,11 +1,5 @@
 {% load elements %}
 
-{% if not location or location.is_region %}
-    {% if request.user.is_authenticated %}
-        {% include "dialogs/change_location.html" %}
-    {% endif %}
-{% endif %}
-
 {% include "blocks/voters.html" %}
 
 {% include "blocks/observers.html" %}
@@ -15,7 +9,3 @@
 {% include "blocks/journalists.html" %}
 
 {% include "blocks/lawyers.html" %}
-
-{% if user.is_authenticated %}
-    {% include "dialogs/add_to_contacts.html" %}
-{% endif %}
