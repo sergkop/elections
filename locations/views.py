@@ -8,10 +8,11 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
+from elections.models import ElectionLocation
 from elements.locations.utils import breadcrumbs_context, subregion_list
 from elements.utils import entity_tabs_view
 from locations.models import Location
-from locations.utils import get_locations_data, get_roles_counters, get_roles_query
+from locations.utils import get_roles_counters, get_roles_query
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, WebObserver
 
@@ -32,14 +33,15 @@ class BaseLocationView(TemplateView):
         except Location.DoesNotExist:
             raise Http404(u'Избирательный округ не найден')
 
+        query = {}
+        query.update({'region__name': location.region.name} if location.region else {'region': None})
+        query.update({'tik__name': location.tik.name} if location.tik else {'tik': None})
+
+        related_locations = Location.objects.filter(country=location.country, name=location.name, **query)
+        print related_locations
+
         # TODO: different query generators might be needed for different data types
         self.location_query = get_roles_query(location)
-
-        signed_up_in_uik = False
-        #if self.request.user.is_authenticated():
-        #    voter_roles = Role.objects.filter(user=self.request.profile, type='voter').select_related('location')
-        #    if voter_roles:
-        #        signed_up_in_uik = voter_roles[0].location.is_uik()
 
         self.info = location.info(related=True)
 
@@ -48,6 +50,7 @@ class BaseLocationView(TemplateView):
             ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('location_wall', args=[location.id]), 'locations/wall.html'),
             #('participants', u'Участники: %i' % self.info['participants']['count'], reverse('location_participants', args=[location.id]), 'locations/participants.html'),
             ('info', u'Информация', reverse('location_info', args=[location.id]), 'locations/info.html'),
+            ('elections', u'Выборы', reverse('location_elections', args=[location.id]), 'locations/elections.html'),
         ]
 
         ctx.update(entity_tabs_view(self))
@@ -56,10 +59,9 @@ class BaseLocationView(TemplateView):
         ctx.update({
             'loc_id': kwargs['loc_id'],
 
-            'signed_up_in_uik': signed_up_in_uik,
-
             'info': self.info,
 
+            'related_locations': related_locations,
             #'counters': get_roles_counters(location),
 
             'add_commission_member_form': CommissionMemberForm(),
@@ -80,6 +82,14 @@ class WallView(BaseLocationView):
 
     def update_context(self):
         return {}
+
+class ElectionsView(BaseLocationView):
+    tab = 'elections'
+
+    def update_context(self):
+        elections = [et.election for et in ElectionLocation.objects.filter(location=self.location).select_related('election')]
+        ctx = {'elections': elections}
+        return ctx
 
 class ParticipantsView(BaseLocationView):
     def update_context(self):
@@ -160,25 +170,3 @@ def goto_location(request):
         return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))
-
-def locations_data(request):
-    """ level = 2, 3, 4 """
-    coords = {}
-    for name in ('x1', 'y1', 'x2', 'y2'):
-        try:
-            coords[name] = float(request.GET.get(name, ''))
-        except ValueError:
-            return HttpResponse('"error"')
-
-    try:
-        level = int(request.GET.get('level', ''))
-    except ValueError:
-        return HttpResponse('"error"')
-
-    if level not in (2, 3, 4):
-        return HttpResponse('"error"')
-
-    queryset = Location.objects.filter(x_coord__gt=coords['x1'], x_coord__lt=coords['x2'],
-            y_coord__gt=coords['y1'], y_coord__lt=coords['y2'])
-
-    return get_locations_data(queryset, level)

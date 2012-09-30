@@ -1,0 +1,6 @@
+{% for election in elections %}
+    <div>
+        <a href="">{{ election.title }}</a> - {{ election.date }}
+        <a href="http://www.izbirkom.ru/region/amur?action=show&vrn={{ election.vrn }}" target="_blank">Сайт ЦИК</a>
+    </div>
+{% endfor %}

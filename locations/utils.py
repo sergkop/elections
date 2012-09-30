@@ -44,27 +44,3 @@ def get_roles_counters(location=None):
     counters['commission_members'] = CommissionMember.objects.filter(query).count()
 
     return counters
-
-def get_locations_data(queryset, level):
-    """ level=2,3,4 """
-    js = 'var electionCommissions = { '
-    data = []
-
-    # get all locations from higher levels as well
-    if level == 2:
-        queryset = queryset.filter(region=None)
-    elif level == 3:
-        queryset = queryset.filter(tik=None)
-
-    # TODO: limit locations number according to the level (don't get uiks for the whole country at once)
-    locations = list(queryset.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address', 'data'))
-
-    # TODO: уровень 3: delta_x=20, delta_y=10 уровень 4: 1,8 и 0,9
-
-    for location in locations:
-        if location.x_coord:
-            js += str(location.id) + ': ' + location.map_data() + ','
-
-    js = js[:-1] + '};'
-
-    return HttpResponse(js, mimetype='application/javascript')

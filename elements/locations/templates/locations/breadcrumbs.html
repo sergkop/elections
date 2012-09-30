@@ -31,12 +31,6 @@
                 <li>
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
-                            {% if location.is_region %}
-                                <option value="" selected="selected">Выбрать район (ТИК)</option>
-                            {% endif %}
-                            {% if location.is_tik %}
-                                <option value="" selected="selected">Выбрать участок</option>
-                            {% endif %}
                             {% for id, name in subregions %}
                                 <option value="{{ id }}">{% if location.is_tik %}УИК № {% endif %}{{ name }}</option>
                             {% endfor %}
@@ -45,6 +39,17 @@
                 </li>
             {% endif %}
         </ul>
+
+        <span style="float:right;">
+            {% for loc in related_locations %}
+                {% if location.date == loc.date %}
+                    <b>{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</b>
+                {% else %}
+                    <a href="{{ loc.get_absolute_url }}" %}>{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</a>
+                {% endif %}
+                &nbsp;&nbsp;
+            {% endfor %}
+        </span>
     </div>
 </div>
 

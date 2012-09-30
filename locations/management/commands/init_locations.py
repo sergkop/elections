@@ -20,8 +20,6 @@ def location_from_info(info):
 
         'vrnorg': int(info['vrnorg']) if 'vrnorg' in info else None,
         'vrnkomis': int(info['vrnkomis']) if 'vrnkomis' in info else None,
-        'tvd': int(info.get('tvd', 0)),
-        'root': int(info.get('root', 0)),
     })
 
 class Command(BaseCommand):
@@ -47,5 +45,6 @@ class Command(BaseCommand):
                 tik.country = country
                 tik.region_code = region_info['id']
                 tik.region = region
+                tik.merge_id = tik_info['id']
 
                 tik.save()
