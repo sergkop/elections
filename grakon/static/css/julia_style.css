@@ -11,7 +11,6 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul {margin-bottom: 1.5em;}
 	ul ul li {margin-bottom: 0.3em;}
 header, nav {background: none;}
-nav {margin-top: 5px;}
 .mb5 {margin-bottom: 5px;}
 .mt10 {margin-top: 10px;}
 table, tbody td {border: none; margin: 0;}
@@ -43,12 +42,10 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 	.clearfix-black .ui-button {box-shadow: none;}
 .mt15 {margin-top: 15px !important;}
 .mb15 {margin-bottom: 15px !important;}
-
-header .ym-wrapper {border-bottom: 1px solid #80a615;}
 	
 #title_link {color: #f2f2f2 !important; float: left; line-height: 0.7em;} 
 	#title_link small {display: block; margin-top: 0.1em; font-size: 30%; font-weight: normal; letter-spacing: 1px;}
-	header .ym-wbox {padding: 9px 0; position: relative;}
+	header .ym-wbox {padding: 0; position: relative;}
 	header .ym-wbox .logo {float: left; margin-left: -12px;}
 	
 .breadcrumbs {border-radius: 4px; margin:0.5em 0 0; box-shadow: 0 2px 2px #ccc;}	
@@ -145,7 +142,7 @@ h3 {margin: 0.3em 0 0;}
 
 .ui-tabs .ui-tabs-nav {padding: 0.4em 1em 0 1em; font-size: 1em;}
 .ui-widget {font-family: Arial, Helvetica, sans-serif;}
-.ui-tabs {padding: 0; border-radius: 5px 5px 0 0; margin-bottom: 2em;}
+.ui-tabs {padding: 0; border-radius: 0; margin-bottom: 2em;}
 
 .ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em; padding: 0 0.5em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li img {margin-top: 0.2em;}
@@ -214,7 +211,7 @@ h3 {margin: 0.3em 0 0;}
 	
 .blue-title {color: #2f8dbc; font-size: 1.5em; font-weight: bold; border-bottom: 1px dotted #a5a5a5; margin: 0 0 0.5em; padding: 0 0 0.2em;}	
 
-.social {position: absolute; top: 20px; right: 0;}
+.social {position: absolute; top: 10px; right: 0;}
 	.social td {padding: 0 0 0 15px;}	
 
 #addressFields select {display: block; margin-top: 10px;}
