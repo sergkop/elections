@@ -3,7 +3,7 @@ south>=0.7.6
 
 # Front-end
 django-tinymce
-django-crispy-forms
+django-crispy-forms==1.1.4
 pystache
 
 # HTML
@@ -25,7 +25,8 @@ boto
 
 # Background tasks
 supervisor
-django-celery
+celery==2.5.5
+django-celery<2.6
 
 # Misc
 django-debug-toolbar

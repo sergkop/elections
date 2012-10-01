@@ -17,7 +17,7 @@ def import_uiks_file(path):
     election_date = datetime.strptime(data['date'], r'%d.%m.%Y')
     election, created = Election.objects.get_or_create(vrn=int(data['vrn']), prver=int(data['prver']),
             defaults={'title': data['election_name'], 'date': election_date})
-    if created:
+    if not created:
         raise ValueError("Election has been imported already")
 
     if data['vrn'][0] == '2':

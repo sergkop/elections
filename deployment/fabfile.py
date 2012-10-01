@@ -139,7 +139,7 @@ def restart_web_server():
 def init_db():
     virtualenv('python %s syncdb --all' % env.manage_path) # TODO: don't create superuser before migrate
     virtualenv('python %s migrate --fake' % env.manage_path)
-    virtualenv('python %s import_locations' % env.manage_path)
+    virtualenv('python %s init_locations' % env.manage_path)
 
 def prepare_code():
     env.user = env.deploy_user # TODO: do we need it?
