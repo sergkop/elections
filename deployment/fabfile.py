@@ -5,13 +5,13 @@ import StringIO
 from fabric.api import cd, env, get, local, prefix, put, run, sudo
 from fabric.contrib.files import sed
 
-REPOSITORY = 'git@github.com:sergkop/grakon.git'
+REPOSITORY = 'git@github.com:sergkop/elections.git'
 
 # TODO: start using roles
 # TODO: command to upgrade requirements.txt packages
 
 def web_server():
-    config_path = '/home/serg/data/grakon/passwords/config.json' # TODO: take it as an argument
+    config_path = '/home/serg/data/election-new/config.json' # TODO: take it as an argument
     env.conf = json.load(open(config_path))
 
     env.hosts = env.conf['servers'].keys()
@@ -134,7 +134,7 @@ def restart_web_server():
     sudo('/etc/init.d/memcached restart')
 
     # TODO: start supervisord if not started
-    # TODO: restart celery (via superuserd?) - no root
+    # TODO: restart celery (via supervisord?) - no root
 
 def init_db():
     virtualenv('python %s syncdb --all' % env.manage_path) # TODO: don't create superuser before migrate
@@ -146,7 +146,7 @@ def prepare_code():
 
     cmd('mkdir -p %s %s %s %s' % (
             env.code_path, env.env_path, env.STATIC_ROOT,
-            os.path.join(env.logs_path, 'superuserd'))
+            os.path.join(env.logs_path, 'supervisord'))
     )
 
     cmd('git clone %s %s' % (REPOSITORY, env.code_path))
@@ -178,7 +178,7 @@ def prepare_code():
             server_sh_path, env.conf)
     sudo("chmod +x %s" % server_sh_path)
 
-    # superuserd config file
+    # supervisord config file
     file_from_template(os.path.join(env.code_path, 'deployment', 'templates', 'supervisor.conf.template'),
             os.path.join(env.code_path, 'deployment', 'supervisor.conf'), env.conf)
 
