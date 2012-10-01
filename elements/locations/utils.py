@@ -8,7 +8,7 @@ def subregion_list(location=None):
     """ location=None for country """
     if location is None or location.is_country():
         res = [('', u'Выбрать субъект РФ'), None, None] # reserve places for Moscow and St. Petersburg
-        for loc_id, name in Location.objects.filter(region=None, date=location.date).order_by('name').values_list('id', 'name'):
+        for loc_id, name in Location.objects.filter(region=None, date=location.date if location else None).order_by('name').values_list('id', 'name'):
             if name == u'Москва':
                 res[1] = (loc_id, name)
             elif name == u'Санкт-Петербург':

@@ -119,8 +119,11 @@ def participant_in(profile, role, entity_type):
     return func
 
 ROLE_TYPES = (
-    ('admin', u'Админ', u'Админы'),
-    ('follower', u'Следит', u'Следят'),
+    ('voter', u'Избиратель', u'Избиратели'),
+    ('observer', u'Наблюдатель', u'Наблюдатели'),
+    ('journalist', u'Представитель СМИ', u'Представители СМИ'),
+    ('lawyer', u'Юрист', u'Юристы'),
+    ('member', u'Член избирательной комиссии', u'Члены избирательной комиссии'),
 )
 ROLE_CHOICES = map(lambda r: (r[0], r[1]), ROLE_TYPES)
 
