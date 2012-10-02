@@ -1,21 +1,20 @@
 {% load crispy_forms_tags %}
 
 <div id="add_commission_member_dialog" style="display: none;">
-    <p style="margin:0.3em;">Перед добавлением члена комиссии
-    <a href="{{ location.get_absolute_url }}">{{ location }}</a> убедитесь,
-    что он еще не добавлен в список.</p>
     <form id="add_commission_member_form" class="dialog_form" method="post" action="{% url add_commission_member %}">
-        {% csrf_token %}
         {% crispy add_commission_member_form %}
 
-        <input type="hidden" name="location" value="" />
+        <input type="hidden" name="location" value="{{ data_location.id }}" />
     </form>
 </div>
 
 <script type="text/javascript">
     function add_commission_member_dialog_init(){
-        $('#add_commission_member_form input[name="location"]').val({{ location.id }});
-        $("#add_commission_member_dialog").dialog("open");
+        {% if request.user.is_authenticated %}
+            $("#add_commission_member_dialog").dialog("open");
+        {% else %}
+            login_dialog_init();
+        {% endif %}
     }
 
     $(function(){

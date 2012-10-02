@@ -145,8 +145,6 @@ class Location(models.Model):
     def is_uik(self):
         return self.tik_id is not None
 
-    
-
     def info_url(self):
         """ Link to the page with commission information on izbirkom.ru """
         if self.vrnorg is None:

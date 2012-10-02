@@ -27,7 +27,7 @@
 {% endif %}
 
 <p>
-    <b>Состав комиссии:</b>
+    <b>Члены комиссии:</b>
     <br/>
 
     <ul>
@@ -48,5 +48,9 @@
         {% endfor %}
     </ul>
 
-    {% button "Добавить члена комиссии" "add_commission_member1" %}
+    {% button "Добавить члена комиссии" "add_commission_member" %}
+
+     <script type="text/javascript">
+        $("#add_commission_member").click(add_commission_member_dialog_init);
+    </script>
 </p>

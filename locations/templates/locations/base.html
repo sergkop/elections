@@ -9,12 +9,6 @@
 {{ location }} - Гракон
 {% endblock %}
 
-{% block head %}
-    <style type="text/css">
-        .ym-col3 .ym-cbox {display: none;}
-    </style>
-{% endblock %}
-
 {% block breadcrumbs %}
     {% include "locations/breadcrumbs.html" %}
 {% endblock %}
@@ -25,14 +19,14 @@
     <div class="ym-clearfix">
         {% include "elements/left_panel.html" %}
     </div>
-{% endblock %}
 
-{% block right_column %}
-    {% include "elements/right_panel.html" %}
+    {% include "dialogs/add_commission_member.html" %}
 {% endblock %}
 
 {% block content_header %}
     <h2 class="location_header">{{ location }}</h2>
+{% endblock %}
 
+{% block content %}
     {% include template_path %}
 {% endblock %}

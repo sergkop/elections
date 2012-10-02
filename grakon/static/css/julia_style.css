@@ -105,8 +105,6 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 .side_block_observer { background: url(/static/images/icon_observer.png) 7px 13px no-repeat;}
 .side_block_member { background: url(/static/images/icon_member.png) 7px 13px no-repeat;}
 	.column_header_icon .side_block_member {background-position: 7px center;}
-.side_block_authority { background: url(/static/images/icon_authority.png) 7px 13px no-repeat;}
-.side_block_prosecutor { background: url(/static/images/icon_prosecutor.png) 7px 13px no-repeat;}
 .side_block_journalist { background: url(/static/images/icon_journalist.png) 7px  13px no-repeat;}
 .side_block_lawyer { background: url(/static/images/icon_lawyer.png) 7px 13px no-repeat;}
 .organizations { background: url(/static/images/icon_organizations.png) 7px 9px no-repeat;}
@@ -118,7 +116,6 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 .resources { background: url(/static/images/icon_resources.png) 7px 6px no-repeat;}
 .contacts { background: url(/static/images/icon_contacts.png) 10px 8px no-repeat;}
 .steps{ background: url(/static/images/icon_steps.png) 7px 6px no-repeat;}
-.support{ background: url(/static/images/icon_support.png) 7px center no-repeat;}
 .web_observers{ background: url(/static/images/icon_web_observers.png) 5px 8px no-repeat;}
 .participants {background: url(/static/images/icon_participants.png) 7px center no-repeat;}
 .icon_info {background: url(/static/images/icon_infographic.gif) center center no-repeat;}
@@ -142,7 +139,7 @@ h3 {margin: 0.3em 0 0;}
 
 .ui-tabs .ui-tabs-nav {padding: 0.4em 1em 0 1em; font-size: 1em;}
 .ui-widget {font-family: Arial, Helvetica, sans-serif;}
-.ui-tabs {padding: 0; border-radius: 0; margin-bottom: 2em;}
+.ui-tabs {padding: 0; border-radius: 0;}
 
 .ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em; padding: 0 0.5em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li img {margin-top: 0.2em;}

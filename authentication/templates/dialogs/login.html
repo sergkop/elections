@@ -28,6 +28,9 @@
 </div>
 
 <script type="text/javascript">
+    $("#login_form_submit").button();
+    $("#login_dialog_register").button();
+
     create_dialog("login_dialog", 400, 270, "Войдите в систему", "", {});
     $("#menu_login_btn").click(login_dialog_init);
 </script>

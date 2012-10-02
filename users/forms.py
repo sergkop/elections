@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
+from crispy_forms.helper import FormHelper
+
 from elements.utils import form_helper
 from users.models import CommissionMember, Message, WebObserver
 
@@ -40,11 +42,14 @@ class FeedbackForm(forms.Form):
                     'profile', kwargs={'username': self.request.user.username}))
         from_mail = settings.DEFAULT_FROM_EMAIL
         message = render_to_string('feedback/mail.txt', ctx)
-        
+
         # TODO: send mail using Amazon SES
         send_mail(u'[ОБРАТНАЯ СВЯЗЬ]', message, from_mail, [from_mail], fail_silently=False)
 
 class CommissionMemberForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_tag = False
+
     class Meta:
         model = CommissionMember
         exclude = ('location', 'user', 'time')

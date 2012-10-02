@@ -38,7 +38,12 @@ class BaseLocationView(TemplateView):
         query.update({'tik__name': location.tik.name} if location.tik else {'tik': None})
 
         related_locations = Location.objects.filter(country=location.country, name=location.name, **query)
-        print related_locations
+
+        # Get location to which comments, commission members are attached
+        if location.is_uik():
+            self.data_location = location
+        else:
+            self.data_location = filter(lambda loc: loc.date is None, related_locations)[0]
 
         # TODO: different query generators might be needed for different data types
         self.location_query = get_roles_query(location)
@@ -60,6 +65,7 @@ class BaseLocationView(TemplateView):
             'loc_id': kwargs['loc_id'],
 
             'info': self.info,
+            'data_location': self.data_location,
 
             'related_locations': related_locations,
             #'counters': get_roles_counters(location),
@@ -75,7 +81,7 @@ class InfoView(BaseLocationView):
     tab = 'info'
 
     def update_context(self):
-        return {'commission_members': CommissionMember.objects.filter(location=self.location)}
+        return {'commission_members': CommissionMember.objects.filter(location=self.data_location)}
 
 class WallView(BaseLocationView):
     tab = 'wall'
@@ -170,3 +176,28 @@ def goto_location(request):
         return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))
+
+def add_commission_member(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        print request.POST
+        try:
+            location_id = int(request.POST.get('location'))
+        except ValueError:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        try:
+            location = Location.objects.get(id=location_id)
+        except Location.DoesNotExist:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        form = CommissionMemberForm(request.POST)
+        if form.is_valid():
+            commission_member = form.save(commit=False)
+            commission_member.location = location
+            commission_member.user = request.profile
+            commission_member.save()
+            return HttpResponse('ok')
+        else:
+            return HttpResponse(u'Заполните обязательные поля')
+
+    return HttpResponse(u'Ошибка')

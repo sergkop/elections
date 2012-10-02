@@ -11,4 +11,6 @@ urlpatterns = patterns('locations.views',
 
     url(r'^get_subregions$', 'get_subregions', name='get_subregions'),
     url(r'^goto_location$', 'goto_location', name='goto_location'),
+
+    url(r'^add_commission_member$', 'add_commission_member', name='add_commission_member'),
 )
