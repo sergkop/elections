@@ -3,7 +3,7 @@ from locations.models import Location
 from services.cache import cache_function
 
 # TODO: add titles choosing command strings
-@cache_function(lambda args, kwargs: 'subregions/'+(str(args[0].id) if args[0] else '0'), 500)
+@cache_function(lambda args, kwargs: 'subregions/'+(str(args[0].id) if args else '0'), 500)
 def subregion_list(location=None):
     """ location=None for country """
     if location is None or location.is_country():

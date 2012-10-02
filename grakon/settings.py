@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'locations',
     'elections',
     'navigation',
+    'violations',
     'services',
     'notifications',
 )

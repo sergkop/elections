@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load elements crispy_forms_tags %}
+
+{% block title %}
+    Сообщить о нарушении - Гражданский контроль за выборами
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Сообщить о нарушении</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="ym-cbox">
+        <div class="static-content">
+            {% crispy form %}
+        </div>
+    </div>
+{% endblock %}
