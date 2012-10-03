@@ -4,8 +4,6 @@
 
 {% block head %}
     <style type="text/css">
-        .ym-col3 .ym-cbox:last-child {display: none;}
-
         .ym-col1 .ym-clearfix .ui-button {width: 180px;}
         .ym-col1 .side_block_header h4 {margin: 10px 10px 5px 15px; font-weight: bold;}
         .ym-col1 .column_header {padding-left: 15px;}
@@ -51,7 +49,10 @@
 
 {% block content_header %}
     <h2 class="location_header">{{ profile.first_name }} {{ profile.last_name }}</h2>
+{% endblock %}
 
+
+{% block content %}
     {% if profile_user == user %}
         {% include template_path %}
     {% else %}
