@@ -1,0 +1,13 @@
+{% extends "letters/base.html" %}
+
+{% block content %}
+    {% if profile %}
+        Пользователь: <a href="{{ URL_PREFIX }}{{ profile.get_absolute_url }}" target="_blank">{{ profile }}</a><br/>
+        Еmail: {{ profile.user.email }}
+    {% else %}
+        Имя: {{ name }}<br/>
+        Email: {{ email }}
+    {% endif %}
+    <br /><br />
+    {{ message }}
+{% endblock %}

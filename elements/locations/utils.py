@@ -3,7 +3,7 @@ from locations.models import Location
 from services.cache import cache_function
 
 # TODO: add titles choosing command strings
-@cache_function(lambda args, kwargs: 'subregions/'+(str(args[0].id) if args else '0'), 500)
+@cache_function(lambda args, kwargs: 'subregions/'+(str(args[0].id) if len(args)>0 and args[0] else '0'), 500)
 def subregion_list(location=None):
     """ location=None for country """
     if location is None or location.is_country():
@@ -33,7 +33,21 @@ def subregion_list(location=None):
         return []
 
 def breadcrumbs_context(location):
+    query = {}
+    query.update({'region__name': location.region.name} if location.region else {'region': None})
+    query.update({'tik__name': location.tik.name} if location.tik else {'tik': None})
+
+    related_locations = Location.objects.filter(country=location.country, name=location.name, **query)
+
+    # Get location to which comments, commission members are attached
+    if location.is_uik():
+        data_location = location
+    else:
+        data_location = filter(lambda loc: loc.date is None, related_locations)[0]
+
     return {
         'location': location,
         'subregions': subregion_list(location),
+        'related_locations': related_locations,
+        'data_location': data_location,
     }

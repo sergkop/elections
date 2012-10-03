@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
+from elements.locations.utils import breadcrumbs_context
+from locations.models import Location
 from users.models import Profile
 from violations.forms import ViolationForm
 from violations.models import Violation
@@ -25,6 +27,8 @@ class ViolationView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super(ViolationView, self).get_context_data(**kwargs)
 
+        ctx.update(breadcrumbs_context(self.object.location))
+
         ctx.update({
             'violation': self.object,
             'violation_id': self.kwargs['violation_id'],
@@ -38,9 +42,20 @@ class ReportViolationView(CreateView):
     form_class = ViolationForm
     model = Violation
 
+    def get_form_kwargs(self):
+        try:
+            loc_id = int(self.request.GET.get('loc_id', ''))
+        except ValueError:
+            raise Http404(u'Неправильно указан идентификатор нарушения')
+        else:
+            self.location = get_object_or_404(Location.objects.exclude(date=None), id=loc_id)
+
+        return super(ReportViolationView, self).get_form_kwargs()
+
     def form_valid(self, form):
         violation = form.save(commit=False)
         violation.source = self.request.profile
+        violation.location = self.location
         violation.save()
 
         response = super(ReportViolationView, self).form_valid(form)

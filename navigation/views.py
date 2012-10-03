@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import redirect, render_to_response
 from django.template import loader, RequestContext
 from django.views.generic.base import TemplateView
 

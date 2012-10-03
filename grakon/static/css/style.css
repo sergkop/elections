@@ -103,7 +103,7 @@
 
 .partner_block {
     background: #f5f5f5;
-    border: 1px solid #727DC2; /* #eee*/
+    border: 1px solid #727DC2;
     border-radius: 3px;
     -moz-border-radius: 3px;
     margin: 0 0 10px;
@@ -146,14 +146,6 @@ select {
 .login_dialog_table td {
     vertical-align: top;
     border: none;
-}
-
-/* Report link dialog */
-#report_link_ul {
-    list-style-type: none;
-}
-#report_link_ul input {
-    margin-right: 0.5em;
 }
 
 .footer_menu a {
@@ -329,27 +321,6 @@ div.olPopupCloseBox {
     text-align: center;
 }
 
-#div_id_captcha img{
-	float: left;
-	margin-right: 5px;
-}
-
-#id_captcha_1{
-	width: 35%;
-	margin: 0;
-	background: none repeat scroll 0 0 #FFF;
-	border: 1px solid #AAA;
-	padding: 4px 2px
-}
-
-.ui-dialog .uniForm{ z-index: 1007 !important; }
-
-/* User activity */
-.points {display: inline; float: right; font-weight: bold; font-size: 2em;}
-.points_active {color: #58B555;}
-.points_inactive {color: #B0BFB0;}
-.checklist_form {display: inline;}
-
 /* Banners */
 .find_uik_btn {display: none;}
 #main_tab .find_uik_btn {display:block;}
@@ -382,7 +353,8 @@ background: linear-gradient(top, #f6f7f3, #e6e8dd);
     border-right: 1px solid;
 }
 
-
+.gr-pseudolink {color:#009EC5; cursor: pointer}
+    .gr-pseudolink:hover {border-bottom: 1px dotted;}
 
 
 /* Комментарии */

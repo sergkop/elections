@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-{% load elements %}
+{% block breadcrumbs %}
+    {% include "locations/breadcrumbs.html" %}
+{% endblock %}
 
 {% block content_header %}
     <h2 class="location_header">{{ violation.get_type_display }}</h2>
@@ -13,6 +15,9 @@
             {% include "elements/location_path.html" %}
         {% endwith %}
     </p>
+
+    <h4>Дата</h4>
+    <p>{{ violation.location.date }}</p>
 
     <h4>Источник</h4>
     <p><a href="{{ violation.source.get_absolute_url }}">{{ violation.source }}</a></p>

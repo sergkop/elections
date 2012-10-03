@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Обратная связь{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Обратная связь</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="gr-descr gr-mt30">
+        <p>Вы можете заполнить форму или оставить отзыв, нажав зеленую кнопку на левой стороне экрана.</p>
+        {% crispy form form.helper %}
+    </div>
+{% endblock %}
+
+
+

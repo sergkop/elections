@@ -15,6 +15,7 @@ from locations.models import Location
 from locations.utils import get_roles_counters, get_roles_query
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, WebObserver
+from violations.models import Violation
 
 # TODO: web_observers tab is not activated for tiks and lead to crush
 class BaseLocationView(TemplateView):
@@ -33,41 +34,29 @@ class BaseLocationView(TemplateView):
         except Location.DoesNotExist:
             raise Http404(u'Избирательный округ не найден')
 
-        query = {}
-        query.update({'region__name': location.region.name} if location.region else {'region': None})
-        query.update({'tik__name': location.tik.name} if location.tik else {'tik': None})
-
-        related_locations = Location.objects.filter(country=location.country, name=location.name, **query)
-
-        # Get location to which comments, commission members are attached
-        if location.is_uik():
-            self.data_location = location
-        else:
-            self.data_location = filter(lambda loc: loc.date is None, related_locations)[0]
-
         # TODO: different query generators might be needed for different data types
         self.location_query = get_roles_query(location)
 
         self.info = location.info(related=True)
 
         self.tabs = [
-            #('map', u'Карта', reverse('location_map', args=[location.id]), '', 'locations/map.html'),
             ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('location_wall', args=[location.id]), 'locations/wall.html'),
             #('participants', u'Участники: %i' % self.info['participants']['count'], reverse('location_participants', args=[location.id]), 'locations/participants.html'),
             ('info', u'Информация', reverse('location_info', args=[location.id]), 'locations/info.html'),
             ('elections', u'Выборы', reverse('location_elections', args=[location.id]), 'locations/elections.html'),
+            ('violations', u'Нарушения', reverse('location_violations', args=[location.id]), 'locations/violations.html'),
         ]
 
         ctx.update(entity_tabs_view(self))
         ctx.update(breadcrumbs_context(location))
 
+        self.data_location = ctx['data_location']
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
 
             'info': self.info,
-            'data_location': self.data_location,
 
-            'related_locations': related_locations,
             #'counters': get_roles_counters(location),
 
             'add_commission_member_form': CommissionMemberForm(),
@@ -88,6 +77,14 @@ class WallView(BaseLocationView):
 
     def update_context(self):
         return {}
+
+class ViolationsView(BaseLocationView):
+    tab = 'violations'
+
+    def update_context(self):
+        return {
+            'violations': Violation.objects.filter(self.location_query)[:100],
+        }
 
 class ElectionsView(BaseLocationView):
     tab = 'elections'

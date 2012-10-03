@@ -1,0 +1,21 @@
+{% load elements %}
+
+{% button "Сообщить о нарушении" "report_violation" %}
+
+<script type="text/javascript">
+    $("#report_violation").click(function(){
+        {% if user.is_authenticated %}
+            window.location.href = "{% url report_violation %}";
+        {% else %}
+            login_dialog_init();
+        {% endif %}
+    });
+</script>
+
+<ul>
+    {% for violation in violations %}
+        <li>
+            <a href="{{ violation.get_absolute_url }}">{{ violation.get_type_display }}</a>
+        </li>
+    {% endfor %}
+</ul>
