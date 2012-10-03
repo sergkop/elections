@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load elements crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Сообщить о нарушении - Гражданский контроль за выборами
@@ -13,6 +13,18 @@
 {% block content %}
     <div class="ym-cbox">
         <div class="static-content">
+            <div class="uniForm">
+                <div class="ctrlHolder">
+                    <label>Местоположение</label>
+                    <div>{% include "elements/location_path.html" %}</div>
+                </div>
+
+                <div class="ctrlHolder">
+                    <label>Дата</label>
+                    <div>{{ location.date }}</div>
+                </div>
+            </div>
+
             {% crispy form %}
         </div>
     </div>

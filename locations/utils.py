@@ -15,8 +15,8 @@ def get_roles_query(location=None):
     query = Q(location=location)
     if location.is_region():
         query |= Q(location__region=location)
-    #elif location.is_tik():
-    #    query |= Q(location__tik=location)
+    elif location.is_tik():
+        query |= Q(location__tik=location)
 
     return query
 

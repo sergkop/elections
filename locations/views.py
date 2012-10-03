@@ -82,9 +82,23 @@ class ViolationsView(BaseLocationView):
     tab = 'violations'
 
     def update_context(self):
-        return {
-            'violations': Violation.objects.filter(self.location_query)[:100],
-        }
+        if self.location.date is None:
+            pass
+        else:
+            query = Q(location=self.location)
+            
+            if self.location.is_country:
+                query = Q(location=self.location)
+            else:
+                query = Q(location=self.location)
+                if location.is_region():
+                    query |= Q(location__region=self.location)
+                elif location.is_tik():
+                    query |= Q(location__tik=self.location)
+
+            return {
+                'violations': Violation.objects.filter(query)[:100],
+            }
 
 class ElectionsView(BaseLocationView):
     tab = 'elections'

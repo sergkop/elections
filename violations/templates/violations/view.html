@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    {{ violation.get_type_display }} - Гражданский контроль за выборами
+{% endblock %}
+
 {% block breadcrumbs %}
     {% include "locations/breadcrumbs.html" %}
 {% endblock %}

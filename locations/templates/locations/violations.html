@@ -1,16 +1,18 @@
 {% load elements %}
 
-{% button "Сообщить о нарушении" "report_violation" %}
+{% if location.date %}
+    {% button "Сообщить о нарушении" "report_violation" %}
 
-<script type="text/javascript">
-    $("#report_violation").click(function(){
-        {% if user.is_authenticated %}
-            window.location.href = "{% url report_violation %}";
-        {% else %}
-            login_dialog_init();
-        {% endif %}
-    });
-</script>
+    <script type="text/javascript">
+        $("#report_violation").click(function(){
+            {% if user.is_authenticated %}
+                window.location.href = "{% url report_violation %}?loc_id={{ location.id }}";
+            {% else %}
+                login_dialog_init();
+            {% endif %}
+        });
+    </script>
+{% endif %}
 
 <ul>
     {% for violation in violations %}

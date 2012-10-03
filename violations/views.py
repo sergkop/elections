@@ -52,6 +52,11 @@ class ReportViolationView(CreateView):
 
         return super(ReportViolationView, self).get_form_kwargs()
 
+    def get_context_data(self, **kwargs):
+        ctx = super(ReportViolationView, self).get_context_data(**kwargs)
+        ctx['location'] = self.location
+        return ctx
+
     def form_valid(self, form):
         violation = form.save(commit=False)
         violation.source = self.request.profile
