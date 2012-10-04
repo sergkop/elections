@@ -369,8 +369,8 @@ background: linear-gradient(top, #f6f7f3, #e6e8dd);
     .gr-child-comments .gr-add-comment {margin-top: 1em}
 .gr-add-comment td {padding: 0;}
 .gr-add-comment td .ym-button {margin: 0 0 0 1em;}
-.gr-add-comment textarea {font-size: 1.2em; width: 100%}
-.gr-comment {margin-top: 1em;}
+.gr-add-comment textarea {font-size: 1.2em; width: 100%; margin-top: .2em;}
+.gr-comment {margin-top: 1em; font-size: .9em;}
 .gr-comment .gr-info-bar {padding: 0 0 .7em; margin: 0; border-bottom: 1px solid #ddd;}  
     .gr-last-comment .gr-info-bar { border-bottom: none; padding-bottom: 0;}
     .gr-comment .gr-info-bar .highlight {cursor: pointer;}
