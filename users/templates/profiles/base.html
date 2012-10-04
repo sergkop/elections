@@ -12,6 +12,10 @@
     </style>
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% include "locations/breadcrumbs.html" %}
+{% endblock %}
+
 {% block left_column %}
     {% include "dialogs/send_message.html" %}
 
@@ -51,7 +55,9 @@
 
 {% block content_header %}
     <h2 class="location_header">{{ profile.first_name }} {{ profile.last_name }}</h2>
+{% endblock %}
 
+{% block content %}
     {% if profile_user == user %}
         {% include template_path %}
     {% else %}
@@ -59,6 +65,5 @@
             {% include "profiles/view.html" %}
         </div>
     {% endif %}
-
 {% endblock %}
 
