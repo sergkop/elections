@@ -70,7 +70,7 @@
 	
 	nav {padding-bottom: .8em; padding-top: 3em}
 	
-	footer {height: 3.3em; position: relative; padding: .8em 0 1em; font-size: .9em; border-top: 2px solid #ddd;}
+	footer {height: 3.3em; position: relative; padding: .3em 0 1em; font-size: .9em; border-top: 2px solid #ddd;}
 
 	header {padding: 0.1em 0; position: fixed; width: 100%; height: 38px; z-index:15000;}
 	
@@ -139,7 +139,7 @@
 	/* (de) Clearfix-Methode zum Clearen der Float-Umgebungen */
 	.ym-clearfix {
 		clear: both;
-        height: 0;
+        /*height: 0;*/
         overflow: hidden;
 	}
 

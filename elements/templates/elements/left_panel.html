@@ -1,11 +1,37 @@
 {% load elements %}
 
-{% include "blocks/voters.html" %}
+<style>
+    .ym-col1 .ym-clearfix .ui-button {width: 180px;}
+    .ym-col1 .side_block_header {padding: 1em 1em 0.7em 2.2em; font-size: 1em;}
+    .ym-col1 .column_header {padding-left: 15px;}
+    .ym-col1 .content_block {padding: 0 1em 1em 2.4em;}
+    .ym-col1 .content_block .pseudolink {font-style: italic; font-size: 0.9em;}
+</style>
 
-{% include "blocks/observers.html" %}
+<div class="side_block_header side_block_voter">
+    <a href="{% url participants location.id %}?type=voter">Избиратели ({{ counters.voter }})</a>
+</div>
 
-{% include "blocks/members.html" %}
+<div class="side_block_header side_block_observer">
+    <a href="{% url participants location.id %}?type=observer">Наблюдатели ({{ counters.observer }})</a>
+</div>
 
-{% include "blocks/journalists.html" %}
+<div class="side_block_header side_block_member">
+    <a href="{% url participants location.id %}?type=member">Члены избирательной комиссии ({{ counters.member }})</a>
+</div>
 
-{% include "blocks/lawyers.html" %}
+<div class="side_block_header side_block_journalist">
+    <a href="{% url participants location.id %}?type=journalist">Представители СМИ ({{ counters.journalist }})</a>
+</div>
+
+<div class="side_block_header side_block_lawyer">
+    <a href="{% url participants location.id %}?type=lawyer">Юристы ({{ counters.lawyer }})</a>
+</div>
+
+<div class="content_block">
+    {% button "Стать участником" "become_participant" %}
+</div>
+
+{% with btn_id="become_observer" role="observer" status_plural="наблюдатели" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

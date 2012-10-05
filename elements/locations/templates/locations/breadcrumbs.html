@@ -40,10 +40,10 @@
             {% endif %}
         </ul>
 
-        <span style="float:right;">
+        <span class="page-select">
             {% for loc in related_locations %}
                 {% if location.date == loc.date %}
-                    <b>{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</b>
+                    {% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}
                 {% else %}
                     <a href="{{ loc.get_absolute_url }}" %}>{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</a>
                 {% endif %}

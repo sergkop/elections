@@ -1,6 +1,21 @@
 * {box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
 html, #publicElectionsMap {width: 100%; height: 100%;}
 body {width: 100%; height: 100%; background-color: #f3f3f3; font-family: Arial, Helvetica, sans-serif;}
+
+  html,body {
+  height: 100%; /* задаем высоту тела документа */
+  }
+  #main { /* основной блок, который должен растянуться до подвала */
+
+  min-height: 100%; /* задаем минимальную высоту основного блока */
+  }
+  * html #main { /* хак для ie6 */
+  height: 100%; /* для ие6, т.к. не понимает min-height */
+  }
+  .hFooter { /* это распорка в основном блоке - резервируем место для подвала */
+  height: 80px; /* высота нашего подвала */
+  }
+
 /*header {background: none; box-shadow: none;}
 nav {background: none;}*/
 .ym-wrapper{min-width:1030px; max-width: 1600px; position: relative;}
@@ -12,7 +27,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul li {margin-bottom: 0.3em;}
 header, nav {background: none;}
 .mb5 {margin-bottom: 5px;}
-.mt10 {margin-top: 10px;}
+.mt10 {margin-top: 10px !important;}
 table, tbody td {border: none; margin: 0;}
 .cl {clear: both; height: 0; overflow: hidden;}
 .fl {float: left;}
@@ -29,7 +44,7 @@ table, tbody td {border: none; margin: 0;}
 	.ym-hlist ul li a#menu_map:hover, .ym-hlist ul li a#menu_map.on {background: url(/static/images/menu_map.png) 0 0 no-repeat;}
 	
 input {outline: none;}	
-
+#login_dialog input {height: 2em;}
 
 ul.nobullet, ul.nobullet li {margin-left: 0; padding-left: 0; list-style-type: none;}
 
@@ -69,10 +84,10 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 .ui-widget-content {background: none; background-color: #fff}		
 		
 
-	.ym-col3 .ym-cbox {padding: 10px; font-size: 1.1em; border-radius: 5px;}
+	.ym-col3 .ym-cbox {padding: 10px; font-size: 1.1em; border: none;}
 h2.location_header {/*border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; padding: 5px 10px;*/ font-size: 2em; text-align: left;  color: #2f8dbc; font-weight: bold; margin: 0.1em 0 0.5em;;}		
 
-footer {background: none; border: none; width: 100%; overflow: hidden; margin-top: 40px;}
+footer {background: none; border: none; width: 100%; overflow: hidden; margin-top: -40px; height: 40px;}
 footer .ym-wbox {text-align: left; padding: 7px 0; color: #343845; font-size: 0.9em;  color: #fff;  width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
 footer .ym-wbox a {text-decoration: none; color: #fff;}
 	footer .ym-wbox a:hover {color: #7E17A3;}
@@ -81,7 +96,7 @@ footer .ym-wbox a {text-decoration: none; color: #fff;}
 
 .ym-clearfix {margin-bottom: 15px; border-radius: 0 0 3px 3px;}
 
-.content_block {box-shadow: none; border: none; background: none; margin: 0; padding: 5px 0;}
+.content_block {box-shadow: none; border: none; background: #b3d147; margin: 0; padding: 0 0 5px;}
 
 .column_header  {font-size: 1em; padding: 0.8em  0.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0;}
 	.column_header	{text-shadow: 0 1px 0 #d0df96;}
@@ -141,17 +156,17 @@ h3 {margin: 0.3em 0 0;}
 .ui-widget {font-family: Arial, Helvetica, sans-serif;}
 .ui-tabs {padding: 0; border-radius: 0;}
 
-.ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em; padding: 0 0.5em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li {font-size: .9em; font-weight: normal;  margin-right: 5px; line-height:1.8em; padding: 0 0.5em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li img {margin-top: 0.2em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.fr {margin-right: 0;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {background-color: #fff; color: #2f8dbc; z-index:1; font-size: 1.3em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {background-color: #fff; color: #2f8dbc; z-index:1; font-size: 1.2em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li a {color: #333; display: block;  padding:  0 0 0 10px; height: 35px; }
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {color: #2f8dbc; font-weight: bold;}
 .ym-col3 .ui-tabs .ui-tabs-nav li a {padding: 5px 0 0;}
 
 .ym-col3 .ui-state-default i, .ym-col3 .ui-widget-content .ui-state-default i, .ym-col3 .ui-widget-header .ui-state-default i {position: absolute; top: 0; right: -36px; background: url(/static/images/back_tab_blue.png) 0 0 no-repeat; width: 40px; height: 30px; display: none;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected i {height: 32px; display: none;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px;  background-color: #fff; line-height: 1.2em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px;  background-color: #fff; line-height: 1.4em;}
 .ui-tabs .ui-tabs-nav {padding: 0;}
 .ui-tabs .ui-tabs-panel {background-color: #fff; margin-top: 0;}
 
@@ -253,6 +268,8 @@ h3 {margin: 0.3em 0 0;}
 	
 .search-filter {border-bottom: 1px dotted #aaa5a5; padding-bottom: 1.5em; padding-right: 60px; line-height: 2em; background: url(/static/images/icon_search_big.gif) right center no-repeat;  }	
 	.search-filter a {white-space: nowrap;}
+	
+.page-select {float: right; padding: 0 1em; line-height: 2.5em; text-shadow: 0 1px 0 #fff;}	
 	
 
 /* backgrounds */

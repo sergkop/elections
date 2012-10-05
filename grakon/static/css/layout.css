@@ -74,7 +74,7 @@
 	/* Column-Set Configuration: 1-3 (sidebar left) */
     /* left column */
     .ym-col1 {
-        width: 228px;
+        width: 25%;
 		position: absolute;
     }
     /* right column */

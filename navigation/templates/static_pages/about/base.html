@@ -7,16 +7,7 @@
 {% endblock %}
 
 {% block head %}
-    <!-- This style is used in a number of pages already - avoid it -->
-    <style type="text/css">
-        .ym-col3 .ym-cbox:last-child {display: none;}
-        .ym-col3 {padding-right: 0;}
-        /* for static pages */
-        .ym-col3 .ui-tabs .ui-tabs-nav li a {height: 45px; text-align:center}
-        .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 53px;}
-        .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {padding-top: 2px;}
-        .ym-col3 .ui-tabs .ui-tabs-nav li {line-height: 1.2em;}
-    </style>
+
 {% endblock %}
 
 {% block left_column %}
@@ -37,5 +28,9 @@
 
 {% block content_header %}
     <h2 class="location_header">О проекте</h2>
+{% endblock %}
+
+
+{% block content %}
     {% include template_path %}
 {% endblock %}

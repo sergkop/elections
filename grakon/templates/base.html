@@ -32,53 +32,55 @@
 
     {% include "services/google-analytics.html" %}
 </head>
-<body>
-    <header>
-        <div class="ym-wrapper">
-            <div class="ym-wbox">
-                <div class="logo">
-                    <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
+<body>    
+
+   <div id="main">
+        <header>
+            <div class="ym-wrapper">
+                <div class="ym-wbox">
+                    <div class="logo">
+                        <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
+                    </div>
+                    {% include "elements/share.html" %}
+                    <br clear="all" />
                 </div>
-                {% include "elements/share.html" %}
-                <br clear="all" />
             </div>
-        </div>
-    </header>
+        </header>
 
-    <nav>
-        <div class="ym-wrapper">
-            <div class="ym-hlist">
-                <ul>
-                    <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
-                </ul>
+        <nav>
+            <div class="ym-wrapper">
+                <div class="ym-hlist">
+                    <ul>
+                        <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
+                        <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
+                    </ul>
 
-                <div class="login_logout">
-                    {% if request.user.is_authenticated %}
-                        <div class="mt10">
-                            {% if request.roles.voter %}
-                                <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
-                            {% endif %}
-                            {% if my_profile.first_name or my_profile.last_name %}
-                                <a href="{{ request.profile.get_absolute_url }}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
-                            {% else %}
-                                <a href="{{ request.profile.get_absolute_url }}">Профайл</a> |
-                            {% endif %}
-                            <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
-                        </div>
-                    {% else %}
-                        <span id="login_btn" class="clickable">Войти</span>
-                    {% endif %}
+                    <div class="login_logout">
+                        {% if request.user.is_authenticated %}
+                            <div class="mt10">
+                                {% if request.roles.voter %}
+                                    <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
+                                {% endif %}
+                                {% if my_profile.first_name or my_profile.last_name %}
+                                    <a href="{{ request.profile.get_absolute_url }}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
+                                {% else %}
+                                    <a href="{{ request.profile.get_absolute_url }}">Профайл</a> |
+                                {% endif %}
+                                <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
+                            </div>
+                        {% else %}
+                            <span id="login_btn" class="clickable">Войти</span>
+                        {% endif %}
+                    </div>
+                    <div class="cl">&nbsp;</div>
                 </div>
-                <div class="cl">&nbsp;</div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    {% block breadcrumbs %}{% endblock %}
+        {% block breadcrumbs %}{% endblock %}
 
 
-    <div id="main">
+
         <div class="ym-wrapper">
             <div class="ym-wbox">
                 <div class="ym-column">
@@ -106,6 +108,7 @@
                 </div>
             </div>
         </div>
+        <div class="hFooter">&nbsp;</div>
     </div>
 
     <footer>

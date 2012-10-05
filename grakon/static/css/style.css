@@ -42,7 +42,13 @@
 .login_logout {
     float: right;
     padding-right: 5px;
-    margin-top: 0.5em;
+    margin-top: 0.3em;
+}
+
+.login_logout a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 .3em;
 }
 
 .user_actions {

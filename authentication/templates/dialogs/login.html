@@ -12,14 +12,17 @@
                 <td><input id="id_password" type="password" name="password" style="width: 90%"/></td>
             </tr>
             <tr>
-                <td colspan="2" valign="middle" align="center">
-                    <input id="login_form_submit" type="submit" value="Войти" class="ym-button" onclick="_gaq.push(['_trackEvent', 'login', 'login']); return true;" />&nbsp;
-                    <!--<a id="login_form_submit" class="ym-button" href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
-                    <button type="button" id="login_dialog_register" class="ym-button" onclick="window.location='{% url register %}?utm_campaign=register&utm_medium=link&utm_source=login_dialog'">Регистрация</button>
+                <td rowspan="2">&nbsp;</td>
+                <td valign="middle" align="center">
+                    <div class="mt10"> 
+                        <input id="login_form_submit" type="submit" value="Войти" class="ym-button" onclick="_gaq.push(['_trackEvent', 'login', 'login']); return true;" />&nbsp;
+                        <!--<a id="login_form_submit" class="ym-button" href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
+                        <button type="button" id="login_dialog_register" class="ym-button" onclick="window.location='{% url register %}?utm_campaign=register&utm_medium=link&utm_source=login_dialog'">Регистрация</button>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" align="center">
+                <td ssalign="center">
                     <a href="{% url password_reset %}">Забыли пароль?</a>
                 </td>
             </tr>
