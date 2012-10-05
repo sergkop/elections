@@ -41,40 +41,41 @@
                     <div class="logo">
                         <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
                     </div>
-                    {% include "elements/share.html" %}
-                    <br clear="all" />
+                    
+                    <ul class="top-menu">
+                        <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a> |</li>
+                        <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a> |</li>
+                    
+
+                       
+                        {% if request.user.is_authenticated %}
+                                {% if request.roles.voter %}
+                                    <li><a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>|</li>
+                                {% endif %}
+                                {% if my_profile.first_name or my_profile.last_name %}
+                                    <li><a href="{{ request.profile.get_absolute_url }}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a>|</li>
+                                {% else %}
+                                    <li><a href="{{ request.profile.get_absolute_url }}">Профайл</a>|</li>
+                                {% endif %}
+                                    <li><a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a></li>
+                        {% else %}
+                                <li><span id="login_btn" class="clickable">Войти</span></li>
+                        {% endif %}
+                        
+                    </ul>
+                    <div class="cl">&nbsp;</div>
+
                 </div>
             </div>
         </header>
 
         <nav>
-            <div class="ym-wrapper">
+            <!--<div class="ym-wrapper">
                 <div class="ym-hlist">
-                    <ul>
-                        <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                        <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
-                    </ul>
-
-                    <div class="login_logout">
-                        {% if request.user.is_authenticated %}
-                            <div class="mt10">
-                                {% if request.roles.voter %}
-                                    <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
-                                {% endif %}
-                                {% if my_profile.first_name or my_profile.last_name %}
-                                    <a href="{{ request.profile.get_absolute_url }}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
-                                {% else %}
-                                    <a href="{{ request.profile.get_absolute_url }}">Профайл</a> |
-                                {% endif %}
-                                <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
-                            </div>
-                        {% else %}
-                            <span id="login_btn" class="clickable">Войти</span>
-                        {% endif %}
-                    </div>
-                    <div class="cl">&nbsp;</div>
+                    {% include "elements/share.html" %}
+                    <br clear="all" />
                 </div>
-            </div>
+            </div>-->
         </nav>
 
         {% block breadcrumbs %}{% endblock %}

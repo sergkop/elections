@@ -63,6 +63,11 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 	header .ym-wbox {padding: 0; position: relative;}
 	header .ym-wbox .logo {float: left; margin-left: -12px;}
 	
+.top-menu, .top-menu li {margin: 0; padding: 0; list-style-type: none;}	
+    .top-menu {float: right; margin: .4em 0;}
+    .top-menu li {display: inline-block; font-size: 1.3em; line-height: 1em; text-shadow: 1px 0 0 #b7d34a; color: #82a709;}
+    .top-menu a, .top-menu .clickable {color: #f9fffb; font-size: .7em; text-decoration: none; font-weight: bold; padding: 0 .5em 0 .7em; text-shadow: 0 1px 0 #82a709;}
+	
 .breadcrumbs {border-radius: 4px; margin:0.5em 0 0; box-shadow: 0 2px 2px #ccc;}	
 	h2.breadcrumbs-title {border: none; margin-bottom: 10px; font-size: 1.4em}
 	.breadcrumbs ul {padding: 0;}
@@ -70,13 +75,16 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 		.breadcrumbs ul li a, .breadcrumbs ul li strong {background: none; color: #333; padding-left: 1.8em; padding-right: 1em; border-radius: 0; position: relative; line-height: 2.5em; display: block; text-shadow: none ; }
 		.breadcrumbs ul li i {position: absolute; top: 0; right: -13px; background:url(/static/images/back_breadcrumbs.png) -1px -139px no-repeat; width: 16px; height: 36px; z-index:2}
 			.breadcrumbs ul li.previous  i {background-position: 0 -37px;}
-			.breadcrumbs ul li strong i {background-position: 0 0;}
-		.breadcrumbs ul li a {text-shadow: 0 1px 0 #fff;}	
-		.breadcrumbs ul li strong {color: #fff; padding-left: 1.8em; padding-right: 1em;}
+			.breadcrumbs ul li strong i, .breadcrumbs ul li a.br-active i {background-position: 0 0;}
+		.breadcrumbs ul li a {text-shadow: 0 1px 0 #fff;}
+            .breadcrumbs ul li a.br-active {text-shadow: none;}
+		.breadcrumbs ul li strong, .breadcrumbs ul li a.br-active {color: #fff; padding-left: 1.8em; padding-right: 1em;}
 		/*.breadcrumbs ul li:last-child {padding-left: 1.3em;}*/
-		#goto_subregion {margin-left: 1.5em; width: 200px; margin-top: 8px}
+		#goto_subregion {margin-left: 1.5em; width: 200px; margin-top: 6px}
 		.breadcrumbs ul li a:focus, .breadcrumbs ul li a:hover {color: #333; background-color: #c9c9c9; text-shadow: 0 1px 0 #fff;  border-radius: 0; box-shadow: inset 0 0 1px #777;}
+            .breadcrumbs ul li a.br-active:focus, .breadcrumbs ul li a.br-active:hover {color: #fff; text-shadow: none;}
 			.breadcrumbs ul li a:focus, .breadcrumbs ul li a:hover i {background-position: 1px -185px;}
+                .breadcrumbs ul li a.br-active:focus, .breadcrumbs ul li a.br-active:hover i {background-position: 0 0;}
 			.breadcrumbs ul li a:focus, .breadcrumbs ul li.previous a:hover i {background-position: 0 -73px;}
 		/*.breadcrumbs ul li a:hover {text-shadow: 0 0 2px #ffc68f;}*/
 
@@ -232,9 +240,8 @@ h3 {margin: 0.3em 0 0;}
 .main-buttons {text-align: center; padding: 20px 0;}
 	.main-buttons div {display: inline-block; border-radius: 3em; padding: 17px; background-color: #fff; box-shadow: inset 0 1px 1px #dedede;  behavior: url(/static/css/PIE.htc);}
 	.main-buttons div, {display: inline; zoom: 1;}	
-	.main-buttons-blue a, .main-buttons-map a, #login_btn {display: block; padding: 11px 20px; border-radius: 1.5em; color: #fff; text-decoration: none; box-shadow: 0 1px 2px #ccc;  behavior: url(/static/css/PIE.htc);}
+	.main-buttons-blue a, .main-buttons-map a {display: block; padding: 11px 20px; border-radius: 1.5em; color: #fff; text-decoration: none; box-shadow: 0 1px 2px #ccc;  behavior: url(/static/css/PIE.htc);}
 	.main-buttons-map a {background: url(/static/images/back_button.gif) 0 0 no-repeat; color: #000;} 
-	#login_btn {padding: 8px 20px;}
 	
 .static-content {background-color: #fff; margin: 0 -15px -15px; padding:1px 20px;}	
 .partners {border-top: 1px dotted #a5a5a5; margin: 20px -20px 0; padding: 20px;}
@@ -328,7 +335,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: linear-gradient(top,#fff, #e6e8dd);		
 }
 	
-.breadcrumbs ul li strong {  
+.breadcrumbs ul li strong, .breadcrumbs ul li a.br-active {  
 	background-color: #2c89b9;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#62c0ee,endColorstr=#2c89b9);	
 	background: -moz-linear-gradient(top, #62c0ee, #2c89b9);
@@ -338,7 +345,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-linear-gradient(top, #62c0ee, #2c89b9);
 	background: linear-gradient(top, #62c0ee, #2c89b9);}	
   
- .breadcrumbs ul li:hover strong {
+ .breadcrumbs ul li:hover strong, .breadcrumbs ul li:hover a.br-active {
   background-color: #003399;
 }
 
@@ -387,7 +394,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: linear-gradient(top, #ded9c3, #c8c1a9);	
 }
 
-.main-buttons-blue a, #login_btn {
+.main-buttons-blue a {
 	background-color: #2a88b8;
 	/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#62c1ef,endColorstr=#2a88b8);*/
 	background: -moz-linear-gradient(top, #62c1ef, #2a88b8);

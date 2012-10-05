@@ -33,19 +33,13 @@
     
     .uniForm legend{ font-weight: bold; font-size: 100%; margin: 0; padding: 1.5em 0; }
   
-    .uniForm .ctrlHolder{ padding: 1em; border-bottom: 1px solid #efefef; }
     .uniForm .ctrlHolder.focused{ background: #fffcdf; }
+    
+    .uniForm .ctrlHolder {margin: 0 0 2em;}
     
     .uniForm .inlineLabels .noLabel{}
     
-    .uniForm .buttonHolder{ background: #efefef; text-align: right; margin: 1.5em 0 0 0; padding: 1.5em;
-                            /* CSS3 */
-                            border-radius:         4px;
-                            -webkit-border-radius: 4px;
-                            -moz-border-radius:    4px;
-                            -o-border-radius:      4px;
-                            -khtml-border-radius:  4px;
-                          }
+    .uniForm .buttonHolder{text-align: right;}
       .uniForm .buttonHolder .primaryAction{ padding: 10px 22px; line-height: 1; background: #254a86; border: 1px solid #163362; font-size: 12px; font-weight: bold; color: #fff;
                                              /* CSS3 */
                                              border-radius:         4px;
