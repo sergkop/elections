@@ -11,7 +11,7 @@ from elements.participants.models import participant_in
 from elements.utils import table_data
 from elements.views import entity_base_view, entity_tabs_view
 from services.email import send_email
-from users.forms import MessageForm
+from users.forms import MessageForm, ProfileForm
 from users.models import Message, Profile
 
 class BaseProfileView(object):
@@ -24,19 +24,25 @@ class BaseProfileView(object):
     def get_context_data(self, **kwargs):
         ctx = super(BaseProfileView, self).get_context_data(**kwargs)
 
-        user_id = int(self.kwargs.get('id'))
+        if self.tab == 'view':
+            user_id = int(self.kwargs.get('id'))
+        else:
+            user_id = self.request.profile.user_id
 
         ctx.update(entity_base_view(self, Profile, {'user': user_id}))
 
-        self.tabs = [
-            ('view', u'Инфо', reverse('profile', args=[user_id]), 'profiles/view.html'),
-        ]
+        self.own_profile = (self.entity==self.request.profile)
+
+        if self.own_profile:
+            self.tabs = [
+                ('view', u'Инфо', reverse('profile', args=[user_id]), 'profiles/view.html'),
+                ('edit', u'Редактировать', reverse('edit_profile'), 'profiles/edit.html'),
+            ]
+        else:
+            self.tabs = []
 
         ctx.update(entity_tabs_view(self))
 
-        self.own_profile = (self.entity==self.request.profile)
-
-        # TODO: UX_HACK
         if len(ctx['info']['locations']['entities']) > 0:
             location = ctx['info']['locations']['entities'][0]['instance']
         else:
@@ -47,6 +53,8 @@ class BaseProfileView(object):
             'profile': self.entity,
             'is_admin': self.own_profile,
             'location': location,
+
+            'message_form': MessageForm(),
         })
         ctx.update(self.update_context())
         return ctx
@@ -54,15 +62,20 @@ class BaseProfileView(object):
 class ProfileView(BaseProfileView, TemplateView):
     tab = 'view'
 
-    def update_context(self):
-        return {'message_form': MessageForm()}
+class EditProfileView(BaseProfileView, UpdateView):
+    tab = 'edit'
+    form_class = ProfileForm
 
-#class ProfileTasksView(BaseProfileView, TemplateView):
-#    tab = 'tasks'
-#
-#    def update_context(self):
-#        # TODO: take data from cache?
-#        return table_data(self.request, 'tasks', participant_in(self.entity, 'admin', 'tasks'))
+    def get_user(self):
+        return self.request.user
+
+    def get_object(self):
+        return self.request.profile
+
+    def get_success_url(self):
+        return reverse('my_profile')
+
+edit_profile = login_required(EditProfileView.as_view())
 
 def remove_account(request):
     if request.user.is_authenticated():

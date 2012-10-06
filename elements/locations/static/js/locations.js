@@ -1,7 +1,7 @@
 // Widget for choosing location path using several select elements
 // Usage: (new SelectLocation({el: $(div), path: []})).render()
 var SelectLocation = Backbone.View.extend({
-    selectors: ['[name="region"]', '[name="district"]', '[name="location"]'],
+    selectors: ['[name="region"]', '[name="tik"]'],
 
     initialize: function(){
         var widget = this;

@@ -4,9 +4,9 @@
 
 {% with role=button.role id=info.instance.id ct=info.ct %}
     {% if is_participant %}
-        <a id="cancel_{{ role }}_btn_{{ ct }}_{{ id }}" class="{{ btn_class }} {{ pressed_button }}"><span>{{ button.cancel_btn_long }}</span></a>
+        <button id="cancel_{{ role }}_btn_{{ ct }}_{{ id }}" class="{{ btn_class }} {{ pressed_button }}"><span class="ui-button-text">{{ button.cancel_btn_long }}</span></button>
     {% else %}
-        <a id="confirm_{{ role }}_btn_{{ ct }}_{{ id }}" class="{{ btn_class }}"><span>{{ button.confirm_btn_long }}</span></a>
+        <button id="confirm_{{ role }}_btn_{{ ct }}_{{ id }}" class="{{ btn_class }}"><span class="ui-button-text">{{ button.confirm_btn_long }}</span></button>
     {% endif %}
 
     {% if request.user.is_authenticated %}

@@ -1,27 +1,7 @@
 {% load crispy_forms_tags %}
 {% if user.is_authenticated %}
     <div id="send_message_dialog">
-        <div class="center">
-            Отправить сообщение пользователю <span id="send_message_dialog_user" class="dialog_user_span"></span>
-        </div>
-
-		{% crispy message_form %}
-		{% comment %}
-        <form id="send_message_form" method="post" action="{% url send_message %}">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td><label for="message_title">Тема:</label></td>
-                    <td><input type="text" name="message_title" value="" size="60" /></td>
-                </tr>
-                <tr>
-                    <td><label for="message_body">Сообщение:</label></td>
-                    <td><textarea name="message_body" rows="4" cols="60"></textarea></td>
-                </tr>
-            </table>
-            <input type="hidden" name="username" value="" />
-        </form>
-        {% endcomment %}
+        {% crispy message_form %}
     </div>
 {% endif %}
 
@@ -43,7 +23,6 @@
         }}).dialog("close");
 
         function send_message_dialog_init(username, pk){
-            $("#send_message_dialog_user").text(username);
             $('#send_message_form input[name="to_user"]').val(pk);
             $("#send_message_dialog").dialog("open");
         }

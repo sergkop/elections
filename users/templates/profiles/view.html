@@ -2,10 +2,10 @@
 <div class="static-content">
 <h4 style="margin-top: 10px;">О себе</h4>
 <div>
-    {% if profile_user.profile.about %}
-        {{ profile_user.profile.about|safe }}
+    {% if profile.about %}
+        {{ profile.about|safe }}
     {% else %}
-        {% if profile_user == user %}
+        {% if is_admin %}
             <i><a href="{% url edit_profile %}">Добавьте</a> информацию о себе.</i>
         {% else %}
             <i>Пользователь еще не добавил информацию о себе.</i>
@@ -21,12 +21,20 @@
 {% if not is_admin %}
     {% include "dialogs/send_message.html" %}
 
-    {% with is_participant=is_follower button=profile.follow_button btn_class="gr-follow-button gr-mb10" pressed_button="gr-grey-button" %}
+    {% button "Отправить сообщение" "send_message" "" "" %}&nbsp;
+
+    <script type="text/javascript">
+        $("#send_message").click(function(){
+            send_message_dialog_init("{{ profile_user.username }}", "{{ profile_user.pk }}");
+        });
+    </script>
+
+    {% with is_participant=is_follower button=profile.follow_button btn_class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" pressed_button="" %}
         {% include "participants/participate_button.html" %}
     {% endwith %}
 {% endif %}
 
-{% if profile_user == user %}
+{% if is_admin %}
     <div>
         Чтобы записаться участником в своем избирательном округе, перейдите на страницу
         округа и запишитесь, нажав соответсвующую кнопку в левой панели.

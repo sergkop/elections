@@ -1,14 +1,13 @@
 <script type="text/javascript">
     $("#{{ btn_id }}").click(function(){
         {% if user.is_authenticated %}
-            {% if location.is_tik %}
-                become_{{ role }}_dialog_init();
+            {% if location.is_tik or location.is_uik %}
+                become_participant_dialog_init();
             {% else %}
-                change_location_dialog_init("Записаться в {{ status_plural }}",
-                        "Выберите ваш избирательный округ:", "{{ role }}");
+                change_location_dialog_init();
             {% endif %}
         {% else %}
-            login_dialog_init("Чтобы записаться в {{ status_plural }}, пожалуйста, войдите в систему");
+            login_dialog_init("Чтобы стать участником, пожалуйста, войдите в систему");
         {% endif %}
     }).tipsy();
 </script>

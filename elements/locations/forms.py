@@ -23,7 +23,7 @@ def location_init(required, label):
         'location': forms.CharField(required=False),
     }
     if not required:
-        attrs['location_select'].help_text = u'если не выбрать место, то задача добавится на страницу России'
+        attrs['location_select'].help_text = u'если не выбрать место, то будет выбрана Россия'
 
     def decorator(cls):
         new_cls = cls.__metaclass__(cls.__name__, (cls,), attrs)

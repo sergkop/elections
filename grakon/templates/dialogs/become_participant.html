@@ -1,0 +1,25 @@
+<div id="become_participant_dialog">
+    <div>Выберите вашу роль на избирательном участке</div>
+    <form id="become_participant_form" method="get" action="{% url goto_location %}">
+        {% csrf_token %}
+
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_participant_dialog_init(){
+        $("#become_participant_dialog").dialog("open");
+    }
+
+    $("#become_participant_dialog").dialog({width:650, height:250, modal: true, title: "Стать участником",
+        buttons: {
+            "Перейти": function(){
+                if ($('#become_participant_form [name="tik"]').val()=="")
+                    alert("Необходимо выбрать район (ТИК)");
+                else
+                    $("#become_participant_form").submit();
+            },
+            "Отмена": function(){$("#become_participant_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

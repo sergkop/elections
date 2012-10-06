@@ -23,12 +23,12 @@
     <div class="ym-clearfix">
         <div class="content_block">
             <ul id="contacts_ul" class="side_list">
-                {% for contact in contacts %}
+                {% for person in info.contacts.entities %}
                     <li>
-                        {% with participant=contact.contact %}
-                            {% include "elements/participant.html" %}
-                        {% endwith %}
+                        <a href="{{ person.url }}">{{ person.full_name }}</a>
                     </li>
+                {% empty %}
+                    <li></li>
                 {% endfor %}
             </ul>
         </div>
@@ -39,12 +39,12 @@
 
         <div class="content_block">
             <ul id="have_in_contacts_ul" class="side_list">
-                {% for contact in have_in_contacts %}
+                {% for person in info.participants.follower.entities %}
                     <li>
-                        {% with participant=contact.user %}
-                            {% include "elements/participant.html" %}
-                        {% endwith %}
+                        <a href="{{ person.url }}">{{ person.full_name }}</a>
                     </li>
+                {% empty %}
+                    <li></li>
                 {% endfor %}
             </ul>
         </div>
@@ -52,16 +52,17 @@
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">{{ profile.first_name }} {{ profile.last_name }}</h2>
+    <h2 class="location_header">{{ profile }}</h2>
 {% endblock %}
 
 {% block content %}
-    {% if profile_user == user %}
-        {% include template_path %}
+    {% if is_admin %}
+        <div class="ym-cbox">
+            {% include template_path %}
+        </div>
     {% else %}
         <div class="ym-cbox">
             {% include "profiles/view.html" %}
         </div>
     {% endif %}
 {% endblock %}
-

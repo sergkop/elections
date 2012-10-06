@@ -83,10 +83,10 @@ class ViolationsView(BaseLocationView):
 
     def update_context(self):
         if self.location.date is None:
-            pass
+            return {}
         else:
             query = Q(location=self.location)
-            
+
             if self.location.is_country:
                 query = Q(location=self.location)
             else:

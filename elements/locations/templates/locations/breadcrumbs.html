@@ -45,7 +45,7 @@
                 {% if location.date == loc.date %}
                     {% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}
                 {% else %}
-                    <a href="{{ loc.get_absolute_url }}" %}>{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</a>
+                    <a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</a>
                 {% endif %}
                 &nbsp;&nbsp;
             {% endfor %}

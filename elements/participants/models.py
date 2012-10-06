@@ -119,6 +119,8 @@ def participant_in(profile, role, entity_type):
     return func
 
 ROLE_TYPES = (
+    ('follower', u'Следит', u'Следят'),
+
     ('voter', u'Избиратель', u'Избиратели'),
     ('observer', u'Наблюдатель', u'Наблюдатели'),
     ('journalist', u'Представитель СМИ', u'Представители СМИ'),

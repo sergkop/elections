@@ -12,7 +12,6 @@ from locations.models import Location
 from locations.utils import get_roles_counters
 from navigation.forms import FeedbackForm
 from services.cache import cache_function
-from users.models import CommissionMember
 
 @cache_function('main_page', 30)
 def main_page_context():
@@ -77,7 +76,6 @@ def static_page(request, **kwargs):
 def sitemap(request):
     context = {
         'locations': Location.objects.filter(region=None).only('id', 'name'),
-        'organizations': Organization.objects.filter(verified=True),
     }
     return render_to_response('sitemap.html', context_instance=RequestContext(request, context))
 
