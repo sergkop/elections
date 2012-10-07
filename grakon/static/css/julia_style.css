@@ -51,7 +51,7 @@ ul.nobullet, ul.nobullet li {margin-left: 0; padding-left: 0; list-style-type: n
 a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 
 
-.ym-hlist ul li a.on, .button, .ui-button  {color: #333; box-shadow: 0 2px 2px #ccc;}
+.ym-hlist ul li a.on, .button, .ui-button  {color: #333; box-shadow: 0 2px 2px #ccc; border: none;}
 	.ym-clearfix .ui-button {box-shadow: 0 2px 2px #999;}
 		.ym-col1 .ym-clearfix .ui-button, .ym-col2 .ym-clearfix .ui-button  {font-size: 0.9em;}
 	.clearfix-black .ui-button {box-shadow: none;}
@@ -104,7 +104,7 @@ footer .ym-wbox a {text-decoration: none; color: #fff;}
 
 .ym-clearfix {margin-bottom: 15px; border-radius: 0 0 3px 3px;}
 
-.content_block {box-shadow: none; border: none; background: #b3d147; margin: 0; padding: 0 0 5px;}
+.content_block {box-shadow: none; border: none; background: #b2d046; margin: 0; padding: 0 0 5px;}
 
 .column_header  {font-size: 1em; padding: 0.8em  0.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0;}
 	.column_header	{text-shadow: 0 1px 0 #d0df96;}
@@ -183,7 +183,7 @@ h3 {margin: 0.3em 0 0;}
 
 .ui-button {margin: 0;}
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, #goto_location, #map_location {font-family: Arial, Helvetica, sans-serif; border: none; color: #333333;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, #goto_location, #map_location, .ui-button {font-family: Arial, Helvetica, sans-serif; border: none; color: #333333;}
 .ui-button {border-radius: 1.5em;  behavior: url(/static/css/PIE.htc);}
 .ui-button-green {color: #fff !important;}
 
@@ -362,14 +362,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 }	
 
 .ym-clearfix {
-	background-color: #91b928;	
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b4d147,endColorstr=#91b928);	  
-	background: -moz-linear-gradient(top,#b4d147, #91b928);
-	background: -ms-linear-gradient(top,#b4d147, #91b928);
-	background: -o-linear-gradient(top,#b4d147, #91b928);
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#b4d147), to(#91b928));
-	background: -webkit-linear-gradient(top,#b4d147, #91b928);
-	background: linear-gradient(top,#b4d147, #91b928);
+	background-color: #b2d046;	
 }		
 
 .column_black {
@@ -469,3 +462,4 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 }
 
 .gr-fr {float: right !important;}
+.ui-widget {font-size: 1em;}

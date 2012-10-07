@@ -359,7 +359,7 @@ background: linear-gradient(top, #f6f7f3, #e6e8dd);
     border-right: 1px solid;
 }
 
-.gr-pseudolink {color:#009EC5; cursor: pointer}
+.gr-pseudolink {color:#0077CA; cursor: pointer}
     .gr-pseudolink:hover {border-bottom: 1px dotted;}
 
 #set_password_form #div_id_username {display: none;}
@@ -373,7 +373,8 @@ background: linear-gradient(top, #f6f7f3, #e6e8dd);
 .gr-add-comment textarea {font-size: 1.2em; width: 100%; margin-top: .2em;}
 .gr-comment {margin-top: 1em; font-size: .9em;}
     .gr-comment .gr-comment {font-size: 1em;}
-.gr-comment .gr-info-bar {padding: 0 0 .7em; margin: 0; border-bottom: 1px solid #ddd;}  
+.gr-comment .gr-info-bar {padding: 0 0 .7em; margin: 0; border-bottom: 1px solid #ddd; font-size: .9em;}  
+    .gr-title-bar {font-size: .9em;}
     .gr-last-comment .gr-info-bar { border-bottom: none; padding-bottom: 0;}
     .gr-comment .gr-info-bar .highlight {cursor: pointer;}
     .gr-comment .gr-info-bar .gr-add-comment {margin-bottom: 0;}    
