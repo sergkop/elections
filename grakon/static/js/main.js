@@ -82,3 +82,25 @@ function prevent_enter_in_form(selector){
     });
 }
 
+function role_remove_btn(li){
+    var remove_btn = $("<span/>")
+            .attr("title", "Удалить роль")
+            .addClass("side_list_btn ui-icon ui-icon-close")
+            .tipsy({gravity: 'n'})
+            .click(function(){
+                var li = $(this).parent();
+                li.css("background-color", "#D9BDFF");
+
+                var confirmation = confirm("Вы действительно хотите удалить эту роль");
+                li.css("background-color", "#FFFFFF");
+
+                if (confirmation)
+                    $.post("/remove_role", {"role_id": li.attr("role_id"), "csrfmiddlewaretoken": get_cookie("csrftoken")}, function(data){
+                        if (data != "ok")
+                            alert(data);
+                        else
+                            li.remove()
+                    });
+            })
+            .prependTo($(li));
+}

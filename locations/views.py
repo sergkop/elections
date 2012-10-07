@@ -56,7 +56,7 @@ class BaseLocationView(TemplateView):
 
             'info': self.info,
 
-            #'counters': get_roles_counters(location),
+            'counters': get_roles_counters(location),
 
             'add_commission_member_form': CommissionMemberForm(),
             'become_web_observer_form': WebObserverForm(),

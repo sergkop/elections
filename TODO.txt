@@ -4,3 +4,4 @@ To merge:
 
 Profile:
     * sending messages
+    * become participant button

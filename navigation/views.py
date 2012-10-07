@@ -19,7 +19,7 @@ def main_page_context():
 
     sub_regions = subregion_list()
     return {
-        'counters': get_roles_counters(None),
+        'counters': get_roles_counters(country), # TODO: country must be used
         'sub_regions': sub_regions,
         'total_counter': total_counter,
     }
@@ -65,8 +65,6 @@ class WallView(BaseMainView):
     tab = 'wall'
 wall = WallView.as_view()
 
-# TODO: how to utilise caching for logged in users?
-#@cache_view(lambda args, kwargs: 'static_page/'+kwargs['tab'], 60)
 def static_page(request, **kwargs):
     """ 
     kwargs must contain the following keys: 'tab', 'template', 'tabs'.

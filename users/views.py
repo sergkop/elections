@@ -12,7 +12,7 @@ from elements.utils import table_data
 from elements.views import entity_base_view, entity_tabs_view
 from services.email import send_email
 from users.forms import MessageForm, ProfileForm
-from users.models import Message, Profile
+from users.models import Message, Profile, Role
 
 class BaseProfileView(object):
     template_name = 'profiles/base.html'
@@ -51,6 +51,7 @@ class BaseProfileView(object):
         ctx.update({
             'title': unicode(self.entity),
             'profile': self.entity,
+            'roles': self.entity.roles_set.select_related('location').order_by('type'),
             'is_admin': self.own_profile,
             'location': location,
 
@@ -125,4 +126,14 @@ def send_message(request):
     Message.objects.create(sender=request.profile, receiver=recipient, title=title,
             body=body, show_email=show_email)
 
+    return HttpResponse('ok')
+
+@authenticated_ajax_post
+def remove_role(request):
+    try:
+        role_id = int(request.POST.get('role_id', ''))
+    except ValueError:
+        return HttpResponse(u'Неверно указан id')
+
+    Role.objects.get(id=role_id, profile=request.profile).delete()
     return HttpResponse('ok')

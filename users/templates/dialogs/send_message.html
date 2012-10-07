@@ -1,4 +1,5 @@
 {% load crispy_forms_tags %}
+
 {% if user.is_authenticated %}
     <div id="send_message_dialog">
         {% crispy message_form %}
@@ -22,8 +23,8 @@
             "Отмена": function(){$("#send_message_dialog").dialog("close");}
         }}).dialog("close");
 
-        function send_message_dialog_init(username, pk){
-            $('#send_message_form input[name="to_user"]').val(pk);
+        function send_message_dialog_init(id){
+            $('#send_message_form input[name="to_user"]').val(id);
             $("#send_message_dialog").dialog("open");
         }
     {% else %}
