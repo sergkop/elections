@@ -119,7 +119,7 @@ def participant_in(profile, role, entity_type):
     return func
 
 ROLE_TYPES = (
-    ('follower', u'Следит', u'Следят'),
+    ('follower', u'Участник', u'Следят'),
 
     ('voter', u'Избиратель', u'Избиратели'),
     ('observer', u'Наблюдатель', u'Наблюдатели'),
@@ -127,7 +127,7 @@ ROLE_TYPES = (
     ('lawyer', u'Юрист', u'Юристы'),
     ('member', u'Член избирательной комиссии', u'Члены избирательной комиссии'),
 )
-ROLE_CHOICES = map(lambda r: (r[0], r[1]), ROLE_TYPES)
+ROLE_CHOICES = map(lambda r: (r[0], r[2]), ROLE_TYPES)
 
 # TODO: add char field for free-text description of role
 # Entity model, using this feature, must specify roles attribute - list of supported roles

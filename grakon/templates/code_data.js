@@ -1,6 +1,5 @@
 var GET_SUBREGIONS_URL = "{% url get_subregions %}";
 var REMOVE_LOCATION_URL = "{% url remove_location %}";
-var UPDATE_TEXT_FIELD_URL = "{% url update_text_field %}";
 
 var ADD_COMMENT_URL = "{% url add_comment %}";
 

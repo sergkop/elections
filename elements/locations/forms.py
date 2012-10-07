@@ -19,15 +19,14 @@ def location_init(required, label):
         'location_select': LocationSelectField(label=label, required=required, initial=[],
                 widget=LocationSelectWidget),
         'region': forms.CharField(required=False),
-        'district': forms.CharField(required=False),
-        'location': forms.CharField(required=False),
+        'tik': forms.CharField(required=False),
     }
     if not required:
         attrs['location_select'].help_text = u'если не выбрать место, то будет выбрана Россия'
 
     def decorator(cls):
         new_cls = cls.__metaclass__(cls.__name__, (cls,), attrs)
-        new_cls.Meta.exclude = getattr(new_cls.Meta, 'exclude', ()) + ('region', 'district', 'location')
+        new_cls.Meta.exclude = getattr(new_cls.Meta, 'exclude', ()) + ('region', 'tik')
 
         old_init = new_cls.__init__
         def new_init(form, *args, **kwargs):
@@ -75,19 +74,16 @@ def location_clean(form):
     msg = u'Необходимо выбрать нижний уровень географической иерархии'
 
     try:
-        form.location = Location.objects.get(id=int(form.cleaned_data.get('location', '')))
+        form.location = Location.objects.get(id=int(form.cleaned_data.get('tik', '')))
     except (ValueError, Location.DoesNotExist):
         try:
-            form.location = Location.objects.get(id=int(form.cleaned_data.get('district', '')))
+            form.location = Location.objects.get(id=int(form.cleaned_data.get('region', '')))
         except (ValueError, Location.DoesNotExist):
-            try:
-                form.location = Location.objects.get(id=int(form.cleaned_data.get('region', '')))
-            except (ValueError, Location.DoesNotExist):
-                if form.required:
-                    form_location_path(form)
-                    raise forms.ValidationError(msg)
-                else:
-                    form.location = Location.objects.country()
+            if form.required:
+                form_location_path(form)
+                raise forms.ValidationError(msg)
+            else:
+                form.location = Location.objects.country()
 
     if form.required and not form.location.is_tik():
         form_location_path(form)

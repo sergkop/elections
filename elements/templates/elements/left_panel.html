@@ -15,23 +15,23 @@
 {% endif %}
 
 <div class="side_block_header side_block_voter">
-    <a href="{% url participants location.id %}?type=voter">Избиратели: {{ counters.voter }}</a>
+    <a href="{% url location_participants location.id %}?type=voter">Избиратели: {{ counters.voter }}</a>
 </div>
 
 <div class="side_block_header side_block_observer">
-    <a href="{% url participants location.id %}?type=observer">Наблюдатели: {{ counters.observer }}</a>
+    <a href="{% url location_participants location.id %}?type=observer">Наблюдатели: {{ counters.observer }}</a>
 </div>
 
 <div class="side_block_header side_block_member">
-    <a href="{% url participants location.id %}?type=member">Члены избирательной комиссии: {{ counters.member }}</a>
+    <a href="{% url location_participants location.id %}?type=member">Члены избирательной комиссии: {{ counters.member }}</a>
 </div>
 
 <div class="side_block_header side_block_journalist">
-    <a href="{% url participants location.id %}?type=journalist">Представители СМИ: {{ counters.journalist }}</a>
+    <a href="{% url location_participants location.id %}?type=journalist">Представители СМИ: {{ counters.journalist }}</a>
 </div>
 
 <div class="side_block_header side_block_lawyer">
-    <a href="{% url participants location.id %}?type=lawyer">Юристы: {{ counters.lawyer }}</a>
+    <a href="{% url location_participants location.id %}?type=lawyer">Юристы: {{ counters.lawyer }}</a>
 </div>
 
 <div class="content_block">

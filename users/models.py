@@ -180,3 +180,50 @@ class WebObserver(models.Model):
     user = models.ForeignKey(Profile)
     location = models.ForeignKey(Location)
     time = models.DateTimeField(auto_now=True)
+
+ROLE_CHOICES = (
+    ('observer', u'Наблюдатель'),
+    ('voter', u'Избиратель'),
+    ('journalist', u'Представитель СМИ'),
+    ('lawyer', u'Юрист'),
+    ('member', u'Член избирательной комиссии'),
+)
+ROLE_TYPES = dict(ROLE_CHOICES)
+
+class RoleManager(models.Manager):
+    def get_participants(self, query):
+        participants = {}
+
+        roles_by_type = {}
+        for role_id, role_type in list(self.filter(query).values_list('id', 'type')):
+            roles_by_type.setdefault(role_type, []).append(role_id)
+
+        role_ids = []
+        for role_type in roles_by_type:
+            # TODO: Temporary hack
+            role_ids += roles_by_type[role_type][:10]
+
+        for role in list(Role.objects.filter(id__in=role_ids).select_related('profile')):
+            participants.setdefault(role.type, []).append(role)
+
+        for role in participants:
+            participants[role] = sorted(participants[role], key=lambda r: unicode(r.profile))
+
+        return participants
+
+class Role(models.Model):
+    profile = models.ForeignKey(Profile, related_name='roles_set')
+    location = models.ForeignKey(Location)
+    type = models.CharField(max_length=10, choices=ROLE_CHOICES, db_index=True)
+    time = models.DateTimeField(auto_now=True)
+
+    objects = RoleManager()
+
+    class Meta:
+        unique_together = ('profile', 'location', 'type')
+
+    def type_name(self):
+        return ROLE_TYPES[self.type]
+
+    def __unicode__(self):
+        return unicode(self.profile) + ' is ' + self.type + ' at ' + unicode(self.location)

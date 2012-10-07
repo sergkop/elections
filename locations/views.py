@@ -1,20 +1,19 @@
 # -*- coding:utf-8 -*-
 import json
 
-from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
-from django.shortcuts import get_object_or_404, redirect, render_to_response
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic.base import TemplateView
 
 from elections.models import ElectionLocation
+from elements.locations.models import EntityLocation
 from elements.locations.utils import breadcrumbs_context, subregion_list
 from elements.utils import entity_tabs_view
 from locations.models import Location
 from locations.utils import get_roles_counters, get_roles_query
 from users.forms import CommissionMemberForm, WebObserverForm
-from users.models import CommissionMember, WebObserver
+from users.models import CommissionMember, Profile, Role, ROLE_CHOICES, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
 # TODO: web_observers tab is not activated for tiks and lead to crush
@@ -41,7 +40,7 @@ class BaseLocationView(TemplateView):
 
         self.tabs = [
             ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('location_wall', args=[location.id]), 'locations/wall.html'),
-            #('participants', u'Участники: %i' % self.info['participants']['count'], reverse('location_participants', args=[location.id]), 'locations/participants.html'),
+            ('participants', u'Участники', reverse('location_participants', args=[location.id]), 'locations/participants.html'),
             ('info', u'Информация', reverse('location_info', args=[location.id]), 'locations/info.html'),
             ('elections', u'Выборы', reverse('location_elections', args=[location.id]), 'locations/elections.html'),
             ('violations', u'Нарушения', reverse('location_violations', args=[location.id]), 'locations/violations.html'),
@@ -109,29 +108,30 @@ class ElectionsView(BaseLocationView):
         return ctx
 
 class ParticipantsView(BaseLocationView):
+    tab = 'participants'
+
     def update_context(self):
         role_type = self.request.GET.get('type', '')
         if not role_type in ROLE_TYPES:
             role_type = ''
 
-        role_queryset = Role.objects.filter(self.location_query)
-        if role_type:
-            role_queryset = role_queryset.filter(type=role_type)
-            roles = role_queryset.order_by('user__username').select_related('user', 'organization')[:100]
-            context = {'participants': roles}
+        # TODO: use pagination
+        if role_type == '':
+            profile_ids = EntityLocation.objects.filter(self.location_query).values_list('entity_id', flat=True)[:100]
+            profiles = Profile.objects.filter(id__in=profile_ids)
         else:
-            roles = role_queryset.order_by('user__username').select_related('user', 'organization')[:100]
-            users = sorted(set(role.user for role in roles), key=lambda user: user.username.lower())
-            context = {'users': users}
+            roles = Role.objects.filter(self.location_query).filter(type=role_type).select_related('profile')[:100]
+            profiles = sorted(set(role.profile for role in roles), key=lambda profile: unicode(profile))
 
-        context.update({
+        return {
+            'participants': profiles,
             'selected_role_type': role_type,
             'ROLE_CHOICES': ROLE_CHOICES,
-        })
-        return context
+        }
 
-# TODO: mark links previously reported by user
 class LinksView(BaseLocationView):
+    tab = 'links'
+
     def update_context(self):
         return {
             'view': 'locations/links.html',
@@ -190,7 +190,6 @@ def goto_location(request):
 
 def add_commission_member(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        print request.POST
         try:
             location_id = int(request.POST.get('location'))
         except ValueError:

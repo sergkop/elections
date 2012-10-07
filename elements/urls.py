@@ -9,6 +9,4 @@ urlpatterns = patterns('',
 
     url(r'^add_participant$', 'elements.participants.views.add_participant', name='add_participant'),
     url(r'^remove_participant$', 'elements.participants.views.remove_participant', name='remove_participant'),
-
-    url(r'^update_text_field$', 'elements.views.update_text_field', name='update_text_field'),
 )

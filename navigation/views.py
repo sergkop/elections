@@ -36,7 +36,7 @@ class BaseMainView(TemplateView):
 
         return ctx
 
-def main(request):
+def main1(request):
     if not request.user.is_authenticated():
         html = cache.get('main_html')
         if html:
@@ -57,6 +57,9 @@ def main(request):
         cache.set('main_html', html, 300)
 
     return HttpResponse(html)
+
+def main(request):
+    return redirect(reverse('location_info', args=[1]))
 
 class WallView(BaseMainView):
     tab = 'wall'
