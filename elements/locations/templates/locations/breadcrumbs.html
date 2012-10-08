@@ -1,4 +1,4 @@
-<div class="ym-wrapper">
+<div class="ym-wrapper" style="z-index: 5">
     <div class="breadcrumbs">
         <ul>
             <li class="first">
@@ -39,19 +39,31 @@
                 </li>
             {% endif %}
         </ul>
-
-        <span class="page-select">
-            {% for loc in related_locations %}
-                {% if location.date == loc.date %}
-                    {% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}
-                {% else %}
-                    <a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Общая страница{% endif %}</a>
-                {% endif %}
-                &nbsp;&nbsp;
-            {% endfor %}
-        </span>
+        
+        <ul class="fr">
+            <li>
+               <i>&nbsp;</i>
+                <span class="page-select br-active" onclick="jQuery('#header-table').toggle();">
+                    {% for loc in related_locations %}
+                        {% if location.date == loc.date %}
+                            {% if loc.date %}{{ loc.date }}{% else %}Перейти к выборам{% endif %}
+                        {% else %}
+                            <a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Перейти к выборам{% endif %}</a>
+                        {% endif %}
+                        &nbsp;&nbsp;
+                    {% endfor %}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div id="header-table">
+        <ul>
+            <li><a href=""><strong>14 октября</strong></a></li>
+            <li><a href="">14 ноября</a></li>
+        </ul>
     </div>
 </div>
+
 
 <script type="text/javascript">
     $("#goto_subregion").change(function(){
