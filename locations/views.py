@@ -60,6 +60,8 @@ class BaseLocationView(TemplateView):
 
             'add_commission_member_form': CommissionMemberForm(),
             'become_web_observer_form': WebObserverForm(),
+
+            'ROLE_CHOICES': ROLE_CHOICES,
         })
 
         ctx.update(self.update_context())
@@ -123,7 +125,6 @@ def participants_context(view):
     return {
         'participants': profiles,
         'selected_role_type': role_type,
-        'ROLE_CHOICES': ROLE_CHOICES,
     }
 
 class ParticipantsView(BaseLocationView):

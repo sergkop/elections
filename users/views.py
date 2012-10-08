@@ -10,6 +10,7 @@ from grakon.utils import authenticated_ajax_post, escape_html
 from elements.participants.models import participant_in
 from elements.utils import table_data
 from elements.views import entity_base_view, entity_tabs_view
+from locations.models import Location
 from services.email import send_email
 from users.forms import MessageForm, ProfileForm
 from users.models import Message, Profile, Role
@@ -127,6 +128,30 @@ def send_message(request):
             body=body, show_email=show_email)
 
     return HttpResponse('ok')
+
+@authenticated_ajax_post
+def add_role(request):
+    try:
+        location = Location.objects.select_related().get(id=int(request.POST.get('loc_id', '')))
+    except (ValueError, Location.DoesNotExist):
+        return HttpResponse(u'Неверно указан loc_id')
+
+    if not location.is_tik() and not location.is_uik():
+        return HttpResponse(u'Записаться участником можно только на ТИК или УИК')
+
+    role = request.POST.get('role')
+    if role == 'participant':
+        if location.is_uik():
+            location = location.tik
+
+        if location.date:
+            location = Location.objects.get() # TODO: implement it
+
+        
+    elif role in ROLE_TYPES:
+        location
+    else:
+        return HttpResponse(u'Неверно указана роль')
 
 @authenticated_ajax_post
 def remove_role(request):

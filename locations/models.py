@@ -189,7 +189,6 @@ class Location(models.Model):
         cache.delete(self.cache_key())
 
     # TODO: cache count separately?
-    # TODO: take is_main into account
     # TODO: cache it (at least for data for side panels) - in Location
     def get_entities(self, entity_type, qfilter=None):
         """ Return {'ids': sorted_entities_ids, 'count': total_count} """

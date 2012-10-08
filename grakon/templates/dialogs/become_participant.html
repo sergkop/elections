@@ -1,8 +1,13 @@
 <div id="become_participant_dialog">
     <div>Выберите вашу роль на избирательном участке</div>
-    <form id="become_participant_form" method="get" action="{% url goto_location %}">
+    <form id="become_participant_form" method="post" action="{% url goto_location %}">
         {% csrf_token %}
-
+        <select name="role">
+            <option value="participant">Житель</option>
+            {% for role, name in ROLE_CHOICES %}
+                <option value="{{ role }}">{{ name }}</option>
+            {% endfor %}
+        </select>
     </form>
 </div>
 
@@ -13,7 +18,7 @@
 
     $("#become_participant_dialog").dialog({width:650, height:250, modal: true, title: "Стать участником",
         buttons: {
-            "Перейти": function(){
+            "Участвовать": function(){
                 if ($('#become_participant_form [name="tik"]').val()=="")
                     alert("Необходимо выбрать район (ТИК)");
                 else

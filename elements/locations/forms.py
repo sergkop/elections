@@ -50,9 +50,8 @@ def location_init(required, label):
 
             entity = save(form)
 
-            # TODO: what about is_main (take decorator params to control it)
             if is_create_form:
-                EntityLocation.objects.add(entity, form.location, params={'is_main': True})
+                EntityLocation.objects.add(entity, form.location)
             else:
                 EntityLocation.objects.update_location(entity, form.location)
 

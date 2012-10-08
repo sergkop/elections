@@ -28,38 +28,7 @@ class ProfileManager(BaseEntityManager):
         participants_data = list(EntityParticipant.objects.filter(person__in=ids) \
                 .values_list('content_type', 'entity_id', 'role', 'person'))
 
-        # TODO: use ratings to sort entities
-
-        """
-        for entity_name in ('ideas', 'projects', 'questions'):
-            model = ENTITIES_MODELS[entity_name]
-
-            for id in ids:
-                data[id][entity_name] = dict((role, {'ids': []}) for role in model.roles)
-
-            model_ct_id = ContentType.objects.get_for_model(model).id
-            for ct_id, e_id, role, id in filter(lambda p: p[0]==model_ct_id, participants_data):
-                data[id][entity_name][role]['ids'].append(e_id)
-
-            for id in ids:
-                for role in model.roles:
-                    data[id][entity_name][role]['count'] = len(data[id][entity_name][role]['ids'])
-        """
-
     def get_related_info(self, data, ids):
-        """
-        for entity_name in ('ideas', 'tasks', 'projects', 'questions'):
-            model = ENTITIES_MODELS[entity_name]
-
-            entities_ids = set(e_id for id in ids for role in model.roles \
-                    for e_id in data[id][entity_name][role]['ids'])
-            entities_info = model.objects.info_for(entities_ids, related=False)
-
-            for id in ids:
-                for role in model.roles:
-                    data[id][entity_name][role]['entities'] = [entities_info[e_id] \
-                            for e_id in data[id][entity_name][role]['ids']]
-        """
         pass
 
 @entity_class(['locations', 'participants'])
@@ -181,11 +150,11 @@ class WebObserver(models.Model):
     time = models.DateTimeField(auto_now=True)
 
 ROLE_CHOICES = (
-    ('observer', u'Наблюдатель'),
     ('voter', u'Избиратель'),
+    ('observer', u'Наблюдатель'),
+    ('member', u'Член избирательной комиссии'),
     ('journalist', u'Представитель СМИ'),
     ('lawyer', u'Юрист'),
-    ('member', u'Член избирательной комиссии'),
 )
 ROLE_TYPES = dict(ROLE_CHOICES)
 

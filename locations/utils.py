@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q
 
+from elements.locations.models import EntityLocation
 from users.models import CommissionMember, Profile, Role, ROLE_TYPES, WebObserver
 
 # TODO: introduce query generators for other types of counting
@@ -31,6 +32,8 @@ def get_roles_counters(location):
 
     # TODO: do it for location=None only?
     counters['total'] = Profile.objects.filter(user__is_active=True).count()
+
+    counters['participants'] = EntityLocation.objects.filter(query).filter(profile__user__is_active=True).count()
 
     # TODO: use count here?
     #counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \

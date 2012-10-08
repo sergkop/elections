@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block left_column %}
-    <h3 class="column_header column_header_icon"><span class="participants">Участники (<b>{{ counters.total }}</b>)</span></h3>
-
     <div class="ym-clearfix">
         {% include "elements/left_panel.html" %}
     </div>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">{{ location }}</h2>
 {% endblock %}
 
 {% block content %}
