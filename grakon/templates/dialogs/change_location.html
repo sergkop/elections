@@ -1,5 +1,5 @@
 <div id="change_location_dialog">
-    <div>Чтобы стать участником, необходимо перейти на соответствующий ТИК или УИК</div>
+    <div>Чтобы стать участником, необходимо перейти на соответствующий район или УИК</div>
     <form id="change_location_form" method="get" action="{% url goto_location %}">
         {% csrf_token %}
         <div id="location_path" class="gr-fl">
@@ -22,7 +22,7 @@
         buttons: {
             "Перейти": function(){
                 if ($('#change_location_form [name="tik"]').val()=="")
-                    alert("Необходимо выбрать район (ТИК)");
+                    alert("Необходимо выбрать район");
                 else
                     $("#change_location_form").submit();
             },
