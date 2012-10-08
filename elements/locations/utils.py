@@ -22,7 +22,7 @@ def subregion_list(location=None):
         res = list(Location.objects.filter(region=location, tik=None, date=location.date)
                 .order_by('name').values_list('id', 'name'))
         if res:
-            res.insert(0, ('', u'Выбрать ТИК'))
+            res.insert(0, ('', u'Выбрать район'))
         return res
     elif location.is_tik():
         res = list(Location.objects.filter(tik=location, date=location.date).order_by('name').values_list('id', 'name'))
