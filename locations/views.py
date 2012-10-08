@@ -107,27 +107,30 @@ class ElectionsView(BaseLocationView):
         ctx = {'elections': elections}
         return ctx
 
+def participants_context(view):
+    role_type = view.request.GET.get('type', '')
+    if not role_type in ROLE_TYPES:
+        role_type = ''
+
+    # TODO: use pagination
+    if role_type == '':
+        profile_ids = EntityLocation.objects.filter(view.location_query).values_list('entity_id', flat=True)[:100]
+        profiles = Profile.objects.filter(id__in=profile_ids)
+    else:
+        roles = Role.objects.filter(view.location_query).filter(type=role_type).select_related('profile')[:100]
+        profiles = sorted(set(role.profile for role in roles), key=lambda profile: unicode(profile))
+
+    return {
+        'participants': profiles,
+        'selected_role_type': role_type,
+        'ROLE_CHOICES': ROLE_CHOICES,
+    }
+
 class ParticipantsView(BaseLocationView):
     tab = 'participants'
 
     def update_context(self):
-        role_type = self.request.GET.get('type', '')
-        if not role_type in ROLE_TYPES:
-            role_type = ''
-
-        # TODO: use pagination
-        if role_type == '':
-            profile_ids = EntityLocation.objects.filter(self.location_query).values_list('entity_id', flat=True)[:100]
-            profiles = Profile.objects.filter(id__in=profile_ids)
-        else:
-            roles = Role.objects.filter(self.location_query).filter(type=role_type).select_related('profile')[:100]
-            profiles = sorted(set(role.profile for role in roles), key=lambda profile: unicode(profile))
-
-        return {
-            'participants': profiles,
-            'selected_role_type': role_type,
-            'ROLE_CHOICES': ROLE_CHOICES,
-        }
+        return participants_context(self)
 
 class LinksView(BaseLocationView):
     tab = 'links'

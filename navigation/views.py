@@ -1,15 +1,16 @@
 # -*- coding:utf-8 -*-
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
-from django.template import loader, RequestContext
+from django.template import RequestContext
 from django.views.generic.base import TemplateView
 
 from elements.locations.utils import breadcrumbs_context, subregion_list
+from elements.utils import entity_tabs_view
 from locations.models import Location
-from locations.utils import get_roles_counters
+from locations.utils import get_roles_counters, get_roles_query
+from locations.views import participants_context
 from navigation.forms import FeedbackForm
 from services.cache import cache_function
 
@@ -17,53 +18,70 @@ from services.cache import cache_function
 def main_page_context():
     total_counter = User.objects.filter(is_active=True).count()
 
+    country = Location.objects.country()
     sub_regions = subregion_list()
     return {
-        'counters': get_roles_counters(country), # TODO: country must be used
+        'location': country,
+        'counters': get_roles_counters(country),
         'sub_regions': sub_regions,
         'total_counter': total_counter,
     }
 
 class BaseMainView(TemplateView):
     template_name = 'main/base.html'
-    tab = '' # 'main' or 'wall'
+    tab = ''
+
+    def update_context(self):
+        return {}
 
     def get_context_data(self, **kwargs):
         ctx = super(BaseMainView, self).get_context_data(**kwargs)
 
         ctx.update(main_page_context())
-        ctx.update({'tab': self.tab})
 
+        self.location = ctx['location']
+
+        self.location_query = get_roles_query(self.location)
+
+        self.info = self.location.info(related=True)
+
+        self.tabs = [
+            ('main', u'Что делать?', reverse('main'), 'main/view.html'),
+            ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('wall'), 'locations/wall.html'),
+            ('participants', u'Участники', reverse('participants'), 'locations/participants.html'),
+            #('elections', u'Выборы', reverse('country_elections'), 'locations/elections.html'),
+        ]
+
+        ctx.update(entity_tabs_view(self))
+        ctx.update(breadcrumbs_context(self.location))
+
+        ctx.update({
+            'info': self.info,
+        })
+
+        #self.data_location = ctx['data_location']
+
+        ctx.update(self.update_context())
         return ctx
 
+class MainView(BaseMainView):
+    tab = 'main'
+main = MainView.as_view()
+
 def main1(request):
-    if not request.user.is_authenticated():
-        html = cache.get('main_html')
-        if html:
-            return HttpResponse(html)
-
-    ctx = {'tab': 'main'}
-    ctx.update(main_page_context())
-
-    tabs = [
-        ('main', u'Что делать?', '', 'main/view.html'),
-        #('main_news', u'Новости', reverse('main_news'), 'main/news.html'),
-        #('wall', u'Сообщения', reverse('wall'), 'projects/wall.html'),
-    ]
-
-    html = loader.render_to_string('main/base.html', context_instance=RequestContext(request, ctx))
-
-    if not request.user.is_authenticated():
-        cache.set('main_html', html, 300)
-
-    return HttpResponse(html)
-
-def main(request):
     return redirect(reverse('location_info', args=[1]))
 
 class WallView(BaseMainView):
     tab = 'wall'
 wall = WallView.as_view()
+
+class ParticipantsView(BaseMainView):
+    tab = 'participants'
+
+    def update_context(self):
+        return participants_context(self)
+
+country_participants = ParticipantsView.as_view()
 
 def static_page(request, **kwargs):
     """ 

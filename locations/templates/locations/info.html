@@ -14,17 +14,14 @@
 </p>
 {% endif %}
 
-{% if not location.is_foreign or not location.is_tik %}
-    <p>
-        <b>Информация на сайте Центризбиркома:</b>
+<!--p>
+    <b>Информация на сайте Центризбиркома:</b>
+    <br/>
+    {% if location.info_url %}
+        <a href="{{ location.info_url }}" target="_blank">Информация о комиссии</a>
         <br/>
-        {% if location.info_url %}
-            <a href="{{ location.info_url }}" target="_blank">Информация о комиссии</a>
-            <br/>
-        {% endif %}
-        <a href="{{ location.results_url }}" target="_blank">Официальные результаты выборов</a>
-    </p>
-{% endif %}
+    {% endif %}
+</p-->
 
 <p>
     <b>Члены комиссии:</b>

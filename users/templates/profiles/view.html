@@ -53,13 +53,21 @@
             });
         </script>
 
-        <div>
+        <p>
             Чтобы записаться участником в своем избирательном округе, перейдите на страницу
-            округа и запишитесь, нажав соответсвующую кнопку в левой панели.
-        </div>
+            округа и запишитесь, нажав кнопку "Стать участником" в левой панели.
+        </p>
         <div class="user_actions">
             {% button "Стать участником" "become_participant" "" %}
         </div>
+
+        {% include "dialogs/change_location.html" %}
+
+        <script type="text/javascript">
+            $("#become_participant").click(function(){
+                change_location_dialog_init();
+            });
+        </script>
     {% endif %}
     <br/>
 </div>

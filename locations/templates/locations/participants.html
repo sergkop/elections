@@ -1,6 +1,6 @@
 <div class="search-filter">
     {% if selected_role_type %}
-        <a href="{% url location_participants location.id %}" class="pseudolink">Жители</a>
+        <a href="{{ location.tab_url.participants }}" class="pseudolink">Жители</a>
     {% else %}
         <b>Жители</b>
     {% endif %}
@@ -10,7 +10,7 @@
         {% if selected_role_type == role_type %}
             <b>{{ role_name }}</b>
         {% else %}
-            <a href="{% url location_participants location.id %}?type={{ role_type }}" class="pseudolink">{{ role_name }}</a>
+            <a href="{{ location.tab_url.participants }}?type={{ role_type }}" class="pseudolink">{{ role_name }}</a>
         {% endif %}
         &nbsp;&nbsp;&nbsp;
     {% endfor %}

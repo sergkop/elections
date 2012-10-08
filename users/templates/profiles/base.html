@@ -21,17 +21,17 @@
 
     <h3 class="column_header column_header_icon"><span class="contacts">Контакты</span></h3>
     <div class="ym-clearfix">
-        <div class="content_block">
+       {% if info.contacts.entities %}
+       <div class="content_block">
             <ul id="contacts_ul" class="side_list">
                 {% for person in info.contacts.entities %}
                     <li>
                         <a href="{{ person.url }}">{{ person.full_name }}</a>
                     </li>
-                {% empty %}
-                    <li></li>
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}
 
         <div class="side_block_header">
             <h4>Добавлен в контакты</h4>

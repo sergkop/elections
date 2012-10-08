@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
 
@@ -230,4 +231,18 @@ class Location(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('location_info', (), {'loc_id': str(self.id)})
+        if self.is_country() and self.date is None:
+            return ('main', (), {})
+        else:
+            return ('location_info', (), {'loc_id': str(self.id)})
+
+    def tab_url(self):
+        if self.is_country() and self.date is None:
+            return {
+                '': reverse('main'),
+                'participants': reverse('participants'),
+            }
+        else:
+            return {
+                'participants': reverse('location_participants', args=[str(self.id)]),
+            }
