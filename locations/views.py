@@ -118,10 +118,15 @@ def participants_context(view):
 
     # TODO: use pagination
     if role_type == '':
-        profile_ids = EntityLocation.objects.filter(view.location_query).values_list('entity_id', flat=True)[:100]
+        query = view.location_query
+        if view.location.date:
+            related = view.location.related()
+            query = get_roles_query(related[None])
+
+        profile_ids = EntityLocation.objects.filter(query).values_list('entity_id', flat=True).distinct()[:100]
         profiles = Profile.objects.filter(id__in=profile_ids, user__is_active=True)
     else:
-        roles = Role.objects.filter(view.location_query).filter(type=role_type).select_related('profile')[:100]
+        roles = Role.objects.filter(view.location_query).filter(type=role_type).select_related('profile').distinct()[:100]
         profiles = sorted(set(role.profile for role in roles), key=lambda profile: unicode(profile))
 
     return {
