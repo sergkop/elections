@@ -27,6 +27,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul li {margin-bottom: 0.3em;}
 header, nav {background: none;}
 .mb5 {margin-bottom: 5px;}
+.mt0 {margin-top: 0 !important;}
 .mt10 {margin-top: 10px !important;}
 table, tbody td {border: none; margin: 0;}
 .cl {clear: both; height: 0; overflow: hidden;}
@@ -66,7 +67,8 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 .top-menu, .top-menu li {margin: 0; padding: 0; list-style-type: none;}	
     .top-menu {float: right; margin: .4em 0;}
     .top-menu li {display: inline-block; font-size: 1.3em; line-height: 1em; text-shadow: 1px 0 0 #b7d34a; color: #82a709;}
-    .top-menu a, .top-menu .clickable {color: #f9fffb; font-size: .7em; text-decoration: none; font-weight: bold; padding: 0 .5em 0 .7em; text-shadow: 0 1px 0 #82a709;}
+    .top-menu a, .top-menu .clickable {color: #f9fffb; font-size: .7em; text-decoration: none; font-weight: bold; padding:  .5em .7em; text-shadow: 0 1px 0 #82a709; border-radius: 2em;  border: 1px solid rgba(0,0,0,0) }
+        .top-menu a:hover, .top-menu .clickable:hover {box-shadow: inset 0 0 4px #6e9209; border: 1px solid #739907 }
 	
 .breadcrumbs {border-radius: 4px; margin:0.5em 0 0; box-shadow: 0 2px 2px #ccc;}	
 	h2.breadcrumbs-title {border: none; margin-bottom: 10px; font-size: 1.4em}
@@ -83,7 +85,7 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 		.breadcrumbs ul li strong, .breadcrumbs ul li .br-active {color: #fff; padding-left: 1.8em; padding-right: 1em;}
 		/*.breadcrumbs ul li:last-child {padding-left: 1.3em;}*/
 		#goto_subregion {margin-left: 1.5em; width: 200px; margin-top: 6px}
-		.breadcrumbs ul li a:focus, .breadcrumbs ul li a:hover {color: #333; background-color: #c9c9c9; text-shadow: 0 1px 0 #fff;  border-radius: 0; box-shadow: inset 0 0 1px #777;}
+		.breadcrumbs ul li a:focus, .breadcrumbs ul li a:hover, .breadcrumbs ul li .br-active:hover  {color: #333; background: #c9c9c9 !important; text-shadow: 0 1px 0 #fff;  border-radius: 0; box-shadow: inset 0 0 1px #777;}
             .breadcrumbs ul li a.br-active:focus, .breadcrumbs ul li a.br-active:hover {color: #fff; text-shadow: none;}
 			.breadcrumbs ul li a:focus, .breadcrumbs ul li a:hover i {background-position: 1px -185px;}
 			.breadcrumbs ul li a:focus, .breadcrumbs ul li.previous a:hover i {background-position: 0 -73px;}
@@ -113,7 +115,7 @@ footer .ym-wbox a {text-decoration: none; color: #fff;}
 h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2em;}
 	h2 {margin-top: 0.5em;}
 	h4 a {text-decoration: none;}
-.column_header {color: #333; font-weight: bold;}
+.column_header {color: #333; font-weight: bold; background-color: #B2D046;}
 	.column_black {border-bottom: 1px solid #cbc4ac; box-shadow: 0 1px 1px #f4eedc;}
 	
 
@@ -197,7 +199,7 @@ h3 {margin: 0.3em 0 0;}
 .ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text  {padding: 0.5em 1em;}
 
 .side_list, .side_list li {list-style-type: none; margin: 0; padding: 0;}
-	.side_list li {font-weight: bold; border-top: 1px solid #9cc118; box-shadow: inset 0 1px 0 #bed761; padding: 0.4em 1em; color: #000;}
+	.side_list li {border-top: 1px solid #9cc118; box-shadow: inset 0 1px 0 #bed761; padding: 0.4em 1em; color: #000;}
 	.side_list li:last-child {border: none;}
 	.side_list li a {text-decoration: none; color: #000;}
 	.side_list i {font-weight: normal; color: #444;}
@@ -215,10 +217,11 @@ h3 {margin: 0.3em 0 0;}
 .side_block_image {border: none;}
 
 #header-table {position: relative; display: none;}
-#header-table ul {position: absolute; top: 0; right: 0; width: 182px; background-color: #fff; border: 1px solid #f3f3f3; box-shadow: 0 1px 2px #cecece;}
+#header-table ul {position: absolute; top: 0; right: 0; width: 197px; background-color: #fff; border: 1px solid #c9c9c9; box-shadow: 0 1px 2px #cecece;}
     #header-table ul, #header-table li {margin: 0; padding: 0; list-style-type: none;}
     #header-table ul a {color: #000; text-decoration: none;}
-    #header-table li {border-bottom: 1px solid #f3f3f3; padding: 5px 5px 5px 25px;}
+    #header-table li {border-bottom: 1px solid #f3f3f3; padding: 5px; text-align: center;}
+        #header-table li:hover {background-color: #f3f3f3;}
 
 
 .result_toggle {position: absolute; bottom: -2.3em; right: 3em; padding: 0.5em 1em 0.6em; border-radius: 0 0 5px 5px; box-shadow: inset 0 1px 1px #ccc, 0 1px 2px #cecece; z-index:2}		
@@ -276,7 +279,7 @@ h3 {margin: 0.3em 0 0;}
 .search-filter {border-bottom: 1px dotted #aaa5a5; padding-bottom: 1.5em; padding-right: 60px; line-height: 2em; background: url(/static/images/icon_search_big.gif) right center no-repeat;  }	
 	.search-filter a {white-space: nowrap;}
 	
-.page-select {float: right; padding: 0 1em; line-height: 2.5em; text-shadow: 0 1px 0 #fff;}	
+.page-select {float: right; padding: 0 1em; line-height: 2.5em; text-shadow: 0 1px 0 #fff; width: 200px; text-align: center;}	
 	
 
 /* backgrounds */
@@ -311,6 +314,16 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-linear-gradient(top,#ffffff, #e7e9df);
 	background: linear-gradient(top,#ffffff, #e7e9df);}
 	
+.ym-hlist ul li a:focus, .ym-hlist ul li a:hover, .ym-hlist ul li a:active, .ui-button:hover, .ui-button:active {  
+    background-color: #e7e9df;
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#e7e9df);*/
+    background: -moz-linear-gradient(top,#eee, #ddd);
+    background: -ms-linear-gradient(top,#eee, #ddd);
+    background: -o-linear-gradient(top,#eee, #ddd);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#eee), to(#ddd));
+    background: -webkit-linear-gradient(top,#eee, #ddd);
+    background: linear-gradient(top,#eee, #ddd);}
+	
 .ui-button-green {
 	background-color: #92b928;	
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b7d34b,endColorstr=#92b928);
@@ -344,6 +357,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#62c0ee), to(#2c89b9));
 	background: -webkit-linear-gradient(top, #62c0ee, #2c89b9);
 	background: linear-gradient(top, #62c0ee, #2c89b9);}	
+s	
   
  
  .column_header {

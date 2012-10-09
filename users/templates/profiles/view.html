@@ -1,7 +1,7 @@
 {% load elements %}
 
 <div class="static-content">
-    <h4 style="margin-top: 10px;">О себе</h4>
+    <h4 class="mt0">О себе</h4>
     <div>
         {% if profile.about %}
             {{ profile.about|safe }}
@@ -34,8 +34,7 @@
         {% endfor %}
     </ul>
 
-    <br/>
-
+    <div class="mt10">
     {% if not is_admin %}
         {% include "dialogs/send_message.html" %}
 
@@ -51,6 +50,7 @@
             {% include "participants/participate_button.html" %}
         {% endwith %}
     {% endif %}
+    </div>
 
     {% if is_admin %}
         <script type="text/javascript">

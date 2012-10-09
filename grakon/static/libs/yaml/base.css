@@ -217,7 +217,7 @@
         #main .ym-col1, .gr-wide .ym-col1  {padding: 2.7em 0 0 0; float: none;}
         #search .ym-col1, .gr-wide .ym-col1  {padding: 0; float: none;}
 	.ym-col2 { width: 30%; float:left;  margin-left: -100%; padding: 1em 1em 0 0;} /* left column */
-	.ym-col3 {  float:right; width: 70%; margin-left: -5px; margin-right: 0%; padding: 3em 0 0 2em;} /* right column */
+	.ym-col3 {  float:right; width: 74%; margin-right: 0%; padding: 3em 0 0 2em;} /* right column */
 	
 	.ym-cbox { padding: 0 10px }
 	.ym-cbox-left { padding: 0 10px 0 0 }
