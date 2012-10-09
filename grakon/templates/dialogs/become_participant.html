@@ -14,8 +14,8 @@
             {% endif %}
         </select>
     </form>
-    {% if location.is_tik and not location.date and related_locations|length > 1 %}
-        {% if show_date %}
+    {% if location.is_tik and not location.date %}
+        {% if show_date and related_locations|length > 1 %}
             <p>Чтобы записаться на другие роли, выберите дату выборов.</p>
         {% else %}
             <p>В этом районе не проходят выборы, поэтому записаться на другие роли нельзя.</p>
