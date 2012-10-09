@@ -106,7 +106,7 @@ class ElectionsView(BaseLocationView):
     tab = 'elections'
 
     def update_context(self):
-        election_ids = list(ElectionLocation.objects.filter(self.location_query).distinct().values_list('election', flat=True)) #
+        election_ids = list(ElectionLocation.objects.filter(self.location_query).distinct().values_list('election', flat=True))
         return {'elections': Election.objects.filter(id__in=election_ids)}
 
 def participants_context(view):
@@ -172,7 +172,7 @@ def get_subregions(request):
         except ValueError, Location.DoesNotExist:
             return HttpResponse('[]')
     else:
-        location = None
+        location = Location.objects.country()
 
     return HttpResponse(json.dumps(subregion_list(location), ensure_ascii=False))
 

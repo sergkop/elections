@@ -13,6 +13,12 @@ class Election(models.Model):
     prver = models.IntegerField()
     location = models.ForeignKey(Location)
 
+    def cik_url(self):
+        return 'http://www.izbirkom.ru/region/amur?action=show&vrn=%i&prver=%i' % (self.vrn, self.prver)
+
+    def get_absolute_url(self):
+        return self.location.get_absolute_url()
+
     def __unicode__(self):
         return self.title
 

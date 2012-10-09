@@ -5,6 +5,7 @@ urlpatterns = patterns('navigation.views',
     url(r'^$', 'main', name='main'),
     url(r'^wall$', 'wall', name='wall'),
     url(r'^participants$', 'country_participants', name='participants'),
+    url(r'^elections$', 'country_elections', name='elections'),
 
     url(r'^feedback$', 'feedback', name='feedback'),
     url('^feedback_thanks$', 'static_page', kwargs={'template': 'feedback/thanks.html'}, name='feedback_thanks'),

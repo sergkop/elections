@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
 
+from elections.models import Election
 from elements.locations.utils import breadcrumbs_context, subregion_list
 from elements.utils import entity_tabs_view
 from locations.models import Location
@@ -47,7 +48,7 @@ class BaseMainView(TemplateView):
             ('main', u'Что делать?', reverse('main'), 'main/view.html'),
             ('wall', u'Комментарии: %i' % self.info['comments']['count'], reverse('wall'), 'locations/wall.html'),
             ('participants', u'Участники', reverse('participants'), 'locations/participants.html'),
-            #('elections', u'Выборы', reverse('country_elections'), 'locations/elections.html'),
+            ('elections', u'Выборы', reverse('elections'), 'locations/elections.html'),
         ]
 
         ctx.update(entity_tabs_view(self))
@@ -76,8 +77,14 @@ class ParticipantsView(BaseMainView):
 
     def update_context(self):
         return participants_context(self)
-
 country_participants = ParticipantsView.as_view()
+
+class ElectionsView(BaseMainView):
+    tab = 'elections'
+
+    def update_context(self):
+        return {'elections': Election.objects.all()}
+country_elections = ElectionsView.as_view()
 
 def static_page(request, **kwargs):
     """ 
