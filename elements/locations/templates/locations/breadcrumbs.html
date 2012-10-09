@@ -42,18 +42,18 @@
 
         {% if show_date %}
             {% if location.date or related_locations|length > 1 %}
-            <ul class="fr">
-                <li>
-                    <i>&nbsp;</i>
-                    <span class="page-select br-active" onclick="$('#header-table').toggle();">
-                        {% if location.date %}{{ location.date }}{% else %}Выбрать дату выборов{% endif %}
-                    </span>
-                </li>
-            </ul>
-            {% endif %}
+                <ul class="fr">
+                    <li>
+                        <i>&nbsp;</i>
+                        <span class="page-select br-active" onclick="$('#header-table').toggle();">
+                            {% if location.date %}{{ location.date }}{% else %}Выбрать дату выборов{% endif %}
+                        </span>
+                    </li>
+                </ul>
 
-            {% if location.is_tik %}
-                <span class="fr" style="margin-top:0.7em; margin-right: 1em;">Чтобы увидеть УИКи, нужно</span>
+                {% if location.is_tik and not location.date %}
+                    <span class="fr" style="margin-top:0.7em; margin-right: 1em;">Чтобы увидеть УИКи, нужно</span>
+                {% endif %}
             {% endif %}
         {% endif %}
     </div>

@@ -43,11 +43,10 @@
                     </div>
 
                     <ul class="top-menu">
-                        <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a> |</li>
-                        <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a> |</li>
-                    
+                        <li><a href="http://projects.grakon.org" target="_blank">Гражданские проекты</a> |</li>
+                        <li><a href="{% url main %}">Главная</a> |</li>
+                        <li><a href="{% url about %}">О проекте</a> |</li>
 
-                       
                         {% if request.user.is_authenticated %}
                                 {% if request.roles.voter %}
                                     <li><a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>|</li>
@@ -61,7 +60,6 @@
                         {% else %}
                                 <li><span id="login_btn" class="clickable">Войти</span></li>
                         {% endif %}
-                        
                     </ul>
                     <div class="cl">&nbsp;</div>
 
@@ -69,18 +67,9 @@
             </div>
         </header>
 
-        <nav>
-            <!--<div class="ym-wrapper">
-                <div class="ym-hlist">
-                    {% include "elements/share.html" %}
-                    <br clear="all" />
-                </div>
-            </div>-->
-        </nav>
+        <nav></nav>
 
         {% block breadcrumbs %}{% endblock %}
-
-
 
         <div class="ym-wrapper">
             <div class="ym-wbox">

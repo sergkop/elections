@@ -107,12 +107,14 @@ class ElectionsView(BaseLocationView):
 
     def update_context(self):
         election_ids = list(ElectionLocation.objects.filter(self.location_query).distinct().values_list('election', flat=True))
-        return {'elections': Election.objects.filter(id__in=election_ids)}
+        elections = Election.objects.filter(id__in=election_ids)
+        # TODO: group by date
+        return {'elections': elections}
 
 def participants_context(view):
-    role_type = view.request.GET.get('type', 'voter' if view.location.date else '')
+    role_type = view.request.GET.get('type', 'voter' if view.location.is_uik() else '')
     if not role_type in ROLE_TYPES:
-        role_type = 'voter' if view.location.date else ''
+        role_type = 'voter' if view.location.is_uik() else ''
 
     # TODO: use pagination
     if role_type == '':
