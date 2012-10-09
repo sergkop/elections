@@ -91,7 +91,7 @@ function role_remove_btn(li){
                 var li = $(this).parent();
                 li.css("background-color", "#D9BDFF");
 
-                var confirmation = confirm("Вы действительно хотите удалить эту роль");
+                var confirmation = confirm("Вы действительно хотите удалить эту роль?");
                 li.css("background-color", "#FFFFFF");
 
                 if (confirmation)
