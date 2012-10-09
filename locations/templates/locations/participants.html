@@ -1,10 +1,12 @@
 <div class="search-filter">
-    {% if selected_role_type %}
-        <a href="{{ location.tab_url.participants }}" class="pseudolink">Жители</a>
-    {% else %}
-        <b>Жители</b>
+    {% if not location.date %}
+        {% if selected_role_type %}
+            <a href="{{ location.tab_url.participants }}" class="pseudolink">Участники</a>
+        {% else %}
+            <b>Участники</b>
+        {% endif %}
+        &nbsp;&nbsp;&nbsp;
     {% endif %}
-    &nbsp;&nbsp;&nbsp;
 
     {% for role_type, role_name in ROLE_CHOICES %}
         {% if selected_role_type == role_type %}

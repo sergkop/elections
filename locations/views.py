@@ -110,9 +110,9 @@ class ElectionsView(BaseLocationView):
         return {'elections': Election.objects.filter(id__in=election_ids)}
 
 def participants_context(view):
-    role_type = view.request.GET.get('type', '')
+    role_type = view.request.GET.get('type', 'voter' if view.location.date else '')
     if not role_type in ROLE_TYPES:
-        role_type = ''
+        role_type = 'voter' if view.location.date else ''
 
     # TODO: use pagination
     if role_type == '':
@@ -172,7 +172,7 @@ def get_subregions(request):
         except ValueError, Location.DoesNotExist:
             return HttpResponse('[]')
     else:
-        location = None
+        location = Location.objects.country()
 
     return HttpResponse(json.dumps(subregion_list(location), ensure_ascii=False))
 

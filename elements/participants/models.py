@@ -120,12 +120,6 @@ def participant_in(profile, role, entity_type):
 
 ROLE_TYPES = (
     ('follower', u'Участник', u'Следят'),
-
-    ('voter', u'Избиратель', u'Избиратели'),
-    ('observer', u'Наблюдатель', u'Наблюдатели'),
-    ('journalist', u'Представитель СМИ', u'Представители СМИ'),
-    ('lawyer', u'Юрист', u'Юристы'),
-    ('member', u'Член избирательной комиссии', u'Члены избирательной комиссии'),
 )
 ROLE_CHOICES = map(lambda r: (r[0], r[2]), ROLE_TYPES)
 

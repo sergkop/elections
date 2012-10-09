@@ -14,6 +14,7 @@ from locations.utils import get_roles_counters, get_roles_query
 from locations.views import participants_context
 from navigation.forms import FeedbackForm
 from services.cache import cache_function
+from users.models import ROLE_CHOICES
 
 @cache_function('main_page', 30)
 def main_page_context():
@@ -76,7 +77,9 @@ class ParticipantsView(BaseMainView):
     tab = 'participants'
 
     def update_context(self):
-        return participants_context(self)
+        ctx = {'ROLE_CHOICES': ROLE_CHOICES}
+        ctx.update(participants_context(self))
+        return ctx
 country_participants = ParticipantsView.as_view()
 
 class ElectionsView(BaseMainView):
@@ -87,7 +90,7 @@ class ElectionsView(BaseMainView):
 country_elections = ElectionsView.as_view()
 
 def static_page(request, **kwargs):
-    """ 
+    """
     kwargs must contain the following keys: 'tab', 'template', 'tabs'.
     kwargs['tabs']=[(name, url, template, css_class), ...]
     """
