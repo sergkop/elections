@@ -57,7 +57,7 @@ def import_uiks_file(path):
         election.location = region
     else:
         if len(merge_ids) == 1:
-            election.location = tiks_by_merge_id[merge_ids[0]]
+            election.location = tiks_by_merge_id[list(merge_ids)[0]]
         else:
             election.location = region
     election.save()
