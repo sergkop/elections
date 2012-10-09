@@ -1,0 +1,366 @@
+{
+    "date": "20.10.2012", 
+    "election_name": "Выборы в Координационный Совет российской оппозиции", 
+    "merge": [
+        {
+            "address": "г Петрозаводск, ул Гоголя 56",
+            "email": "artemd1983@yandex.ru",
+            "merge_id": 10, 
+            "name": "РВК №10001",
+            "telephone": "960-212-77-88",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Казань, ул.Камала 7",
+            "email": "marsel_62_marsel@mail.ru",
+            "merge_id": 16, 
+            "name": "РВК №16001",
+            "telephone": "8-843-292-20-69",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        },
+        {
+            "address": "г. Ижевск, ул. Ленина д. 29",
+            "email": "suvorov-job@mail.ru",
+            "merge_id": 18, 
+            "name": "РВК №18001",
+            "telephone": "8(3412)219693",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        },
+        {
+            "address": "г. Чебоксары, пр. Мира, 76Б (здание 'Квинта', вход с правого торца под вывеской 'Ломбард'), оф. 203",
+            "email": "rvk.chuvashia2012@gmail.com",
+            "merge_id": 21, 
+            "name": "РВК №21001",
+            "telephone": "8-902-288-27-24",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Барнаул, ул. М.Горького д.21, оф.21",
+            "email": "alvis87@yandex.ru",
+            "merge_id": 22, 
+            "name": "РВК №22001",
+            "telephone": "+7 (913) 087-78-47",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Красноярск, ул. Красной армии 10 корпус 3, офис 503",
+            "email": "styazshkin@mail.ru",
+            "merge_id": 24, 
+            "name": "РВК №24001",
+            "telephone": "8905-974-08-24",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Владивосток, ул. Пограничная, 12, к. 10. Редакция газеты 'Арсеньевские вести'",
+            "email": "albina@arsvest.ru",
+            "merge_id": 25, 
+            "name": "РВК №25001",
+            "telephone": "8 4232 260463; 8 4232 26 0296",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Архангельск, ул. Урицкого, д.47, оф.408",
+            "email": "kyrg.cust@mail.ru",
+            "merge_id": 29, 
+            "name": "РВК №29001",
+            "telephone": "8-960-007-40-89",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "город Астрахань, ул. Красная Набережная 30, штаб партии 'Справедливая Россия'",
+            "email": "ANTON20000101@mail.ru",
+            "merge_id": 30, 
+            "name": "РВК №30001",
+            "telephone": "+79678214096",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Брянск, ул. Калинина, д. 99-А, офис 110",
+            "email": "kda@online.debryansk.ru",
+            "merge_id": 32, 
+            "name": "РВК №32001",
+            "telephone": "89611003660",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Офис редакции газеты 'Ковровская искра', г. Ковров, ул. Социалистическая 4",
+            "email": "iskrakovrov@yandex.ru",
+            "merge_id": 33, 
+            "name": "РВК №33001",
+            "telephone": "8 910 175 9711",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "1) г. Вологда, ул. Зосимовская, 13-а, вход направо. Нежилые помещения №27-36. 2) г. Вологда, ул. Чернышевского, 76, здание предприятия 'Экран', 2 этаж, офис Движения 'Вместе'.",
+            "email": "nabludat.vologda@gmail.com",
+            "merge_id": 35, 
+            "name": "РВК №35001",
+            "telephone": "(8172)50-17-22, 8-921-234-75-73",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Офис воронежского отделения движения 'Солидарность': город Воронеж, улица Цюрупы, дом 34, комната 204",
+            "email": "rvk-vrn@mail.ru",
+            "merge_id": 36, 
+            "name": "РВК №36001",
+            "telephone": "+7 903 650 69 26",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Новокузнецк, пр.Дружбы 15-вход в арку между 13 и 15 домом налево по лестнице",
+            "email": "lvovich.75@mail.ru",
+            "merge_id": 42, 
+            "name": "РВК №42001",
+            "telephone": "+79130763621, 8(3843)200-600",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Липецк ул. Игнатьева, д. 32",
+            "email": "V31082012@yandex.ru",
+            "merge_id": 48, 
+            "name": "РВК №48001",
+            "telephone": "(4742)72-08-66",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Одинцово, Можайское шоссе д.10",
+            "email": "pshenka2004@mail.ru",
+            "merge_id": 50, 
+            "name": "РВК №50001",
+            "telephone": "7 (495) 599-59-98",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Жуковский, ул. Менделеева, д. 7 (редакция газеты 'Жуковские Вести')",
+            "email": "sr.andrey.n@gmail.com",
+            "merge_id": 50, 
+            "name": "РВК №50002",
+            "telephone": "+7 (916) 810-53-90",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Котельники, Коммерческий проезд, промзона Технопром, стр. Е, оф. 104 (за АШАНом из МЕГА Белая Дача)",
+            "email": "smig92@yandex.ru",
+            "merge_id": 50, 
+            "name": "РВК №50003",
+            "telephone": "(495) 221-7001",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Кафе 'Город Солнца', г. Нижний Новгород, ул. Медицинская, 1а",
+            "email": "noizeof@gmail.com",
+            "merge_id": 52, 
+            "name": "РВК №52002",
+            "telephone": "+79047997853",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Офис Нижегородского отделения РПР-ПАРНАС, г. Нижний Новгород, ул.Голованова, д.23, офис 304,305",
+            "email": "a.notalin@mail.ru",
+            "merge_id": 52, 
+            "name": "РВК №52001",
+            "telephone": "8 920-251-65-44",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Новосибирск, Коммунистическая, 50, офис 500 Помещение новосибирского 'Голоса', Красный проспект, 39, офис 403 Офис Новосибирского регионального отделения РОДП 'Яблоко'",
+            "email": "rvknsk@gmail.com",
+            "merge_id": 54, 
+            "name": "РВК №54001",
+            "telephone": "+7-913-481-4080",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Омск, ул. Богдана Хмельницкого, д. 156, офис 4",
+            "email": "rvk55001@gmail.com",
+            "merge_id": 55, 
+            "name": "РВК №55001",
+            "telephone": "+79136879011",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Орел, ул. Ленина, д.45, 2-й этаж. Вход в здание напротив бокового входа в обладминистрацию. Здание, где расположено РВК, находится за главпочтамтом",
+            "email": "orel.rvk@gmail.com",
+            "merge_id": 57, 
+            "name": "РВК №57001",
+            "telephone": "8-960-648-84-77",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Пермь, Щербакова, 49а 1 этаж, офис председателя НУ Леонова, 43а, офис председателя НП 'Надежда', Пермь, ул. Героев Хасана, д. 35, первый этаж (общественная приемная)",
+            "email": "rvk.perm@mai.ru",
+            "merge_id": 90, 
+            "name": "РВК №59002",
+            "telephone": "89638779137",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "1) Общественный центр. г. Пермь, ул. Куйбышева, 63-17. 2) Общественная приемная. г. Пермь, ул. Циолковского, 9, 2-ой подъезд",
+            "email": "rvk.perm@gmail.com",
+            "merge_id": 90, 
+            "name": "РВК №59001",
+            "telephone": "8-912-888-9-888",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "город Псков, Рижский проспект, дом 16, 'Бизнес центр' (вход с улицы Петровская), офис 308",
+            "email": "guzinin@mail.ru",
+            "merge_id": 60, 
+            "name": "РВК №60001",
+            "telephone": "+7 953 232 49 52",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Ростов-на-Дону, ул.Московская 71, оф 1, этаж 3 (в помещении ОО 'ГИД')",
+            "email": "rvk2012rostov@gmail.com",
+            "merge_id": 61, 
+            "name": "РВК №61001",
+            "telephone": "(863) 256-67-82, +7-903-406-67-82",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Офис регионального отделения партии 'Яблоко', адрес: г. Рязань, ул. Праволыбедская, дом 40, 8 этаж, офис 5",
+            "email": "komitet.rzn@yandex.ru",
+            "merge_id": 62, 
+            "name": "РВК №62001",
+            "telephone": "95-85-19",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Самара, ул. Галактионовская, 157, офис № 507 (5-й этаж). Резервное помещение: ул. Галактионовская, 157, офис № 501",
+            "email": "volgasecond@ya.ru",
+            "merge_id": 63, 
+            "name": "РВК №63001",
+            "telephone": "+7 9276 88 07 40",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Екатеринбург, ул.Красноармейская, 78, ООО 'Прожектор'",
+            "email": "rvkekb@yandex.ru",
+            "merge_id": 66, 
+            "name": "РВК №66002",
+            "telephone": "+7(343)268-96-08",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "гор. Екатеринбург ул. Посадская д.21 оф.312, резервное: ул. Малышева д.36",
+            "email": "madbip@mail.ru",
+            "merge_id": 66, 
+            "name": "РВК №66001",
+            "telephone": "8(343)2012057, +79126284947",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "1) Основное: офис Ассоциации ГОЛОС в Екатеринбурге. Ул. Шевченко, д.9 офис 301. 2) Резервное: помещение Екатеринбургского общества Мемориал. Пр. Ленина, 99",
+            "email": "grezev@gmail.com",
+            "merge_id": 66, 
+            "name": "РВК №66003",
+            "telephone": "+79221144145",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Томск, Белинского 38",
+            "email": "rvk_tomsk@mail.ru",
+            "merge_id": 70, 
+            "name": "РВК №70001",
+            "telephone": "8-913-855-36-00",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Тюмень, основное помещение: ул Мельникайте 55, резервное помещение: ул. 25 Октября 46",
+            "email": "russimex@hotmail.com",
+            "merge_id": 72, 
+            "name": "РВК №72001",
+            "telephone": "+79123931941",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "зал в офисном помещении ООО 'Баланс' по адресу г.Снежинск, б.Циолковского 7а",
+            "email": "rvk.snezhinsk@mail.ru",
+            "merge_id": 74, 
+            "name": "РВК №74002",
+            "telephone": "+79227107194",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г. Челябинск, ул. Степана Разина, д. 4 (гостиница 'Челябинск'), 2 этаж, оф. 18",
+            "email": "rvk2012.chel@gmail.com",
+            "merge_id": 74, 
+            "name": "РВК №74001",
+            "telephone": "+79658568234",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Ярославль, ул.Собинова 27а",
+            "email": "andrew.sharygin@gmail.com",
+            "merge_id": 76, 
+            "name": "РВК №76001",
+            "telephone": "+79109690010; +79108116752",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Москва, ул. Новосущёвская, 13/1, комната правления",
+            "email": "mskrvk@gmail.com",
+            "merge_id": 77, 
+            "name": "РВК №77005",
+            "telephone": "(499) 973-0578, 973-0595",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Москва, Проспект Вернадского, д. 111 (200 метров от метро Юго-Западная), подъезд 2, домофон 38В, дверь напротив входа",
+            "email": "rvk.vernadskogo111@gmail.com",
+            "merge_id": 77, 
+            "name": "РВК №77003",
+            "telephone": "+7 495 7551511",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Москва, ул. Брянский пост 6 стр.1",
+            "email": "rvk.77.begovaya@gmail.com",
+            "merge_id": 77, 
+            "name": "РВК №77002",
+            "telephone": "+7 916-640-97-03",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "г.Москва, Новая площадь, 3/4 (политехнический музей) м. Китай-город, Лубянка. Подъезд 7д, Книжный магазин 'Циолковский', от входа налево в самый дальний зал, второй этаж, офис Пиратской партии России",
+            "email": "rvkmoscow2012@gmail.com",
+            "merge_id": 77, 
+            "name": "РВК №77004",
+            "telephone": "+79684918663",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Москва, м. Чистые пруды, ул. Покровка 19-1. Подъезд выходит на Чистопрудный бульвар. Напротив небольшой зоомагазин и окна магазина 'Дикси'. На домофоне необходимо набрать '1В'",
+            "email": "rvk.moskva@gmail.com",
+            "merge_id": 77, 
+            "name": "РВК №77001",
+            "telephone": "8 (495) 625-48-14",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Санкт-Петербург, Можайская 15, офис сторонников Григория Явлинского",
+            "email": "rvk78003@gmail.com",
+            "merge_id": 78, 
+            "name": "РВК №78003",
+            "telephone": "+7 962 715-65-59",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Офис оппозиционных сил Санкт-Петербурга, Санкт-Петербург, Невский проспект д. 154, оф. 19",
+            "email": "rvk_spb@yahoo.com",
+            "merge_id": 78, 
+            "name": "РВК №78001",
+            "telephone": "89218710207",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }, 
+        {
+            "address": "Помещение НКО 'Наблюдатели Петербурга', адрес Санкт-Петербург, ул. Достоевского, д. 34 литера А (войти во двор, с правой стороны, возле арки)",
+            "email": "rvk@spbelect.org",
+            "merge_id": 78, 
+            "name": "РВК №78002",
+            "telephone": "+79112710644",
+            "url": "http://www.cvk2012.org/rvk/list/#all"
+        }
+    ]
+}

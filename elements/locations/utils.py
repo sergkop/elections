@@ -43,7 +43,8 @@ def breadcrumbs_context(location):
     if location.is_uik():
         data_location = location
     else:
-        data_location = filter(lambda loc: loc.date is None, related_locations)[0]
+        r_locs = filter(lambda loc: loc.date is None, related_locations)
+        data_location = r_locs[0] if len(r_locs)>0 else location
 
     return {
         'location': location,

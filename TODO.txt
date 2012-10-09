@@ -1,11 +1,5 @@
-* main page content
-
 * on navigating in breadcrumbs keep the same tab open
 * chose the default tab to display
-
-* make elections tab look nice (group by date)
-
-* on tik make it clear that date must be chosen
 
 * adding links
 

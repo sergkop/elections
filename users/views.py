@@ -147,7 +147,8 @@ def add_role(request):
             location = location.tik
 
         if location.date:
-            location = location.related()[None]
+            related = location.related()
+            location = related.get(None, location)
 
         EntityLocation.objects.add(request.profile, location)
         return HttpResponse('ok')

@@ -41,16 +41,12 @@ def get_roles_counters(location):
         counters[role_type] = len(filter(lambda r: r[0]==role_type, roles))
 
     if location.date:
-        related = location.related()
-        if None in related:
-            no_date_query = get_roles_query(related[None])
-            counters['participants'] = EntityLocation.objects.filter(no_date_query).filter(profile__user__is_active=True) \
-                    .values_list('profile').distinct().count()
-        else:
-            counters['participants'] = 0
+        participants_query = get_roles_query(location.related().get(None, location))
     else:
-        counters['participants'] = EntityLocation.objects.filter(query).filter(profile__user__is_active=True) \
-                    .values_list('profile').distinct().count()
+        participants_query = query
+
+    counters['participants'] = EntityLocation.objects.filter(participants_query).filter(profile__user__is_active=True) \
+                .values_list('profile').distinct().count()
 
     # TODO: use count here?
     #counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \

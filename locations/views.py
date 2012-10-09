@@ -121,7 +121,7 @@ def participants_context(view):
         query = view.location_query
         if view.location.date:
             related = view.location.related()
-            query = get_roles_query(related[None])
+            query = get_roles_query(related.get(None, view.location))
 
         profile_ids = EntityLocation.objects.filter(query).values_list('entity_id', flat=True).distinct()[:100]
         profiles = Profile.objects.filter(id__in=profile_ids, user__is_active=True)
