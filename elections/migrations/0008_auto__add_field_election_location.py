@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Election.location'
         db.add_column('elections_election', 'location',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['locations.Location']),
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['locations.Location']),
                       keep_default=False)
 
 
