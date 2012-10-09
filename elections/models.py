@@ -11,6 +11,7 @@ class Election(models.Model):
     date = models.DateField(u'Дата', db_index=True)
     vrn = models.BigIntegerField(unique=True)
     prver = models.IntegerField()
+    location = models.ForeignKey(Location)
 
     def __unicode__(self):
         return self.title

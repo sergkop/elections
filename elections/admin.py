@@ -3,7 +3,7 @@ from django.contrib import admin
 from elections.models import Election, ElectionLocation
 
 class ElectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'vrn')
+    list_display = ('title', 'date', 'vrn', 'location')
 
 class ElectionLocationAdmin(admin.ModelAdmin):
     list_display = ('election', 'location')

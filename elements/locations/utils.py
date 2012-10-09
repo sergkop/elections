@@ -4,17 +4,17 @@ from services.cache import cache_function
 
 # TODO: add titles choosing command strings
 @cache_function(lambda args, kwargs: 'subregions/'+(str(args[0].id) if len(args)>0 and args[0] else '0'), 500)
-def subregion_list(location=None):
-    """ location=None for country """
-    if location is None or location.is_country():
-        res = [('', u'Выбрать субъект РФ'), None, None] # reserve places for Moscow and St. Petersburg
-        for loc_id, name in Location.objects.filter(region=None, date=location.date if location else None).order_by('name').values_list('id', 'name'):
-            if name == u'Москва':
-                res[1] = (loc_id, name)
-            elif name == u'Санкт-Петербург':
-                res[2] = (loc_id, name)
-            #elif name == u'Зарубежные территории':
-            #    res[3] = (loc_id, name)
+def subregion_list(location):
+    if location.is_country():
+        res = [('', u'Выбрать субъект РФ'), None, None] if location.date is None else [('', u'Выбрать субъект РФ')] # reserve places for Moscow and St. Petersburg
+        for loc_id, name in Location.objects.exclude(country=None).filter(region=None, date=location.date if location else None).order_by('name').values_list('id', 'name'):
+            if location.date is None:
+                if name == u'Москва':
+                    res[1] = (loc_id, name)
+                elif name == u'Санкт-Петербург':
+                    res[2] = (loc_id, name)
+                else:
+                    res.append((loc_id, name))
             else:
                 res.append((loc_id, name))
         return res
@@ -37,7 +37,7 @@ def breadcrumbs_context(location):
     query.update({'region__name': location.region.name} if location.region else {'region': None})
     query.update({'tik__name': location.tik.name} if location.tik else {'tik': None})
 
-    related_locations = Location.objects.filter(country=location.country, name=location.name, **query)
+    related_locations = Location.objects.filter(name=location.name, **query)
 
     # Get location to which comments, commission members are attached
     if location.is_uik():

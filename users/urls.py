@@ -12,5 +12,6 @@ urlpatterns = patterns('users.views',
 
     url(r'^send_message$', 'send_message', name='send_message'),
 
+    url(r'^add_role$', 'add_role', name='add_role'),
     url(r'^remove_role$', 'remove_role', name='remove_role'),
 )

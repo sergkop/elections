@@ -6,8 +6,8 @@
     О проекте - Гракон - гражданский контроль за выборами
 {% endblock %}
 
-{% block head %}
-
+{% block breadcrumbs %}
+    {% include "locations/breadcrumbs.html" %}
 {% endblock %}
 
 {% block left_column %}
@@ -29,7 +29,6 @@
 {% block content_header %}
     <h2 class="location_header">О проекте</h2>
 {% endblock %}
-
 
 {% block content %}
     {% include template_path %}

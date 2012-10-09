@@ -5,7 +5,7 @@
                {% if location.country %}
                     <a href="{{ location.country.get_absolute_url }}">Россия<i></i><b></b></a>
                {% else %}
-                    <a href="{{ location.country.get_absolute_url }}" class="br-active">Россия<i></i><b></b></a>
+                    <a href="{{ location.get_absolute_url }}" class="br-active">Россия<i></i><b></b></a>
                {% endif %}
             </li>
 
@@ -39,27 +39,28 @@
                 </li>
             {% endif %}
         </ul>
-        
-        <ul class="fr">
-            <li>
-               <i>&nbsp;</i>
-                <span class="page-select br-active" onclick="jQuery('#header-table').toggle();">
-                    {% for loc in related_locations %}
-                        {% if location.date == loc.date %}
-                            {% if loc.date %}{{ loc.date }}{% else %}Перейти к выборам{% endif %}
-                        {% else %}
-                            <a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Перейти к выборам{% endif %}</a>
-                        {% endif %}
-                        &nbsp;&nbsp;
-                    {% endfor %}
-                </span>
-            </li>
-        </ul>
+
+        {% if show_date %}
+            {% if location.date or related_locations|length > 1 %}
+            <ul class="fr">
+                <li>
+                    <i>&nbsp;</i>
+                    <span class="page-select br-active" onclick="$('#header-table').toggle();">
+                        {% if location.date %}{{ location.date }}{% else %}Выбрать дату{% endif %}
+                    </span>
+                </li>
+            </ul>
+            {% endif %}
+        {% endif %}
     </div>
+
     <div id="header-table">
         <ul>
-            <li><a href=""><strong>14 октября</strong></a></li>
-            <li><a href="">14 ноября</a></li>
+            {% for loc in related_locations %}
+                {% if location.date != loc.date %}
+                    <li><a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Все даты{% endif %}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
     </div>
 </div>

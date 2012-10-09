@@ -19,11 +19,9 @@ def main_page_context():
     total_counter = User.objects.filter(is_active=True).count()
 
     country = Location.objects.country()
-    sub_regions = subregion_list()
+    sub_regions = subregion_list(country)
     return {
-        'location': country,
-        'counters': get_roles_counters(country),
-        'sub_regions': sub_regions,
+        'counters': get_roles_counters(Location.objects.country()),
         'total_counter': total_counter,
     }
 
@@ -39,7 +37,7 @@ class BaseMainView(TemplateView):
 
         ctx.update(main_page_context())
 
-        self.location = ctx['location']
+        self.location = Location.objects.country()
 
         self.location_query = get_roles_query(self.location)
 
@@ -57,6 +55,7 @@ class BaseMainView(TemplateView):
 
         ctx.update({
             'info': self.info,
+            'show_date': True,
         })
 
         #self.data_location = ctx['data_location']
@@ -67,9 +66,6 @@ class BaseMainView(TemplateView):
 class MainView(BaseMainView):
     tab = 'main'
 main = MainView.as_view()
-
-def main1(request):
-    return redirect(reverse('location_info', args=[1]))
 
 class WallView(BaseMainView):
     tab = 'wall'

@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic.base import TemplateView
 
-from elections.models import ElectionLocation
+from elections.models import Election, ElectionLocation
 from elements.locations.models import EntityLocation
 from elements.locations.utils import breadcrumbs_context, subregion_list
 from elements.utils import entity_tabs_view
@@ -55,6 +55,7 @@ class BaseLocationView(TemplateView):
             'loc_id': kwargs['loc_id'],
 
             'info': self.info,
+            'show_date': True,
 
             'counters': get_roles_counters(location),
 
@@ -105,9 +106,8 @@ class ElectionsView(BaseLocationView):
     tab = 'elections'
 
     def update_context(self):
-        elections = [et.election for et in ElectionLocation.objects.filter(location=self.location).select_related('election')]
-        ctx = {'elections': elections}
-        return ctx
+        election_ids = list(ElectionLocation.objects.filter(self.location_query).distinct().values_list('election', flat=True)) #
+        return {'elections': Election.objects.filter(id__in=election_ids)}
 
 def participants_context(view):
     role_type = view.request.GET.get('type', '')

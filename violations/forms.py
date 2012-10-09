@@ -5,7 +5,6 @@ from django import forms
 
 from crispy_forms.layout import Fieldset, HTML, Layout
 
-from elements.locations.utils import subregion_list
 from elements.utils import form_helper
 from locations.models import Location
 from violations.models import Violation

@@ -1,12 +1,15 @@
-<div id="become_participant_dialog">
+<div id="become_participant_dialog" style="display: none;">
     <div>Выберите вашу роль на избирательном участке</div>
-    <form id="become_participant_form" method="post" action="{% url goto_location %}">
+    <form id="become_participant_form" method="post" action="{% url add_role %}">
         {% csrf_token %}
+        <input type="hidden" name="loc_id" value="{{ location.id }}" />
         <select name="role">
             <option value="participant">Житель</option>
-            {% for role, name in ROLE_CHOICES %}
-                <option value="{{ role }}">{{ name }}</option>
-            {% endfor %}
+            {% if location.date %}
+                {% for role, name in ROLE_CHOICES %}
+                    <option value="{{ role }}">{{ name }}</option>
+                {% endfor %}
+            {% endif %}
         </select>
     </form>
 </div>
@@ -20,9 +23,15 @@
         buttons: {
             "Участвовать": function(){
                 if ($('#become_participant_form [name="tik"]').val()=="")
-                    alert("Необходимо выбрать район");
+                    alert("Необходимо выбрать район (ТИК)");
                 else
-                    $("#become_participant_form").submit();
+                    $.post("{% url add_role %}", $("#become_participant_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#become_participant_form").dialog("close");
+                            window.location.reload(true);
+                        } else
+                            alert(data);
+                    });
             },
             "Отмена": function(){$("#become_participant_dialog").dialog("close");}
         }

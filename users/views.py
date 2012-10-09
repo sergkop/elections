@@ -7,13 +7,14 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 
 from grakon.utils import authenticated_ajax_post, escape_html
+from elements.locations.models import EntityLocation
 from elements.participants.models import participant_in
 from elements.utils import table_data
 from elements.views import entity_base_view, entity_tabs_view
 from locations.models import Location
 from services.email import send_email
 from users.forms import MessageForm, ProfileForm
-from users.models import Message, Profile, Role
+from users.models import Message, Profile, Role, ROLE_TYPES
 
 class BaseProfileView(object):
     template_name = 'profiles/base.html'
@@ -132,7 +133,8 @@ def send_message(request):
 @authenticated_ajax_post
 def add_role(request):
     try:
-        location = Location.objects.select_related().get(id=int(request.POST.get('loc_id', '')))
+        loc_id = int(request.POST.get('loc_id', ''))
+        location = Location.objects.select_related().get(id=loc_id)
     except (ValueError, Location.DoesNotExist):
         return HttpResponse(u'Неверно указан loc_id')
 
@@ -145,11 +147,16 @@ def add_role(request):
             location = location.tik
 
         if location.date:
-            location = Location.objects.get() # TODO: implement it
+            location = location.related()[None]
 
-        
+        EntityLocation.objects.add(request.profile, location)
+        return HttpResponse('ok')
     elif role in ROLE_TYPES:
-        location
+        if location.date is None:
+            return HttpResponse(u'Здесь нельзя записаться на эту роль')
+
+        role, created = Role.objects.get_or_create(type=role, profile=request.profile, location=location)
+        return HttpResponse('ok')
     else:
         return HttpResponse(u'Неверно указана роль')
 

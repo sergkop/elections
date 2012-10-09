@@ -6,13 +6,23 @@ from users.models import CommissionMember, Profile, Role, ROLE_TYPES, WebObserve
 
 # TODO: introduce query generators for other types of counting
 def get_roles_query(location):
-    query = Q(location=location)
-    if location.is_country():
-        query |= Q(location__country=location)
-    if location.is_region():
-        query |= Q(location__region=location)
-    elif location.is_tik():
-        query |= Q(location__tik=location)
+    if location.date:
+        query = Q(location=location)
+        if location.is_country():
+            query |= Q(location__country=location)
+        elif location.is_region():
+            query |= Q(location__region=location)
+        elif location.is_tik():
+            query |= Q(location__tik=location)
+    else:
+        related = location.related()
+        query = Q(location__in=related.values())
+        if location.is_country():
+            query |= Q(location__country__in=related.values())
+        elif location.is_region():
+            query |= Q(location__region__in=related.values())
+        elif location.is_tik():
+            query |= Q(location__tik__in=related.values())
 
     return query
 
@@ -33,7 +43,8 @@ def get_roles_counters(location):
     # TODO: do it for location=None only?
     counters['total'] = Profile.objects.filter(user__is_active=True).count()
 
-    counters['participants'] = EntityLocation.objects.filter(query).filter(profile__user__is_active=True).count()
+    counters['participants'] = EntityLocation.objects.filter(query).filter(profile__user__is_active=True) \
+            .values_list('profile').distinct().count()
 
     # TODO: use count here?
     #counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \

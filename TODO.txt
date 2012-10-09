@@ -1,15 +1,13 @@
-* signing up for participation on locations
-
-* choosing date in breadcrumbs
-* on tik make it clear that date must be chosen
+* remove elections tab and create one on the main page
 
 * main page content
-* remove elections tab and create one on the main page
-* entering date mode on the main page
+
 * on navigating in breadcrumbs keep the same tab open
 * chose the default tab to display
 
-* show correct statistics on locations with no date
+* signing up for participation on locations - Location method to get related location with specified date
+
+* on tik make it clear that date must be chosen
 
 * adding links
 

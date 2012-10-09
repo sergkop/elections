@@ -15,7 +15,13 @@
     </div>
 
     <h4>Место жительства</h4>
-    {% include "locations/path.html" %}
+    <ul>
+        {% for loc in info.locations.entities %}
+            {% with location=loc.instance %}
+                <li>{% include "locations/path.html" %}</li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
 
     <h4>Участие в выборах</h4>
     <ul>

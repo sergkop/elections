@@ -14,7 +14,7 @@ INFO_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)
 class LocationManager(models.Manager):
     @cache_function('location/country', 1000)
     def country(self):
-        return self.get(country=None)
+        return self.get(country=None, date=None)
 
     def info_for(self, ids, related=True):
         """
@@ -227,6 +227,19 @@ class Location(models.Model):
             }
 
         return method
+
+    def related(self):
+        """ Return {date: location} with versions of this location at different dates """
+        if self.is_country():
+            locations = Location.objects.filter(country=None).select_related()
+        elif self.is_region():
+            locations = Location.objects.exclude(country=None).filter(region=None, region_code=self.region_code).select_related()
+        elif self.is_tik():
+            locations = Location.objects.filter(tik=None, region_code=self.region_code, name=self.name).select_related()
+        else:
+            locations = Location.objects.filter(region_code=self.region_code, tik__name=self.tik.name, name=self.name).select_related()
+
+        return dict((location.date, location) for location in locations)
 
     @models.permalink
     def get_absolute_url(self):

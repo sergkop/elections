@@ -14,9 +14,11 @@
     {% include "dialogs/become_participant.html" %}
 {% endif %}
 
-<div class="side_block_header participants">
-    <a href="{{ location.tab_url.participants }}">Жители: {{ counters.participants }}</a>
-</div>
+{% if not location.date %}
+    <div class="side_block_header participants">
+        <a href="{{ location.tab_url.participants }}">Участники: {{ counters.participants }}</a>
+    </div>
+{% endif %}
 
 <div class="side_block_header side_block_voter">
     <a href="{{ location.tab_url.participants }}?type=voter">Избиратели: {{ counters.voter }}</a>

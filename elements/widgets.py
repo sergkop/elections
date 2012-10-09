@@ -3,12 +3,13 @@ from django.forms.widgets import DateTimeInput
 from django.utils.safestring import mark_safe
 
 # TODO: compress and merge media files
+# TODO: jquery is added for admin to work
 class DateTimeWidget(DateTimeInput):
     class Media:
         css = {
             'all': ('libs/timepicker/timepicker.css',)
         }
-        js = ('libs/timepicker/timepicker.js',)
+        js = ('libs/jquery.js', 'libs/jquery-ui/jquery-ui.js', 'libs/timepicker/timepicker.js')
 
     # TODO: raises errors when used in admin
     def render(self, name, value, attrs=None):

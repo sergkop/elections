@@ -15,27 +15,30 @@ def import_uiks_file(path):
     from elections.models import Election, ElectionLocation
     from locations.models import Location
     election_date = datetime.strptime(data['date'], r'%d.%m.%Y')
+
+    # Create country location for the date
+    country, created = Location.objects.get_or_create(name=u'Россия', region_code=0, date=election_date)
+
     election, created = Election.objects.get_or_create(vrn=int(data['vrn']), prver=int(data['prver']),
-            defaults={'title': data['election_name'], 'date': election_date})
+            defaults={'title': data['election_name'], 'date': election_date, 'location': country})
     if not created:
         raise ValueError("Election has been imported already")
 
-    if data['vrn'][0] == '2':
-        try:
-            region = Location.objects.get(region=None, region_code=data['region_id'], date=election_date)
-        except Location.DoesNotExist:
-            region = Location.objects.get(region=None, region_code=data['region_id'], date=None)
-
-            region.id = None
-            region.date = election_date
-            region.save()
-
-        ElectionLocation(location=region, election=election).save()
-    else:
+    try:
+        region = Location.objects.get(region=None, region_code=data['region_id'], date=election_date)
+    except Location.DoesNotExist:
         region = Location.objects.get(region=None, region_code=data['region_id'], date=None)
 
+        region.id = None
+        region.country = country
+        region.date = election_date
+        region.save()
+
+    if data['vrn'][0] == '2':
+        ElectionLocation(location=region, election=election).save()
+
     merge_ids = set(uik_data['merge_id'] for uik_data in data['merge'])
-    tiks = Location.objects.filter(tik=None, merge_id__in=merge_ids,  date=election_date).exclude(region=None)
+    tiks = Location.objects.filter(tik=None, merge_id__in=merge_ids, date=election_date).exclude(region=None)
     tiks_by_merge_id = dict((tik.merge_id, tik) for tik in tiks)
 
     for merge_id in merge_ids:
@@ -43,11 +46,21 @@ def import_uiks_file(path):
             tik = Location.objects.get(merge_id=merge_id, date=None)
             tik.id = None
             tik.date = election_date
+            tik.country = country
             tik.region = region
             tik.save()
             tiks_by_merge_id[merge_id] = tik
 
         ElectionLocation(location=tiks_by_merge_id[merge_id], election=election).save()
+
+    if data['vrn'][0] == '2': # region-level elections
+        election.location = region
+    else:
+        if len(merge_ids) == 1:
+            election.location = tiks_by_merge_id[merge_ids[0]]
+        else:
+            election.location = region
+    election.save()
 
     i = 0
     for uik_data in data['merge']:
