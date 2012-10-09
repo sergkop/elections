@@ -11,7 +11,7 @@
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
     <meta property="og:image" content="{{ URL_PREFIX }}{{ STATIC_URL }}images/grakon_share_logo.jpg" />
-    <meta property="og:description" content="Гракон - мини-соцсеть для координации работы любых организаций и граждан, объединенных одной целью - проведением честных выборов президента 4 марта." />
+    <meta property="og:description" content="Гракон - интернет площадка для систематизации информации о наблюдении за выборами, дающая возможность активистам легко находить друг друга" />
 
     {{ media_files }}
 
@@ -41,7 +41,7 @@
                     <div class="logo">
                         <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
                     </div>
-                    
+
                     <ul class="top-menu">
                         <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a> |</li>
                         <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a> |</li>

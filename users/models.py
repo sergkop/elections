@@ -149,13 +149,16 @@ class WebObserver(models.Model):
     location = models.ForeignKey(Location)
     time = models.DateTimeField(auto_now=True)
 
-ROLE_CHOICES = (
-    ('voter', u'Избиратель'),
-    ('observer', u'Наблюдатель'),
-    ('member', u'Член избирательной комиссии'),
-    ('journalist', u'Журналист'),
-    ('lawyer', u'Юрист'),
+ROLES_DATA = (
+    ('voter', u'Избиратель', u'Избиратели'),
+    ('observer', u'Наблюдатель', u'Наблюдатели'),
+    ('member', u'Член избирательной комиссии', u'Члены избирательной комиссии'),
+    ('journalist', u'Журналист', u'Журналисты'),
+    ('lawyer', u'Юрист', u'Юристы'),
 )
+
+ROLE_CHOICES = [(name, title) for name, title, plural in ROLES_DATA]
+ROLE_CHOICES_PLURAL = [(name, plural) for name, title, plural in ROLES_DATA]
 ROLE_TYPES = dict(ROLE_CHOICES)
 
 class RoleManager(models.Manager):

@@ -228,6 +228,7 @@ class Location(models.Model):
 
         return method
 
+    # TODO: cache it
     def related(self):
         """ Return {date: location} with versions of this location at different dates """
         if self.is_country():

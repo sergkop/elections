@@ -13,7 +13,7 @@ from elements.utils import entity_tabs_view
 from locations.models import Location
 from locations.utils import get_roles_counters, get_roles_query
 from users.forms import CommissionMemberForm, WebObserverForm
-from users.models import CommissionMember, Profile, Role, ROLE_CHOICES, ROLE_TYPES, WebObserver
+from users.models import CommissionMember, Profile, Role, ROLE_CHOICES_PLURAL, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
 # TODO: web_observers tab is not activated for tiks and lead to crush
@@ -62,7 +62,7 @@ class BaseLocationView(TemplateView):
             'add_commission_member_form': CommissionMemberForm(),
             'become_web_observer_form': WebObserverForm(),
 
-            'ROLE_CHOICES': ROLE_CHOICES,
+            'ROLE_CHOICES': ROLE_CHOICES_PLURAL,
         })
 
         ctx.update(self.update_context())

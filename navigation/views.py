@@ -14,7 +14,7 @@ from locations.utils import get_roles_counters, get_roles_query
 from locations.views import participants_context
 from navigation.forms import FeedbackForm
 from services.cache import cache_function
-from users.models import ROLE_CHOICES
+from users.models import ROLE_CHOICES_PLURAL
 
 @cache_function('main_page', 30)
 def main_page_context():
@@ -77,7 +77,7 @@ class ParticipantsView(BaseMainView):
     tab = 'participants'
 
     def update_context(self):
-        ctx = {'ROLE_CHOICES': ROLE_CHOICES}
+        ctx = {'ROLE_CHOICES': ROLE_CHOICES_PLURAL}
         ctx.update(participants_context(self))
         return ctx
 country_participants = ParticipantsView.as_view()

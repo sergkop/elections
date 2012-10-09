@@ -4,7 +4,9 @@
         {% csrf_token %}
         <input type="hidden" name="loc_id" value="{{ location.id }}" />
         <select name="role">
-            <option value="participant">Житель</option>
+            {% if not location.is_uik %}
+                <option value="participant">Участник</option>
+            {% endif %}
             {% if location.date %}
                 {% for role, name in ROLE_CHOICES %}
                     <option value="{{ role }}">{{ name }}</option>
@@ -12,6 +14,13 @@
             {% endif %}
         </select>
     </form>
+    {% if location.is_tik %}
+        {% if show_date %}
+            <p>Чтобы записаться на другие роли, выберите дату выборов.</p>
+        {% else %}
+            <p>В этом районе не проходят выборы, поэтому записаться на другие роли нельзя.</p>
+        {% endif %}
+    {% endif %}
 </div>
 
 <script type="text/javascript">

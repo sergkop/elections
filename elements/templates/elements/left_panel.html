@@ -14,7 +14,7 @@
     {% include "dialogs/become_participant.html" %}
 {% endif %}
 
-{% if not location.date %}
+{% if not location.is_uik %}
     <div class="side_block_header participants">
         <a href="{{ location.tab_url.participants }}">Участники: {{ counters.participants }}</a>
     </div>
