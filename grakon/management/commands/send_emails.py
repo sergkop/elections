@@ -9,12 +9,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         from services.email import send_email
 
-        i = 0
         with open('/home/serg/emails.txt') as f:
-            emails = [line.strip() for line in f]
-            i += 1
-            if i > 9000:
-                break
+            emails = [line.strip() for line in f][:9000]
 
         for email in emails:
             print email
