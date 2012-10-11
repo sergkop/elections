@@ -179,7 +179,7 @@ def get_subregions(request):
         except ValueError, Location.DoesNotExist:
             return HttpResponse('[]')
     else:
-        location = Location.objects.country()
+        location = Location.objects.country() # TODO: this should be time-dependent
 
     return HttpResponse(json.dumps(subregion_list(location), ensure_ascii=False))
 

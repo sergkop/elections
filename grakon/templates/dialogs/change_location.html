@@ -5,13 +5,14 @@
         <div id="location_path" class="gr-fl">
             {% include "locations/select.html" %}
         </div>
-        <script type="text/javascript">
-            $().ready(function(){
-                (new SelectLocation({el: $("#location_path"), path: {% if location.is_country %}[]{% else %}{{ location.path }}{% endif %} })).render();
-            });
-        </script>
     </form>
 </div>
+
+<script type="text/javascript">
+    $().ready(function(){
+        (new SelectLocation({el: $("#location_path"), path: {% if location.is_country %}[]{% else %}{{ location.path }}{% endif %} })).render();
+    });
+</script>
 
 <script type="text/javascript">
     function change_location_dialog_init(){

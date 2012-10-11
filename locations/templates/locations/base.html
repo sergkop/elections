@@ -8,6 +8,14 @@
 {{ location }} - Гракон
 {% endblock %}
 
+{% block head %}
+    {% if location.date %}
+        <style type="text/css">
+            body {background-color: #e0e0e0;}
+        </style>
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {% include "locations/breadcrumbs.html" %}
 {% endblock %}

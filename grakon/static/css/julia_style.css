@@ -227,7 +227,7 @@ h3 {margin: 0.3em 0 0;}
 .result_toggle {position: absolute; bottom: -2.3em; right: 3em; padding: 0.5em 1em 0.6em; border-radius: 0 0 5px 5px; box-shadow: inset 0 1px 1px #ccc, 0 1px 2px #cecece; z-index:2}		
 
 .step {position: relative; padding-left: 45px; margin-bottom: 10px;}
-	.step i {position: absolute; top: 0.45em; left: 0; font-size: 3.5em; color: #f3f3f3; font-style: normal; line-height: 0; font-weight: bold;}
+	.step i {position: absolute; top: 0.45em; left: 0; font-size: 3.5em; color: #D0D0D0; font-style: normal; line-height: 0; font-weight: bold;}
 
 .check-list-step {position: relative; padding-left: 40px; padding-bottom: 10px; margin-bottom: 10px;}
     .check-list-step i {position: absolute; top: 0; left: 0; font-size: 1.7em; color: #0077CA; font-style: normal; text-align:center; width: 70px;}
