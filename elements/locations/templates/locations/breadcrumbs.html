@@ -1,11 +1,13 @@
 <div class="ym-wrapper" style="z-index: 5">
     <div class="date-selection">
         Выбрать дату выборов
-        <input type="button" value="14 октября 2012" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" />
-        <input type="button" value="20-21 октября 2012" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"  />
-        <input type="button" value="Дата не выбрана" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary button-blue"  />
-    
+        <!--input type="button" value="14 октября 2012" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary date-button-disabled" /><a-->
+
+        {% for loc in related_locations %}
+            <a style="text-decoration:none;" href="{{ loc.get_absolute_url }}"><input type="button" value="{% if loc.date %}{{ loc.date }}{% else %}Дата не выбрана{% endif %}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary {% if location.date == loc.date %}button-blue{% endif %}" /></a>
+        {% endfor %}
     </div>
+
     <div class="breadcrumbs">
         <ul>
             <li class="first">
@@ -49,30 +51,11 @@
 
         {% if show_date %}
             {% if location.date or related_locations|length > 1 %}
-                <ul class="fr">
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="page-select br-active" onclick="$('#header-table').toggle();">
-                            {% if location.date %}{{ location.date }}{% else %}Выбрать дату выборов{% endif %}
-                        </span>
-                    </li>
-                </ul>
-
                 {% if location.is_tik and not location.date %}
-                    <span class="fr" style="margin-top:0.7em; margin-right: 1em;">Чтобы увидеть УИКи, нужно</span>
+                    <span class="fl" style="margin-top:0.7em; margin-left: 2em;">Чтобы увидеть УИКи, выберите дату</span>
                 {% endif %}
             {% endif %}
         {% endif %}
-    </div>
-
-    <div id="header-table">
-        <ul>
-            {% for loc in related_locations %}
-                {% if location.date != loc.date %}
-                    <li><a href="{{ loc.get_absolute_url }}">{% if loc.date %}{{ loc.date }}{% else %}Все даты{% endif %}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
     </div>
 </div>
 

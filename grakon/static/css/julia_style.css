@@ -312,7 +312,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-linear-gradient(top,#ffffff, #e7e9df);
 	background: linear-gradient(top,#ffffff, #e7e9df);}
 	
-.ym-hlist ul li a:hover, .ui-button:hover {  
+.ym-hlist ul li a:hover, .ui-button:hover {
     background-color: #20739e;
     background: -moz-linear-gradient(top, #4fabd8, #20739e);
     background: -ms-linear-gradient(top, #4fabd8, #20739e);
@@ -324,7 +324,6 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
     border: 1px solid #4fabd8;
     border-bottom: 1px solid #20739e;
 }
-    
 
 .button-blue, .ui-button:active, .ym-hlist ul li a:focus, .ym-hlist ul li a:active {
     background-color: #2986b6;
@@ -373,7 +372,7 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#62c0ee), to(#2c89b9));
 	background: -webkit-linear-gradient(top, #62c0ee, #2c89b9);
 	background: linear-gradient(top, #62c0ee, #2c89b9);}	
-s	
+
   
  
  .column_header {
@@ -493,3 +492,20 @@ s
 .date-selection {margin: 1em 0; font-size: .9em;}
     .date-selection .ui-button  {border-radius: .2em; margin: 0 0 0 .7em; border: 1px solid #a7a7a7}
     .date-selection .button-blue {border: 1px solid #62c1ef; border-bottom: 1px solid #2a88b8; }
+
+.date-button-disabled {opacity:0.5; cursor: default;}
+
+/* Повторение стилей для .ui-button */
+.date-button-disabled:hover {
+    background-color: #e7e9df;
+    background: -moz-linear-gradient(top,#ffffff, #e7e9df);
+    background: -ms-linear-gradient(top,#ffffff, #e7e9df);
+    background: -o-linear-gradient(top,#ffffff, #e7e9df);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e7e9df));
+    background: -webkit-linear-gradient(top,#ffffff, #e7e9df);
+    background: linear-gradient(top,#ffffff, #e7e9df);
+    color: #333333;
+    /*border: 1px solid #4fabd8;
+    border-bottom: 1px solid #20739e;*/
+}
+}
