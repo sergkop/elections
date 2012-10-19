@@ -33,10 +33,9 @@
         </div>
         {% endif %}
 
-        <div class="side_block_header">
-            <h4>Добавлен в контакты</h4>
-        </div>
-
+    </div>    
+    <h3 class="column_header column_header_icon"><span class="contacts">Добавлен в контакты</span></h3>
+    <div class="ym-clearfix">
         <div class="content_block">
             <ul id="have_in_contacts_ul" class="side_list">
                 {% for person in info.participants.follower.entities %}

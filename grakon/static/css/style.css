@@ -369,7 +369,7 @@ background: linear-gradient(top, #f6f7f3, #e6e8dd);
 .gr-add-comment {margin: 0}
     .gr-child-comments .gr-add-comment {margin-top: 1em}
 .gr-add-comment td {padding: 0;}
-.gr-add-comment td .ym-button {margin: 0 0 0 1em;}
+.gr-add-comment td button {margin:  .2em 0 0 1em;}
 .gr-add-comment textarea {font-size: 1.2em; width: 100%; margin-top: .2em;}
 .gr-comment {margin-top: 1em; font-size: .9em;}
     .gr-comment .gr-comment {font-size: 1em;}
